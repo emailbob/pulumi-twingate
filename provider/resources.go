@@ -58,7 +58,8 @@ func Provider() tfbridge.ProviderInfo {
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
 		// Instantiate the Terraform provider
-		P:    shimv2.NewProvider(twingate.New(version.Version)()),
+		//P:    shimv2.NewProvider(twingate.New(version.Version)()),
+		P:    shimv2.NewProvider(twingate.Provider(version.Version)),
 		Name: "twingate",
 		// DisplayName is a way to be able to change the casing of the provider
 		// name when being displayed on the Pulumi registry
@@ -82,13 +83,13 @@ func Provider() tfbridge.ProviderInfo {
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in
 		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
-		Keywords:   []string{"pulumi", "twingate", "category/cloud"},
+		Keywords:   []string{"pulumi", "twingate", "category/infrastructure"},
 		License:    "Apache-2.0",
 		Homepage:   "https://www.twingate.com",
 		Repository: "https://github.com/emailbob/pulumi-twingate",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
-		GitHubOrg:    "",
+		GitHubOrg:    "Twingate",
 		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
 		Config:       map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
@@ -101,15 +102,15 @@ func Provider() tfbridge.ProviderInfo {
 			// },
 		},
 		PreConfigureCallback: preConfigureCallback,
-		Resources: map[string]*tfbridge.ResourceInfo{
-			"twingate_remote_network":      {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateRemoteNetwork")},
-			"twingate_connector":           {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateConnector")},
-			"twingate_connector_tokens":    {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateConnectorTokens")},
-			"twingate_group":               {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateGroup")},
-			"twingate_resource":            {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateResource")},
-			"twingate_service_account":     {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateServiceAccount")},
-			"twingate_service_account_key": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateServiceAccountKey")},
-			"twingate_user":                {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateUser")},
+		Resources:            map[string]*tfbridge.ResourceInfo{
+			// "twingate_remote_network": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateRemoteNetwork")},
+			// "twingate_connector":           {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateConnector")},
+			// "twingate_connector_tokens":    {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateConnectorTokens")},
+			// "twingate_group":               {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateGroup")},
+			// "twingate_resource":            {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateResource")},
+			// "twingate_service_account":     {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateServiceAccount")},
+			// "twingate_service_account_key": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateServiceAccountKey")},
+			// "twingate_user":                {Tok: tfbridge.MakeResource(mainPkg, mainMod, "TwingateUser")},
 			// Map each resource in the Terraform provider to a Pulumi type. Two examples
 			// are below - the single line form is the common case. The multi-line form is
 			// needed only if you wish to override types or other default options.
@@ -124,19 +125,19 @@ func Provider() tfbridge.ProviderInfo {
 			// },
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
-			"twingate_remote_network":    {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateRemoteNetwork")},
-			"twingate_remote_networks":   {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateRemoteNetworks")},
-			"twingate_connector":         {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateConnector")},
-			"twingate_connectors":        {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateConnectors")},
-			"twingate_group":             {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateGroup")},
-			"twingate_groups":            {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateGroups")},
-			"twingate_resource":          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateResource")},
-			"twingate_resources":         {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateResources")},
-			"twingate_user":              {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateUser")},
-			"twingate_users":             {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateUsers")},
-			"twingate_service_accounts":  {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateServiceAccounts")},
-			"twingate_security_policy":   {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateSecurityPolicy")},
-			"twingate_security_policies": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateSecurityPolicies")},
+			"twingate_remote_network": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateRemoteNetwork")},
+			// "twingate_remote_networks":   {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateRemoteNetworks")},
+			// "twingate_connector":         {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateConnector")},
+			// "twingate_connectors":        {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateConnectors")},
+			// "twingate_group":             {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateGroup")},
+			// "twingate_groups":            {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateGroups")},
+			// "twingate_resource":          {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateResource")},
+			// "twingate_resources":         {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateResources")},
+			// "twingate_user":              {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateUser")},
+			// "twingate_users":             {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateUsers")},
+			// "twingate_service_accounts":  {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateServiceAccounts")},
+			// "twingate_security_policy":   {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateSecurityPolicy")},
+			// "twingate_security_policies": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getTwingateSecurityPolicies")},
 			// Map each resource in the Terraform provider to a Pulumi function. An example
 			// is below.
 			// "aws_ami": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAmi")},

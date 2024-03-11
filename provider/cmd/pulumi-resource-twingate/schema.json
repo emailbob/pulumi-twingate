@@ -1,0 +1,363 @@
+{
+    "name": "twingate",
+    "displayName": "Twingate",
+    "description": "A Pulumi package for creating and managing twingate cloud resources.",
+    "keywords": [
+        "pulumi",
+        "twingate",
+        "category/infrastructure"
+    ],
+    "homepage": "https://www.twingate.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`twingate` Terraform Provider](https://github.com/Twingate/terraform-provider-twingate).",
+    "repository": "https://github.com/emailbob/pulumi-twingate",
+    "publisher": "Twingate",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "compatibility": "tfbridge20"
+        },
+        "go": {
+            "importBasePath": "github.com/emailbob/pulumi-twingate/sdk/go/twingate",
+            "generateResourceContainerTypes": true,
+            "generateExtraInputTypes": true
+        },
+        "nodejs": {
+            "packageDescription": "A Pulumi package for creating and managing twingate cloud resources.",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/Twingate/terraform-provider-twingate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-twingate` repo](https://github.com/emailbob/pulumi-twingate/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-twingate` repo](https://github.com/Twingate/terraform-provider-twingate/issues).",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true
+        },
+        "python": {
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            },
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/Twingate/terraform-provider-twingate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-twingate` repo](https://github.com/emailbob/pulumi-twingate/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-twingate` repo](https://github.com/Twingate/terraform-provider-twingate/issues).",
+            "compatibility": "tfbridge20",
+            "pyproject": {}
+        }
+    },
+    "config": {
+        "variables": {
+            "apiToken": {
+                "type": "string",
+                "description": "The access key for API operations. You can retrieve this from the Twingate Admin Console\n([documentation](https://docs.twingate.com/docs/api-overview)). Alternatively, this can be specified using the\nTWINGATE_API_TOKEN environment variable.\n",
+                "secret": true
+            },
+            "httpMaxRetry": {
+                "type": "integer",
+                "description": "Specifies a retry limit for the http requests made. The default value is 10. Alternatively, this can be specified using\nthe TWINGATE_HTTP_MAX_RETRY environment variable\n"
+            },
+            "httpTimeout": {
+                "type": "integer",
+                "description": "Specifies a time limit in seconds for the http requests made. The default value is 35 seconds. Alternatively, this can\nbe specified using the TWINGATE_HTTP_TIMEOUT environment variable\n"
+            },
+            "network": {
+                "type": "string",
+                "description": "Your Twingate network ID for API operations. You can find it in the Admin Console URL, for example:\n`autoco.twingate.com`, where `autoco` is your network ID Alternatively, this can be specified using the TWINGATE_NETWORK\nenvironment variable.\n"
+            },
+            "url": {
+                "type": "string",
+                "description": "The default is 'twingate.com' This is optional and shouldn't be changed under normal circumstances.\n"
+            }
+        }
+    },
+    "types": {
+        "twingate:index/ResourceAccess:ResourceAccess": {
+            "properties": {
+                "groupIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of Group IDs that will have permission to access the Resource.\n"
+                },
+                "serviceAccountIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of Service Account IDs that will have permission to access the Resource.\n"
+                }
+            },
+            "type": "object"
+        },
+        "twingate:index/ResourceProtocols:ResourceProtocols": {
+            "properties": {
+                "allowIcmp": {
+                    "type": "boolean",
+                    "description": "Whether to allow ICMP (ping) traffic\n"
+                },
+                "tcp": {
+                    "$ref": "#/types/twingate:index/ResourceProtocolsTcp:ResourceProtocolsTcp"
+                },
+                "udp": {
+                    "$ref": "#/types/twingate:index/ResourceProtocolsUdp:ResourceProtocolsUdp"
+                }
+            },
+            "type": "object",
+            "required": [
+                "tcp",
+                "udp"
+            ]
+        },
+        "twingate:index/ResourceProtocolsTcp:ResourceProtocolsTcp": {
+            "properties": {
+                "policy": {
+                    "type": "string",
+                    "description": "Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`\n"
+                },
+                "ports": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "policy"
+            ]
+        },
+        "twingate:index/ResourceProtocolsUdp:ResourceProtocolsUdp": {
+            "properties": {
+                "policy": {
+                    "type": "string",
+                    "description": "Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`\n"
+                },
+                "ports": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "policy"
+            ]
+        }
+    },
+    "provider": {
+        "description": "The provider type for the twingate package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "apiToken": {
+                "type": "string",
+                "description": "The access key for API operations. You can retrieve this from the Twingate Admin Console\n([documentation](https://docs.twingate.com/docs/api-overview)). Alternatively, this can be specified using the\nTWINGATE_API_TOKEN environment variable.\n",
+                "secret": true
+            },
+            "httpMaxRetry": {
+                "type": "integer",
+                "description": "Specifies a retry limit for the http requests made. The default value is 10. Alternatively, this can be specified using\nthe TWINGATE_HTTP_MAX_RETRY environment variable\n"
+            },
+            "httpTimeout": {
+                "type": "integer",
+                "description": "Specifies a time limit in seconds for the http requests made. The default value is 35 seconds. Alternatively, this can\nbe specified using the TWINGATE_HTTP_TIMEOUT environment variable\n"
+            },
+            "network": {
+                "type": "string",
+                "description": "Your Twingate network ID for API operations. You can find it in the Admin Console URL, for example:\n`autoco.twingate.com`, where `autoco` is your network ID Alternatively, this can be specified using the TWINGATE_NETWORK\nenvironment variable.\n"
+            },
+            "url": {
+                "type": "string",
+                "description": "The default is 'twingate.com' This is optional and shouldn't be changed under normal circumstances.\n"
+            }
+        },
+        "inputProperties": {
+            "apiToken": {
+                "type": "string",
+                "description": "The access key for API operations. You can retrieve this from the Twingate Admin Console\n([documentation](https://docs.twingate.com/docs/api-overview)). Alternatively, this can be specified using the\nTWINGATE_API_TOKEN environment variable.\n",
+                "secret": true
+            },
+            "httpMaxRetry": {
+                "type": "integer",
+                "description": "Specifies a retry limit for the http requests made. The default value is 10. Alternatively, this can be specified using\nthe TWINGATE_HTTP_MAX_RETRY environment variable\n"
+            },
+            "httpTimeout": {
+                "type": "integer",
+                "description": "Specifies a time limit in seconds for the http requests made. The default value is 35 seconds. Alternatively, this can\nbe specified using the TWINGATE_HTTP_TIMEOUT environment variable\n"
+            },
+            "network": {
+                "type": "string",
+                "description": "Your Twingate network ID for API operations. You can find it in the Admin Console URL, for example:\n`autoco.twingate.com`, where `autoco` is your network ID Alternatively, this can be specified using the TWINGATE_NETWORK\nenvironment variable.\n"
+            },
+            "url": {
+                "type": "string",
+                "description": "The default is 'twingate.com' This is optional and shouldn't be changed under normal circumstances.\n"
+            }
+        }
+    },
+    "resources": {
+        "twingate:index/resource:Resource": {
+            "description": "Resources in Twingate represent servers on the private network that clients can connect to. Resources can be defined by IP, CIDR range, FQDN, or DNS zone. For more information, see the Twingate [documentation](https://docs.twingate.com/docs/resources-and-access-nodes).\n\n\n## Import\n\n\n\n```sh\n $ pulumi import twingate:index/resource:Resource resource UmVzb3VyY2U6MzQwNDQ3\n```\n\n ",
+            "properties": {
+                "access": {
+                    "$ref": "#/types/twingate:index/ResourceAccess:ResourceAccess",
+                    "description": "Restrict access to certain groups or service accounts\n"
+                },
+                "address": {
+                    "type": "string",
+                    "description": "The Resource's IP/CIDR or FQDN/DNS zone\n"
+                },
+                "alias": {
+                    "type": "string",
+                    "description": "Set a DNS alias address for the Resource. Must be a DNS-valid name string.\n"
+                },
+                "isActive": {
+                    "type": "boolean",
+                    "description": "Set the resource as active or inactive. Default is `true`.\n"
+                },
+                "isAuthoritative": {
+                    "type": "boolean",
+                    "description": "Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to\n`false`, assignments made outside of Terraform will be ignored.\n"
+                },
+                "isBrowserShortcutEnabled": {
+                    "type": "boolean",
+                    "description": "Controls whether an \"Open in Browser\" shortcut will be shown for this Resource in the Twingate Client.\n"
+                },
+                "isVisible": {
+                    "type": "boolean",
+                    "description": "Controls whether this Resource will be visible in the main Resource list in the Twingate Client.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Resource\n"
+                },
+                "protocols": {
+                    "$ref": "#/types/twingate:index/ResourceProtocols:ResourceProtocols",
+                    "description": "Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.\n"
+                },
+                "remoteNetworkId": {
+                    "type": "string",
+                    "description": "Remote Network ID where the Resource lives\n"
+                },
+                "securityPolicyId": {
+                    "type": "string",
+                    "description": "The ID of a `twingate_security_policy` to set as this Resource's Security Policy. Default is `Default Policy`\n"
+                }
+            },
+            "required": [
+                "address",
+                "isAuthoritative",
+                "isBrowserShortcutEnabled",
+                "isVisible",
+                "name",
+                "remoteNetworkId"
+            ],
+            "inputProperties": {
+                "access": {
+                    "$ref": "#/types/twingate:index/ResourceAccess:ResourceAccess",
+                    "description": "Restrict access to certain groups or service accounts\n"
+                },
+                "address": {
+                    "type": "string",
+                    "description": "The Resource's IP/CIDR or FQDN/DNS zone\n"
+                },
+                "alias": {
+                    "type": "string",
+                    "description": "Set a DNS alias address for the Resource. Must be a DNS-valid name string.\n"
+                },
+                "isActive": {
+                    "type": "boolean",
+                    "description": "Set the resource as active or inactive. Default is `true`.\n"
+                },
+                "isAuthoritative": {
+                    "type": "boolean",
+                    "description": "Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to\n`false`, assignments made outside of Terraform will be ignored.\n"
+                },
+                "isBrowserShortcutEnabled": {
+                    "type": "boolean",
+                    "description": "Controls whether an \"Open in Browser\" shortcut will be shown for this Resource in the Twingate Client.\n"
+                },
+                "isVisible": {
+                    "type": "boolean",
+                    "description": "Controls whether this Resource will be visible in the main Resource list in the Twingate Client.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Resource\n"
+                },
+                "protocols": {
+                    "$ref": "#/types/twingate:index/ResourceProtocols:ResourceProtocols",
+                    "description": "Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.\n"
+                },
+                "remoteNetworkId": {
+                    "type": "string",
+                    "description": "Remote Network ID where the Resource lives\n"
+                },
+                "securityPolicyId": {
+                    "type": "string",
+                    "description": "The ID of a `twingate_security_policy` to set as this Resource's Security Policy. Default is `Default Policy`\n"
+                }
+            },
+            "requiredInputs": [
+                "address",
+                "remoteNetworkId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Resource resources.\n",
+                "properties": {
+                    "access": {
+                        "$ref": "#/types/twingate:index/ResourceAccess:ResourceAccess",
+                        "description": "Restrict access to certain groups or service accounts\n"
+                    },
+                    "address": {
+                        "type": "string",
+                        "description": "The Resource's IP/CIDR or FQDN/DNS zone\n"
+                    },
+                    "alias": {
+                        "type": "string",
+                        "description": "Set a DNS alias address for the Resource. Must be a DNS-valid name string.\n"
+                    },
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "Set the resource as active or inactive. Default is `true`.\n"
+                    },
+                    "isAuthoritative": {
+                        "type": "boolean",
+                        "description": "Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to\n`false`, assignments made outside of Terraform will be ignored.\n"
+                    },
+                    "isBrowserShortcutEnabled": {
+                        "type": "boolean",
+                        "description": "Controls whether an \"Open in Browser\" shortcut will be shown for this Resource in the Twingate Client.\n"
+                    },
+                    "isVisible": {
+                        "type": "boolean",
+                        "description": "Controls whether this Resource will be visible in the main Resource list in the Twingate Client.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Resource\n"
+                    },
+                    "protocols": {
+                        "$ref": "#/types/twingate:index/ResourceProtocols:ResourceProtocols",
+                        "description": "Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.\n"
+                    },
+                    "remoteNetworkId": {
+                        "type": "string",
+                        "description": "Remote Network ID where the Resource lives\n"
+                    },
+                    "securityPolicyId": {
+                        "type": "string",
+                        "description": "The ID of a `twingate_security_policy` to set as this Resource's Security Policy. Default is `Default Policy`\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
