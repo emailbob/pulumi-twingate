@@ -9,15 +9,7 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Twingate
 {
-    /// <summary>
-    /// Resources in Twingate represent servers on the private network that clients can connect to. Resources can be defined by IP, CIDR range, FQDN, or DNS zone. For more information, see the Twingate [documentation](https://docs.twingate.com/docs/resources-and-access-nodes).
-    /// 
-    /// ## Import
-    /// 
-    /// ```sh
-    ///  $ pulumi import twingate:index/resource:Resource resource UmVzb3VyY2U6MzQwNDQ3
-    /// ```
-    /// </summary>
+    [Obsolete(@"twingate.index/resource.Resource has been deprecated in favor of twingate.index/twingateresource.TwingateResource")]
     [TwingateResourceType("twingate:index/resource:Resource")]
     public partial class Resource : global::Pulumi.CustomResource
     {
@@ -38,12 +30,6 @@ namespace Pulumi.Twingate
         /// </summary>
         [Output("alias")]
         public Output<string?> Alias { get; private set; } = null!;
-
-        /// <summary>
-        /// Set the resource as active or inactive. Default is `true`.
-        /// </summary>
-        [Output("isActive")]
-        public Output<bool?> IsActive { get; private set; } = null!;
 
         /// <summary>
         /// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
@@ -71,7 +57,8 @@ namespace Pulumi.Twingate
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
+        /// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no
+        /// restriction, and all protocols and ports are allowed.
         /// </summary>
         [Output("protocols")]
         public Output<Outputs.ResourceProtocols?> Protocols { get; private set; } = null!;
@@ -81,12 +68,6 @@ namespace Pulumi.Twingate
         /// </summary>
         [Output("remoteNetworkId")]
         public Output<string> RemoteNetworkId { get; private set; } = null!;
-
-        /// <summary>
-        /// The ID of a `twingate_security_policy` to set as this Resource's Security Policy. Default is `Default Policy`
-        /// </summary>
-        [Output("securityPolicyId")]
-        public Output<string?> SecurityPolicyId { get; private set; } = null!;
 
 
         /// <summary>
@@ -153,12 +134,6 @@ namespace Pulumi.Twingate
         public Input<string>? Alias { get; set; }
 
         /// <summary>
-        /// Set the resource as active or inactive. Default is `true`.
-        /// </summary>
-        [Input("isActive")]
-        public Input<bool>? IsActive { get; set; }
-
-        /// <summary>
         /// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
         /// `false`, assignments made outside of Terraform will be ignored.
         /// </summary>
@@ -184,7 +159,8 @@ namespace Pulumi.Twingate
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
+        /// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no
+        /// restriction, and all protocols and ports are allowed.
         /// </summary>
         [Input("protocols")]
         public Input<Inputs.ResourceProtocolsArgs>? Protocols { get; set; }
@@ -194,12 +170,6 @@ namespace Pulumi.Twingate
         /// </summary>
         [Input("remoteNetworkId", required: true)]
         public Input<string> RemoteNetworkId { get; set; } = null!;
-
-        /// <summary>
-        /// The ID of a `twingate_security_policy` to set as this Resource's Security Policy. Default is `Default Policy`
-        /// </summary>
-        [Input("securityPolicyId")]
-        public Input<string>? SecurityPolicyId { get; set; }
 
         public ResourceArgs()
         {
@@ -228,12 +198,6 @@ namespace Pulumi.Twingate
         public Input<string>? Alias { get; set; }
 
         /// <summary>
-        /// Set the resource as active or inactive. Default is `true`.
-        /// </summary>
-        [Input("isActive")]
-        public Input<bool>? IsActive { get; set; }
-
-        /// <summary>
         /// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
         /// `false`, assignments made outside of Terraform will be ignored.
         /// </summary>
@@ -259,7 +223,8 @@ namespace Pulumi.Twingate
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
+        /// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no
+        /// restriction, and all protocols and ports are allowed.
         /// </summary>
         [Input("protocols")]
         public Input<Inputs.ResourceProtocolsGetArgs>? Protocols { get; set; }
@@ -269,12 +234,6 @@ namespace Pulumi.Twingate
         /// </summary>
         [Input("remoteNetworkId")]
         public Input<string>? RemoteNetworkId { get; set; }
-
-        /// <summary>
-        /// The ID of a `twingate_security_policy` to set as this Resource's Security Policy. Default is `Default Policy`
-        /// </summary>
-        [Input("securityPolicyId")]
-        public Input<string>? SecurityPolicyId { get; set; }
 
         public ResourceState()
         {

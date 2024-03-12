@@ -13,13 +13,7 @@ namespace Pulumi.Twingate.Outputs
     [OutputType]
     public sealed class ResourceProtocolsTcp
     {
-        /// <summary>
-        /// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-        /// </summary>
         public readonly string Policy;
-        /// <summary>
-        /// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
-        /// </summary>
         public readonly ImmutableArray<string> Ports;
 
         [OutputConstructor]

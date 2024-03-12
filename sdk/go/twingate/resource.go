@@ -12,15 +12,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Resources in Twingate represent servers on the private network that clients can connect to. Resources can be defined by IP, CIDR range, FQDN, or DNS zone. For more information, see the Twingate [documentation](https://docs.twingate.com/docs/resources-and-access-nodes).
-//
-// ## Import
-//
-// ```sh
-//
-//	$ pulumi import twingate:index/resource:Resource resource UmVzb3VyY2U6MzQwNDQ3
-//
-// ```
+// Deprecated: twingate.index/resource.Resource has been deprecated in favor of twingate.index/twingateresource.TwingateResource
 type Resource struct {
 	pulumi.CustomResourceState
 
@@ -30,8 +22,6 @@ type Resource struct {
 	Address pulumi.StringOutput `pulumi:"address"`
 	// Set a DNS alias address for the Resource. Must be a DNS-valid name string.
 	Alias pulumi.StringPtrOutput `pulumi:"alias"`
-	// Set the resource as active or inactive. Default is `true`.
-	IsActive pulumi.BoolPtrOutput `pulumi:"isActive"`
 	// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
 	// `false`, assignments made outside of Terraform will be ignored.
 	IsAuthoritative pulumi.BoolOutput `pulumi:"isAuthoritative"`
@@ -41,12 +31,11 @@ type Resource struct {
 	IsVisible pulumi.BoolOutput `pulumi:"isVisible"`
 	// The name of the Resource
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
+	// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no
+	// restriction, and all protocols and ports are allowed.
 	Protocols ResourceProtocolsPtrOutput `pulumi:"protocols"`
 	// Remote Network ID where the Resource lives
 	RemoteNetworkId pulumi.StringOutput `pulumi:"remoteNetworkId"`
-	// The ID of a `twingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`
-	SecurityPolicyId pulumi.StringPtrOutput `pulumi:"securityPolicyId"`
 }
 
 // NewResource registers a new resource with the given unique name, arguments, and options.
@@ -91,8 +80,6 @@ type resourceState struct {
 	Address *string `pulumi:"address"`
 	// Set a DNS alias address for the Resource. Must be a DNS-valid name string.
 	Alias *string `pulumi:"alias"`
-	// Set the resource as active or inactive. Default is `true`.
-	IsActive *bool `pulumi:"isActive"`
 	// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
 	// `false`, assignments made outside of Terraform will be ignored.
 	IsAuthoritative *bool `pulumi:"isAuthoritative"`
@@ -102,12 +89,11 @@ type resourceState struct {
 	IsVisible *bool `pulumi:"isVisible"`
 	// The name of the Resource
 	Name *string `pulumi:"name"`
-	// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
+	// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no
+	// restriction, and all protocols and ports are allowed.
 	Protocols *ResourceProtocols `pulumi:"protocols"`
 	// Remote Network ID where the Resource lives
 	RemoteNetworkId *string `pulumi:"remoteNetworkId"`
-	// The ID of a `twingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`
-	SecurityPolicyId *string `pulumi:"securityPolicyId"`
 }
 
 type ResourceState struct {
@@ -117,8 +103,6 @@ type ResourceState struct {
 	Address pulumi.StringPtrInput
 	// Set a DNS alias address for the Resource. Must be a DNS-valid name string.
 	Alias pulumi.StringPtrInput
-	// Set the resource as active or inactive. Default is `true`.
-	IsActive pulumi.BoolPtrInput
 	// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
 	// `false`, assignments made outside of Terraform will be ignored.
 	IsAuthoritative pulumi.BoolPtrInput
@@ -128,12 +112,11 @@ type ResourceState struct {
 	IsVisible pulumi.BoolPtrInput
 	// The name of the Resource
 	Name pulumi.StringPtrInput
-	// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
+	// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no
+	// restriction, and all protocols and ports are allowed.
 	Protocols ResourceProtocolsPtrInput
 	// Remote Network ID where the Resource lives
 	RemoteNetworkId pulumi.StringPtrInput
-	// The ID of a `twingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`
-	SecurityPolicyId pulumi.StringPtrInput
 }
 
 func (ResourceState) ElementType() reflect.Type {
@@ -147,8 +130,6 @@ type resourceArgs struct {
 	Address string `pulumi:"address"`
 	// Set a DNS alias address for the Resource. Must be a DNS-valid name string.
 	Alias *string `pulumi:"alias"`
-	// Set the resource as active or inactive. Default is `true`.
-	IsActive *bool `pulumi:"isActive"`
 	// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
 	// `false`, assignments made outside of Terraform will be ignored.
 	IsAuthoritative *bool `pulumi:"isAuthoritative"`
@@ -158,12 +139,11 @@ type resourceArgs struct {
 	IsVisible *bool `pulumi:"isVisible"`
 	// The name of the Resource
 	Name *string `pulumi:"name"`
-	// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
+	// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no
+	// restriction, and all protocols and ports are allowed.
 	Protocols *ResourceProtocols `pulumi:"protocols"`
 	// Remote Network ID where the Resource lives
 	RemoteNetworkId string `pulumi:"remoteNetworkId"`
-	// The ID of a `twingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`
-	SecurityPolicyId *string `pulumi:"securityPolicyId"`
 }
 
 // The set of arguments for constructing a Resource resource.
@@ -174,8 +154,6 @@ type ResourceArgs struct {
 	Address pulumi.StringInput
 	// Set a DNS alias address for the Resource. Must be a DNS-valid name string.
 	Alias pulumi.StringPtrInput
-	// Set the resource as active or inactive. Default is `true`.
-	IsActive pulumi.BoolPtrInput
 	// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
 	// `false`, assignments made outside of Terraform will be ignored.
 	IsAuthoritative pulumi.BoolPtrInput
@@ -185,12 +163,11 @@ type ResourceArgs struct {
 	IsVisible pulumi.BoolPtrInput
 	// The name of the Resource
 	Name pulumi.StringPtrInput
-	// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
+	// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no
+	// restriction, and all protocols and ports are allowed.
 	Protocols ResourceProtocolsPtrInput
 	// Remote Network ID where the Resource lives
 	RemoteNetworkId pulumi.StringInput
-	// The ID of a `twingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`
-	SecurityPolicyId pulumi.StringPtrInput
 }
 
 func (ResourceArgs) ElementType() reflect.Type {
@@ -295,11 +272,6 @@ func (o ResourceOutput) Alias() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Resource) pulumi.StringPtrOutput { return v.Alias }).(pulumi.StringPtrOutput)
 }
 
-// Set the resource as active or inactive. Default is `true`.
-func (o ResourceOutput) IsActive() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *Resource) pulumi.BoolPtrOutput { return v.IsActive }).(pulumi.BoolPtrOutput)
-}
-
 // Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
 // `false`, assignments made outside of Terraform will be ignored.
 func (o ResourceOutput) IsAuthoritative() pulumi.BoolOutput {
@@ -321,7 +293,8 @@ func (o ResourceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Resource) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
+// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no
+// restriction, and all protocols and ports are allowed.
 func (o ResourceOutput) Protocols() ResourceProtocolsPtrOutput {
 	return o.ApplyT(func(v *Resource) ResourceProtocolsPtrOutput { return v.Protocols }).(ResourceProtocolsPtrOutput)
 }
@@ -329,11 +302,6 @@ func (o ResourceOutput) Protocols() ResourceProtocolsPtrOutput {
 // Remote Network ID where the Resource lives
 func (o ResourceOutput) RemoteNetworkId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Resource) pulumi.StringOutput { return v.RemoteNetworkId }).(pulumi.StringOutput)
-}
-
-// The ID of a `twingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`
-func (o ResourceOutput) SecurityPolicyId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Resource) pulumi.StringPtrOutput { return v.SecurityPolicyId }).(pulumi.StringPtrOutput)
 }
 
 type ResourceArrayOutput struct{ *pulumi.OutputState }

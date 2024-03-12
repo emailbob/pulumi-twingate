@@ -7,13 +7,7 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Resources in Twingate represent servers on the private network that clients can connect to. Resources can be defined by IP, CIDR range, FQDN, or DNS zone. For more information, see the Twingate [documentation](https://docs.twingate.com/docs/resources-and-access-nodes).
- *
- * ## Import
- *
- * ```sh
- *  $ pulumi import twingate:index/resource:Resource resource UmVzb3VyY2U6MzQwNDQ3
- * ```
+ * @deprecated twingate.index/resource.Resource has been deprecated in favor of twingate.index/twingateresource.TwingateResource
  */
 export class Resource extends pulumi.CustomResource {
     /**
@@ -26,6 +20,7 @@ export class Resource extends pulumi.CustomResource {
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
     public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: ResourceState, opts?: pulumi.CustomResourceOptions): Resource {
+        pulumi.log.warn("Resource is deprecated: twingate.index/resource.Resource has been deprecated in favor of twingate.index/twingateresource.TwingateResource")
         return new Resource(name, <any>state, { ...opts, id: id });
     }
 
@@ -56,10 +51,6 @@ export class Resource extends pulumi.CustomResource {
      */
     public readonly alias!: pulumi.Output<string | undefined>;
     /**
-     * Set the resource as active or inactive. Default is `true`.
-     */
-    public readonly isActive!: pulumi.Output<boolean | undefined>;
-    /**
      * Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
      * `false`, assignments made outside of Terraform will be ignored.
      */
@@ -77,17 +68,14 @@ export class Resource extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
+     * Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no
+     * restriction, and all protocols and ports are allowed.
      */
     public readonly protocols!: pulumi.Output<outputs.ResourceProtocols | undefined>;
     /**
      * Remote Network ID where the Resource lives
      */
     public readonly remoteNetworkId!: pulumi.Output<string>;
-    /**
-     * The ID of a `twingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`
-     */
-    public readonly securityPolicyId!: pulumi.Output<string | undefined>;
 
     /**
      * Create a Resource resource with the given unique name, arguments, and options.
@@ -96,8 +84,11 @@ export class Resource extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
+    /** @deprecated twingate.index/resource.Resource has been deprecated in favor of twingate.index/twingateresource.TwingateResource */
     constructor(name: string, args: ResourceArgs, opts?: pulumi.CustomResourceOptions)
+    /** @deprecated twingate.index/resource.Resource has been deprecated in favor of twingate.index/twingateresource.TwingateResource */
     constructor(name: string, argsOrState?: ResourceArgs | ResourceState, opts?: pulumi.CustomResourceOptions) {
+        pulumi.log.warn("Resource is deprecated: twingate.index/resource.Resource has been deprecated in favor of twingate.index/twingateresource.TwingateResource")
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
@@ -105,14 +96,12 @@ export class Resource extends pulumi.CustomResource {
             resourceInputs["access"] = state ? state.access : undefined;
             resourceInputs["address"] = state ? state.address : undefined;
             resourceInputs["alias"] = state ? state.alias : undefined;
-            resourceInputs["isActive"] = state ? state.isActive : undefined;
             resourceInputs["isAuthoritative"] = state ? state.isAuthoritative : undefined;
             resourceInputs["isBrowserShortcutEnabled"] = state ? state.isBrowserShortcutEnabled : undefined;
             resourceInputs["isVisible"] = state ? state.isVisible : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["protocols"] = state ? state.protocols : undefined;
             resourceInputs["remoteNetworkId"] = state ? state.remoteNetworkId : undefined;
-            resourceInputs["securityPolicyId"] = state ? state.securityPolicyId : undefined;
         } else {
             const args = argsOrState as ResourceArgs | undefined;
             if ((!args || args.address === undefined) && !opts.urn) {
@@ -124,14 +113,12 @@ export class Resource extends pulumi.CustomResource {
             resourceInputs["access"] = args ? args.access : undefined;
             resourceInputs["address"] = args ? args.address : undefined;
             resourceInputs["alias"] = args ? args.alias : undefined;
-            resourceInputs["isActive"] = args ? args.isActive : undefined;
             resourceInputs["isAuthoritative"] = args ? args.isAuthoritative : undefined;
             resourceInputs["isBrowserShortcutEnabled"] = args ? args.isBrowserShortcutEnabled : undefined;
             resourceInputs["isVisible"] = args ? args.isVisible : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["protocols"] = args ? args.protocols : undefined;
             resourceInputs["remoteNetworkId"] = args ? args.remoteNetworkId : undefined;
-            resourceInputs["securityPolicyId"] = args ? args.securityPolicyId : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Resource.__pulumiType, name, resourceInputs, opts);
@@ -155,10 +142,6 @@ export interface ResourceState {
      */
     alias?: pulumi.Input<string>;
     /**
-     * Set the resource as active or inactive. Default is `true`.
-     */
-    isActive?: pulumi.Input<boolean>;
-    /**
      * Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
      * `false`, assignments made outside of Terraform will be ignored.
      */
@@ -176,17 +159,14 @@ export interface ResourceState {
      */
     name?: pulumi.Input<string>;
     /**
-     * Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
+     * Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no
+     * restriction, and all protocols and ports are allowed.
      */
     protocols?: pulumi.Input<inputs.ResourceProtocols>;
     /**
      * Remote Network ID where the Resource lives
      */
     remoteNetworkId?: pulumi.Input<string>;
-    /**
-     * The ID of a `twingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`
-     */
-    securityPolicyId?: pulumi.Input<string>;
 }
 
 /**
@@ -206,10 +186,6 @@ export interface ResourceArgs {
      */
     alias?: pulumi.Input<string>;
     /**
-     * Set the resource as active or inactive. Default is `true`.
-     */
-    isActive?: pulumi.Input<boolean>;
-    /**
      * Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
      * `false`, assignments made outside of Terraform will be ignored.
      */
@@ -227,15 +203,12 @@ export interface ResourceArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
+     * Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no
+     * restriction, and all protocols and ports are allowed.
      */
     protocols?: pulumi.Input<inputs.ResourceProtocols>;
     /**
      * Remote Network ID where the Resource lives
      */
     remoteNetworkId: pulumi.Input<string>;
-    /**
-     * The ID of a `twingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`
-     */
-    securityPolicyId?: pulumi.Input<string>;
 }
