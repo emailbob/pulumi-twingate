@@ -89,6 +89,7 @@ func Provider() tfbridge.ProviderInfo {
 		Repository: "https://github.com/emailbob/pulumi-twingate",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
+		//TFProviderModuleVersion: "v3",
 		GitHubOrg:    "Twingate",
 		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
 		Config:       map[string]*tfbridge.SchemaInfo{
