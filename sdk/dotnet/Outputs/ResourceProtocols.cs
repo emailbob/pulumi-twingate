@@ -13,6 +13,9 @@ namespace Pulumi.Twingate.Outputs
     [OutputType]
     public sealed class ResourceProtocols
     {
+        /// <summary>
+        /// Whether to allow ICMP (ping) traffic
+        /// </summary>
         public readonly bool? AllowIcmp;
         public readonly Outputs.ResourceProtocolsTcp Tcp;
         public readonly Outputs.ResourceProtocolsUdp Udp;

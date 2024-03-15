@@ -15,6 +15,7 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
@@ -36,6 +37,7 @@ import (
 //	}
 //
 // ```
+// <!--End PulumiCodeChooser -->
 func GetTwingateUsers(ctx *pulumi.Context, args *GetTwingateUsersArgs, opts ...pulumi.InvokeOption) (*GetTwingateUsersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTwingateUsersResult

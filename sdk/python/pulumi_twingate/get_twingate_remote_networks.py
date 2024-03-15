@@ -65,12 +65,14 @@ def get_twingate_remote_networks(remote_networks: Optional[Sequence[pulumi.Input
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_twingate as twingate
 
     all = twingate.get_twingate_remote_networks()
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param Sequence[pulumi.InputType['GetTwingateRemoteNetworksRemoteNetworkArgs']] remote_networks: List of Remote Networks
@@ -93,12 +95,14 @@ def get_twingate_remote_networks_output(remote_networks: Optional[pulumi.Input[O
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_twingate as twingate
 
     all = twingate.get_twingate_remote_networks()
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param Sequence[pulumi.InputType['GetTwingateRemoteNetworksRemoteNetworkArgs']] remote_networks: List of Remote Networks

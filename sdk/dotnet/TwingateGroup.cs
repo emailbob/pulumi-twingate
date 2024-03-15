@@ -14,6 +14,7 @@ namespace Pulumi.Twingate
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
@@ -26,11 +27,12 @@ namespace Pulumi.Twingate
     /// 
     /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ```sh
-    ///  $ pulumi import twingate:index/twingateGroup:TwingateGroup aws R3JvdXA6MzQ4OTE=
+    /// $ pulumi import twingate:index/twingateGroup:TwingateGroup aws R3JvdXA6MzQ4OTE=
     /// ```
     /// </summary>
     [TwingateResourceType("twingate:index/twingateGroup:TwingateGroup")]

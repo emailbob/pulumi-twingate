@@ -14,6 +14,7 @@ namespace Pulumi.Twingate
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
@@ -64,11 +65,12 @@ namespace Pulumi.Twingate
     /// 
     /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ```sh
-    ///  $ pulumi import twingate:index/twingateResource:TwingateResource resource UmVzb3VyY2U6MzQwNDQ3
+    /// $ pulumi import twingate:index/twingateResource:TwingateResource resource UmVzb3VyY2U6MzQwNDQ3
     /// ```
     /// </summary>
     [TwingateResourceType("twingate:index/twingateResource:TwingateResource")]

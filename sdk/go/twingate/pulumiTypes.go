@@ -14,7 +14,9 @@ import (
 var _ = internal.GetEnvOrDefault
 
 type ResourceAccess struct {
-	GroupIds          []string `pulumi:"groupIds"`
+	// List of Group IDs that will have permission to access the Resource.
+	GroupIds []string `pulumi:"groupIds"`
+	// List of Service Account IDs that will have permission to access the Resource.
 	ServiceAccountIds []string `pulumi:"serviceAccountIds"`
 }
 
@@ -30,7 +32,9 @@ type ResourceAccessInput interface {
 }
 
 type ResourceAccessArgs struct {
-	GroupIds          pulumi.StringArrayInput `pulumi:"groupIds"`
+	// List of Group IDs that will have permission to access the Resource.
+	GroupIds pulumi.StringArrayInput `pulumi:"groupIds"`
+	// List of Service Account IDs that will have permission to access the Resource.
 	ServiceAccountIds pulumi.StringArrayInput `pulumi:"serviceAccountIds"`
 }
 
@@ -111,10 +115,12 @@ func (o ResourceAccessOutput) ToResourceAccessPtrOutputWithContext(ctx context.C
 	}).(ResourceAccessPtrOutput)
 }
 
+// List of Group IDs that will have permission to access the Resource.
 func (o ResourceAccessOutput) GroupIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ResourceAccess) []string { return v.GroupIds }).(pulumi.StringArrayOutput)
 }
 
+// List of Service Account IDs that will have permission to access the Resource.
 func (o ResourceAccessOutput) ServiceAccountIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ResourceAccess) []string { return v.ServiceAccountIds }).(pulumi.StringArrayOutput)
 }
@@ -143,6 +149,7 @@ func (o ResourceAccessPtrOutput) Elem() ResourceAccessOutput {
 	}).(ResourceAccessOutput)
 }
 
+// List of Group IDs that will have permission to access the Resource.
 func (o ResourceAccessPtrOutput) GroupIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ResourceAccess) []string {
 		if v == nil {
@@ -152,6 +159,7 @@ func (o ResourceAccessPtrOutput) GroupIds() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
+// List of Service Account IDs that will have permission to access the Resource.
 func (o ResourceAccessPtrOutput) ServiceAccountIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ResourceAccess) []string {
 		if v == nil {
@@ -162,6 +170,7 @@ func (o ResourceAccessPtrOutput) ServiceAccountIds() pulumi.StringArrayOutput {
 }
 
 type ResourceProtocols struct {
+	// Whether to allow ICMP (ping) traffic
 	AllowIcmp *bool                `pulumi:"allowIcmp"`
 	Tcp       ResourceProtocolsTcp `pulumi:"tcp"`
 	Udp       ResourceProtocolsUdp `pulumi:"udp"`
@@ -179,6 +188,7 @@ type ResourceProtocolsInput interface {
 }
 
 type ResourceProtocolsArgs struct {
+	// Whether to allow ICMP (ping) traffic
 	AllowIcmp pulumi.BoolPtrInput       `pulumi:"allowIcmp"`
 	Tcp       ResourceProtocolsTcpInput `pulumi:"tcp"`
 	Udp       ResourceProtocolsUdpInput `pulumi:"udp"`
@@ -261,6 +271,7 @@ func (o ResourceProtocolsOutput) ToResourceProtocolsPtrOutputWithContext(ctx con
 	}).(ResourceProtocolsPtrOutput)
 }
 
+// Whether to allow ICMP (ping) traffic
 func (o ResourceProtocolsOutput) AllowIcmp() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ResourceProtocols) *bool { return v.AllowIcmp }).(pulumi.BoolPtrOutput)
 }
@@ -297,6 +308,7 @@ func (o ResourceProtocolsPtrOutput) Elem() ResourceProtocolsOutput {
 	}).(ResourceProtocolsOutput)
 }
 
+// Whether to allow ICMP (ping) traffic
 func (o ResourceProtocolsPtrOutput) AllowIcmp() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ResourceProtocols) *bool {
 		if v == nil {
@@ -325,8 +337,10 @@ func (o ResourceProtocolsPtrOutput) Udp() ResourceProtocolsUdpPtrOutput {
 }
 
 type ResourceProtocolsTcp struct {
-	Policy string   `pulumi:"policy"`
-	Ports  []string `pulumi:"ports"`
+	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
+	Policy string `pulumi:"policy"`
+	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
+	Ports []string `pulumi:"ports"`
 }
 
 // ResourceProtocolsTcpInput is an input type that accepts ResourceProtocolsTcpArgs and ResourceProtocolsTcpOutput values.
@@ -341,8 +355,10 @@ type ResourceProtocolsTcpInput interface {
 }
 
 type ResourceProtocolsTcpArgs struct {
-	Policy pulumi.StringInput      `pulumi:"policy"`
-	Ports  pulumi.StringArrayInput `pulumi:"ports"`
+	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
+	Policy pulumi.StringInput `pulumi:"policy"`
+	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
+	Ports pulumi.StringArrayInput `pulumi:"ports"`
 }
 
 func (ResourceProtocolsTcpArgs) ElementType() reflect.Type {
@@ -422,10 +438,12 @@ func (o ResourceProtocolsTcpOutput) ToResourceProtocolsTcpPtrOutputWithContext(c
 	}).(ResourceProtocolsTcpPtrOutput)
 }
 
+// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
 func (o ResourceProtocolsTcpOutput) Policy() pulumi.StringOutput {
 	return o.ApplyT(func(v ResourceProtocolsTcp) string { return v.Policy }).(pulumi.StringOutput)
 }
 
+// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 func (o ResourceProtocolsTcpOutput) Ports() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ResourceProtocolsTcp) []string { return v.Ports }).(pulumi.StringArrayOutput)
 }
@@ -454,6 +472,7 @@ func (o ResourceProtocolsTcpPtrOutput) Elem() ResourceProtocolsTcpOutput {
 	}).(ResourceProtocolsTcpOutput)
 }
 
+// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
 func (o ResourceProtocolsTcpPtrOutput) Policy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ResourceProtocolsTcp) *string {
 		if v == nil {
@@ -463,6 +482,7 @@ func (o ResourceProtocolsTcpPtrOutput) Policy() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 func (o ResourceProtocolsTcpPtrOutput) Ports() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ResourceProtocolsTcp) []string {
 		if v == nil {
@@ -473,8 +493,10 @@ func (o ResourceProtocolsTcpPtrOutput) Ports() pulumi.StringArrayOutput {
 }
 
 type ResourceProtocolsUdp struct {
-	Policy string   `pulumi:"policy"`
-	Ports  []string `pulumi:"ports"`
+	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
+	Policy string `pulumi:"policy"`
+	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
+	Ports []string `pulumi:"ports"`
 }
 
 // ResourceProtocolsUdpInput is an input type that accepts ResourceProtocolsUdpArgs and ResourceProtocolsUdpOutput values.
@@ -489,8 +511,10 @@ type ResourceProtocolsUdpInput interface {
 }
 
 type ResourceProtocolsUdpArgs struct {
-	Policy pulumi.StringInput      `pulumi:"policy"`
-	Ports  pulumi.StringArrayInput `pulumi:"ports"`
+	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
+	Policy pulumi.StringInput `pulumi:"policy"`
+	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
+	Ports pulumi.StringArrayInput `pulumi:"ports"`
 }
 
 func (ResourceProtocolsUdpArgs) ElementType() reflect.Type {
@@ -570,10 +594,12 @@ func (o ResourceProtocolsUdpOutput) ToResourceProtocolsUdpPtrOutputWithContext(c
 	}).(ResourceProtocolsUdpPtrOutput)
 }
 
+// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
 func (o ResourceProtocolsUdpOutput) Policy() pulumi.StringOutput {
 	return o.ApplyT(func(v ResourceProtocolsUdp) string { return v.Policy }).(pulumi.StringOutput)
 }
 
+// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 func (o ResourceProtocolsUdpOutput) Ports() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ResourceProtocolsUdp) []string { return v.Ports }).(pulumi.StringArrayOutput)
 }
@@ -602,6 +628,7 @@ func (o ResourceProtocolsUdpPtrOutput) Elem() ResourceProtocolsUdpOutput {
 	}).(ResourceProtocolsUdpOutput)
 }
 
+// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
 func (o ResourceProtocolsUdpPtrOutput) Policy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ResourceProtocolsUdp) *string {
 		if v == nil {
@@ -611,6 +638,7 @@ func (o ResourceProtocolsUdpPtrOutput) Policy() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 func (o ResourceProtocolsUdpPtrOutput) Ports() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ResourceProtocolsUdp) []string {
 		if v == nil {

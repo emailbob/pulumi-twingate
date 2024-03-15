@@ -15,6 +15,7 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
@@ -38,6 +39,7 @@ import (
 //	}
 //
 // ```
+// <!--End PulumiCodeChooser -->
 func GetTwingateServiceAccounts(ctx *pulumi.Context, args *GetTwingateServiceAccountsArgs, opts ...pulumi.InvokeOption) (*GetTwingateServiceAccountsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTwingateServiceAccountsResult

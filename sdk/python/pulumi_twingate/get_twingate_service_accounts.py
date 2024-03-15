@@ -78,12 +78,14 @@ def get_twingate_service_accounts(name: Optional[str] = None,
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_twingate as twingate
 
     foo = twingate.get_twingate_service_accounts(name="<your service account's name>")
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param str name: Name of the Service Account
@@ -110,12 +112,14 @@ def get_twingate_service_accounts_output(name: Optional[pulumi.Input[Optional[st
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_twingate as twingate
 
     foo = twingate.get_twingate_service_accounts(name="<your service account's name>")
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param str name: Name of the Service Account

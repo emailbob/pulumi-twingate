@@ -13,7 +13,13 @@ namespace Pulumi.Twingate.Outputs
     [OutputType]
     public sealed class ResourceAccess
     {
+        /// <summary>
+        /// List of Group IDs that will have permission to access the Resource.
+        /// </summary>
         public readonly ImmutableArray<string> GroupIds;
+        /// <summary>
+        /// List of Service Account IDs that will have permission to access the Resource.
+        /// </summary>
         public readonly ImmutableArray<string> ServiceAccountIds;
 
         [OutputConstructor]

@@ -62,12 +62,14 @@ def get_twingate_security_policies(security_policies: Optional[Sequence[pulumi.I
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_twingate as twingate
 
     all = twingate.get_twingate_security_policies()
     ```
+    <!--End PulumiCodeChooser -->
     """
     __args__ = dict()
     __args__['securityPolicies'] = security_policies
@@ -87,11 +89,13 @@ def get_twingate_security_policies_output(security_policies: Optional[pulumi.Inp
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_twingate as twingate
 
     all = twingate.get_twingate_security_policies()
     ```
+    <!--End PulumiCodeChooser -->
     """
     ...

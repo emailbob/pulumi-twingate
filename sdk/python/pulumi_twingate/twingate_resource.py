@@ -339,6 +339,7 @@ class TwingateResource(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_twingate as twingate
@@ -367,11 +368,12 @@ class TwingateResource(pulumi.CustomResource):
                 service_account_ids=[github_actions_prod.id],
             ))
         ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 
         ```sh
-         $ pulumi import twingate:index/twingateResource:TwingateResource resource UmVzb3VyY2U6MzQwNDQ3
+        $ pulumi import twingate:index/twingateResource:TwingateResource resource UmVzb3VyY2U6MzQwNDQ3
         ```
 
         :param str resource_name: The name of the resource.
@@ -398,6 +400,7 @@ class TwingateResource(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_twingate as twingate
@@ -426,11 +429,12 @@ class TwingateResource(pulumi.CustomResource):
                 service_account_ids=[github_actions_prod.id],
             ))
         ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 
         ```sh
-         $ pulumi import twingate:index/twingateResource:TwingateResource resource UmVzb3VyY2U6MzQwNDQ3
+        $ pulumi import twingate:index/twingateResource:TwingateResource resource UmVzb3VyY2U6MzQwNDQ3
         ```
 
         :param str resource_name: The name of the resource.

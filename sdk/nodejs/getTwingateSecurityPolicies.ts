@@ -11,12 +11,14 @@ import * as utilities from "./utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as twingate from "@pulumi/twingate";
  *
  * const all = twingate.getTwingateSecurityPolicies({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTwingateSecurityPolicies(args?: GetTwingateSecurityPoliciesArgs, opts?: pulumi.InvokeOptions): Promise<GetTwingateSecurityPoliciesResult> {
     args = args || {};
@@ -49,12 +51,14 @@ export interface GetTwingateSecurityPoliciesResult {
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as twingate from "@pulumi/twingate";
  *
  * const all = twingate.getTwingateSecurityPolicies({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTwingateSecurityPoliciesOutput(args?: GetTwingateSecurityPoliciesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTwingateSecurityPoliciesResult> {
     return pulumi.output(args).apply((a: any) => getTwingateSecurityPolicies(a, opts))

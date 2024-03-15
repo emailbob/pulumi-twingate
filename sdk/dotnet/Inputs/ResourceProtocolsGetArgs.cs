@@ -12,6 +12,9 @@ namespace Pulumi.Twingate.Inputs
 
     public sealed class ResourceProtocolsGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Whether to allow ICMP (ping) traffic
+        /// </summary>
         [Input("allowIcmp")]
         public Input<bool>? AllowIcmp { get; set; }
 

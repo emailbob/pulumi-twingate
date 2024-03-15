@@ -11,12 +11,14 @@ import * as utilities from "./utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as twingate from "@pulumi/twingate";
  *
  * const all = twingate.getTwingateConnectors({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTwingateConnectors(args?: GetTwingateConnectorsArgs, opts?: pulumi.InvokeOptions): Promise<GetTwingateConnectorsResult> {
     args = args || {};
@@ -55,12 +57,14 @@ export interface GetTwingateConnectorsResult {
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as twingate from "@pulumi/twingate";
  *
  * const all = twingate.getTwingateConnectors({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTwingateConnectorsOutput(args?: GetTwingateConnectorsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTwingateConnectorsResult> {
     return pulumi.output(args).apply((a: any) => getTwingateConnectors(a, opts))

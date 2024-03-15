@@ -15,6 +15,7 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
@@ -38,6 +39,7 @@ import (
 //	}
 //
 // ```
+// <!--End PulumiCodeChooser -->
 func GetTwingateResources(ctx *pulumi.Context, args *GetTwingateResourcesArgs, opts ...pulumi.InvokeOption) (*GetTwingateResourcesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTwingateResourcesResult

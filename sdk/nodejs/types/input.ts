@@ -416,23 +416,44 @@ export interface GetTwingateUsersUserArgs {
 }
 
 export interface ResourceAccess {
+    /**
+     * List of Group IDs that will have permission to access the Resource.
+     */
     groupIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * List of Service Account IDs that will have permission to access the Resource.
+     */
     serviceAccountIds?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface ResourceProtocols {
+    /**
+     * Whether to allow ICMP (ping) traffic
+     */
     allowIcmp?: pulumi.Input<boolean>;
     tcp: pulumi.Input<inputs.ResourceProtocolsTcp>;
     udp: pulumi.Input<inputs.ResourceProtocolsUdp>;
 }
 
 export interface ResourceProtocolsTcp {
+    /**
+     * Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
+     */
     policy: pulumi.Input<string>;
+    /**
+     * List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
+     */
     ports?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface ResourceProtocolsUdp {
+    /**
+     * Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
+     */
     policy: pulumi.Input<string>;
+    /**
+     * List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
+     */
     ports?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
