@@ -135,6 +135,7 @@ class TwingateConnectorTokens(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_twingate as twingate
@@ -143,6 +144,7 @@ class TwingateConnectorTokens(pulumi.CustomResource):
         aws_connector = twingate.TwingateConnector("awsConnector", remote_network_id=aws_network.id)
         aws_connector_tokens = twingate.TwingateConnectorTokens("awsConnectorTokens", connector_id=aws_connector.id)
         ```
+        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -160,6 +162,7 @@ class TwingateConnectorTokens(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_twingate as twingate
@@ -168,6 +171,7 @@ class TwingateConnectorTokens(pulumi.CustomResource):
         aws_connector = twingate.TwingateConnector("awsConnector", remote_network_id=aws_network.id)
         aws_connector_tokens = twingate.TwingateConnectorTokens("awsConnectorTokens", connector_id=aws_connector.id)
         ```
+        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param TwingateConnectorTokensArgs args: The arguments to use to populate this resource's properties.

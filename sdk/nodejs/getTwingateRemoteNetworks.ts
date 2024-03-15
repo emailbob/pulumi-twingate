@@ -11,12 +11,14 @@ import * as utilities from "./utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as twingate from "@pulumi/twingate";
  *
  * const all = twingate.getTwingateRemoteNetworks({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTwingateRemoteNetworks(args?: GetTwingateRemoteNetworksArgs, opts?: pulumi.InvokeOptions): Promise<GetTwingateRemoteNetworksResult> {
     args = args || {};
@@ -55,12 +57,14 @@ export interface GetTwingateRemoteNetworksResult {
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as twingate from "@pulumi/twingate";
  *
  * const all = twingate.getTwingateRemoteNetworks({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTwingateRemoteNetworksOutput(args?: GetTwingateRemoteNetworksOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTwingateRemoteNetworksResult> {
     return pulumi.output(args).apply((a: any) => getTwingateRemoteNetworks(a, opts))

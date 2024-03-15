@@ -104,12 +104,14 @@ def get_twingate_groups(groups: Optional[Sequence[pulumi.InputType['GetTwingateG
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_twingate as twingate
 
     foo = twingate.get_twingate_groups(name="<your group's name>")
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param Sequence[pulumi.InputType['GetTwingateGroupsGroupArgs']] groups: List of Groups
@@ -144,12 +146,14 @@ def get_twingate_groups_output(groups: Optional[pulumi.Input[Optional[Sequence[p
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_twingate as twingate
 
     foo = twingate.get_twingate_groups(name="<your group's name>")
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param Sequence[pulumi.InputType['GetTwingateGroupsGroupArgs']] groups: List of Groups

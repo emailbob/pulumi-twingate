@@ -11,6 +11,7 @@ import * as utilities from "./utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as twingate from "@pulumi/twingate";
@@ -19,6 +20,7 @@ import * as utilities from "./utilities";
  *     name: "<your service account's name>",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTwingateServiceAccounts(args?: GetTwingateServiceAccountsArgs, opts?: pulumi.InvokeOptions): Promise<GetTwingateServiceAccountsResult> {
     args = args || {};
@@ -66,6 +68,7 @@ export interface GetTwingateServiceAccountsResult {
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as twingate from "@pulumi/twingate";
@@ -74,6 +77,7 @@ export interface GetTwingateServiceAccountsResult {
  *     name: "<your service account's name>",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTwingateServiceAccountsOutput(args?: GetTwingateServiceAccountsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTwingateServiceAccountsResult> {
     return pulumi.output(args).apply((a: any) => getTwingateServiceAccounts(a, opts))

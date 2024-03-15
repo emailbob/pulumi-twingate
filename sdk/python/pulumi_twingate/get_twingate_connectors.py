@@ -65,12 +65,14 @@ def get_twingate_connectors(connectors: Optional[Sequence[pulumi.InputType['GetT
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_twingate as twingate
 
     all = twingate.get_twingate_connectors()
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param Sequence[pulumi.InputType['GetTwingateConnectorsConnectorArgs']] connectors: List of Connectors
@@ -93,12 +95,14 @@ def get_twingate_connectors_output(connectors: Optional[pulumi.Input[Optional[Se
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_twingate as twingate
 
     all = twingate.get_twingate_connectors()
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param Sequence[pulumi.InputType['GetTwingateConnectorsConnectorArgs']] connectors: List of Connectors

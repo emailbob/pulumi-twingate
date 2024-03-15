@@ -136,6 +136,7 @@ class TwingateConnector(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_twingate as twingate
@@ -143,11 +144,12 @@ class TwingateConnector(pulumi.CustomResource):
         aws_network = twingate.TwingateRemoteNetwork("awsNetwork")
         aws_connector = twingate.TwingateConnector("awsConnector", remote_network_id=aws_network.id)
         ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 
         ```sh
-         $ pulumi import twingate:index/twingateConnector:TwingateConnector aws_connector Q29ubmVjdG9yOjI2NzM=
+        $ pulumi import twingate:index/twingateConnector:TwingateConnector aws_connector Q29ubmVjdG9yOjI2NzM=
         ```
 
         :param str resource_name: The name of the resource.
@@ -167,6 +169,7 @@ class TwingateConnector(pulumi.CustomResource):
 
         ## Example Usage
 
+        <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import pulumi_twingate as twingate
@@ -174,11 +177,12 @@ class TwingateConnector(pulumi.CustomResource):
         aws_network = twingate.TwingateRemoteNetwork("awsNetwork")
         aws_connector = twingate.TwingateConnector("awsConnector", remote_network_id=aws_network.id)
         ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 
         ```sh
-         $ pulumi import twingate:index/twingateConnector:TwingateConnector aws_connector Q29ubmVjdG9yOjI2NzM=
+        $ pulumi import twingate:index/twingateConnector:TwingateConnector aws_connector Q29ubmVjdG9yOjI2NzM=
         ```
 
         :param str resource_name: The name of the resource.

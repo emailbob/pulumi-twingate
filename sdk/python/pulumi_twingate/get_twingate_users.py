@@ -62,12 +62,14 @@ def get_twingate_users(users: Optional[Sequence[pulumi.InputType['GetTwingateUse
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_twingate as twingate
 
     all = twingate.get_twingate_users()
     ```
+    <!--End PulumiCodeChooser -->
     """
     __args__ = dict()
     __args__['users'] = users
@@ -87,11 +89,13 @@ def get_twingate_users_output(users: Optional[pulumi.Input[Optional[Sequence[pul
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_twingate as twingate
 
     all = twingate.get_twingate_users()
     ```
+    <!--End PulumiCodeChooser -->
     """
     ...

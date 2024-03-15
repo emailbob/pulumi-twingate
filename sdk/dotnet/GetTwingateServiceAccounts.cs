@@ -14,10 +14,9 @@ namespace Pulumi.Twingate
         /// <summary>
         /// Service Accounts offer a way to provide programmatic, centrally-controlled, and consistent access controls.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
@@ -33,8 +32,7 @@ namespace Pulumi.Twingate
         /// 
         /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTwingateServiceAccountsResult> InvokeAsync(GetTwingateServiceAccountsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTwingateServiceAccountsResult>("twingate:index/getTwingateServiceAccounts:getTwingateServiceAccounts", args ?? new GetTwingateServiceAccountsArgs(), options.WithDefaults());
@@ -42,10 +40,9 @@ namespace Pulumi.Twingate
         /// <summary>
         /// Service Accounts offer a way to provide programmatic, centrally-controlled, and consistent access controls.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
@@ -61,8 +58,7 @@ namespace Pulumi.Twingate
         /// 
         /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTwingateServiceAccountsResult> Invoke(GetTwingateServiceAccountsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTwingateServiceAccountsResult>("twingate:index/getTwingateServiceAccounts:getTwingateServiceAccounts", args ?? new GetTwingateServiceAccountsInvokeArgs(), options.WithDefaults());

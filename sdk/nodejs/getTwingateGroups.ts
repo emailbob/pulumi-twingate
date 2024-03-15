@@ -11,6 +11,7 @@ import * as utilities from "./utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as twingate from "@pulumi/twingate";
@@ -19,6 +20,7 @@ import * as utilities from "./utilities";
  *     name: "<your group's name>",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTwingateGroups(args?: GetTwingateGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetTwingateGroupsResult> {
     args = args || {};
@@ -84,6 +86,7 @@ export interface GetTwingateGroupsResult {
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as twingate from "@pulumi/twingate";
@@ -92,6 +95,7 @@ export interface GetTwingateGroupsResult {
  *     name: "<your group's name>",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTwingateGroupsOutput(args?: GetTwingateGroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTwingateGroupsResult> {
     return pulumi.output(args).apply((a: any) => getTwingateGroups(a, opts))

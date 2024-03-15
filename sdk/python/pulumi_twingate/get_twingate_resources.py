@@ -78,12 +78,14 @@ def get_twingate_resources(name: Optional[str] = None,
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_twingate as twingate
 
     foo = twingate.get_twingate_resources(name="<your resource's name>")
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param str name: The name of the Resource
@@ -110,12 +112,14 @@ def get_twingate_resources_output(name: Optional[pulumi.Input[str]] = None,
 
     ## Example Usage
 
+    <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_twingate as twingate
 
     foo = twingate.get_twingate_resources(name="<your resource's name>")
     ```
+    <!--End PulumiCodeChooser -->
 
 
     :param str name: The name of the Resource

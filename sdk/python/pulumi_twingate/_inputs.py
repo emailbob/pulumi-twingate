@@ -38,6 +38,10 @@ class ResourceAccessArgs:
     def __init__(__self__, *,
                  group_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  service_account_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] group_ids: List of Group IDs that will have permission to access the Resource.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] service_account_ids: List of Service Account IDs that will have permission to access the Resource.
+        """
         if group_ids is not None:
             pulumi.set(__self__, "group_ids", group_ids)
         if service_account_ids is not None:
@@ -46,6 +50,9 @@ class ResourceAccessArgs:
     @property
     @pulumi.getter(name="groupIds")
     def group_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of Group IDs that will have permission to access the Resource.
+        """
         return pulumi.get(self, "group_ids")
 
     @group_ids.setter
@@ -55,6 +62,9 @@ class ResourceAccessArgs:
     @property
     @pulumi.getter(name="serviceAccountIds")
     def service_account_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of Service Account IDs that will have permission to access the Resource.
+        """
         return pulumi.get(self, "service_account_ids")
 
     @service_account_ids.setter
@@ -68,6 +78,9 @@ class ResourceProtocolsArgs:
                  tcp: pulumi.Input['ResourceProtocolsTcpArgs'],
                  udp: pulumi.Input['ResourceProtocolsUdpArgs'],
                  allow_icmp: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[bool] allow_icmp: Whether to allow ICMP (ping) traffic
+        """
         pulumi.set(__self__, "tcp", tcp)
         pulumi.set(__self__, "udp", udp)
         if allow_icmp is not None:
@@ -94,6 +107,9 @@ class ResourceProtocolsArgs:
     @property
     @pulumi.getter(name="allowIcmp")
     def allow_icmp(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to allow ICMP (ping) traffic
+        """
         return pulumi.get(self, "allow_icmp")
 
     @allow_icmp.setter
@@ -106,6 +122,10 @@ class ResourceProtocolsTcpArgs:
     def __init__(__self__, *,
                  policy: pulumi.Input[str],
                  ports: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[str] policy: Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ports: List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
+        """
         pulumi.set(__self__, "policy", policy)
         if ports is not None:
             pulumi.set(__self__, "ports", ports)
@@ -113,6 +133,9 @@ class ResourceProtocolsTcpArgs:
     @property
     @pulumi.getter
     def policy(self) -> pulumi.Input[str]:
+        """
+        Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
+        """
         return pulumi.get(self, "policy")
 
     @policy.setter
@@ -122,6 +145,9 @@ class ResourceProtocolsTcpArgs:
     @property
     @pulumi.getter
     def ports(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
+        """
         return pulumi.get(self, "ports")
 
     @ports.setter
@@ -134,6 +160,10 @@ class ResourceProtocolsUdpArgs:
     def __init__(__self__, *,
                  policy: pulumi.Input[str],
                  ports: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[str] policy: Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] ports: List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
+        """
         pulumi.set(__self__, "policy", policy)
         if ports is not None:
             pulumi.set(__self__, "ports", ports)
@@ -141,6 +171,9 @@ class ResourceProtocolsUdpArgs:
     @property
     @pulumi.getter
     def policy(self) -> pulumi.Input[str]:
+        """
+        Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
+        """
         return pulumi.get(self, "policy")
 
     @policy.setter
@@ -150,6 +183,9 @@ class ResourceProtocolsUdpArgs:
     @property
     @pulumi.getter
     def ports(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
+        """
         return pulumi.get(self, "ports")
 
     @ports.setter
