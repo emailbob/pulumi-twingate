@@ -1,5 +1,10 @@
-env:
-  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+name: Upgrade provider
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
 jobs:
   upgrade_provider:
     name: upgrade-provider
@@ -9,10 +14,5 @@ jobs:
       uses: pulumi/pulumi-upgrade-provider-action@v0.0.4
       with:
         kind: all
-name: Upgrade provider
-
-permissions:
-  contents: write
-
-on:
-  workflow_dispatch: {}
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
