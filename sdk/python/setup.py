@@ -18,7 +18,7 @@ def readme():
         return "twingate Pulumi Package - Development Version"
 
 
-setup(name='pulumi_twingate',
+setup(name='emailbob_twingate',
       python_requires='>=3.8',
       version=VERSION,
       description="A Pulumi package for creating and managing twingate cloud resources.",
@@ -32,7 +32,7 @@ setup(name='pulumi_twingate',
       license='Apache-2.0',
       packages=find_packages(),
       package_data={
-          'pulumi_twingate': [
+          'emailbob_twingate': [
               'py.typed',
               'pulumi-plugin.json',
           ]

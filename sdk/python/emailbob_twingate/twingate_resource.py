@@ -342,7 +342,7 @@ class TwingateResource(pulumi.CustomResource):
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
-        import pulumi_twingate as twingate
+        import emailbob_twingate as twingate
 
         aws_network = twingate.TwingateRemoteNetwork("awsNetwork")
         aws = twingate.TwingateGroup("aws")
@@ -403,7 +403,7 @@ class TwingateResource(pulumi.CustomResource):
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
-        import pulumi_twingate as twingate
+        import emailbob_twingate as twingate
 
         aws_network = twingate.TwingateRemoteNetwork("awsNetwork")
         aws = twingate.TwingateGroup("aws")
