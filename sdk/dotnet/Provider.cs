@@ -58,6 +58,7 @@ namespace Pulumi.Twingate
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/emailbob/pulumi-twingate",
                 AdditionalSecretOutputs =
                 {
                     "apiToken",
