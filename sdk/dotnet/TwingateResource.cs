@@ -154,6 +154,7 @@ namespace Pulumi.Twingate
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/emailbob/pulumi-twingate",
                 Aliases =
                 {
                     new global::Pulumi.Alias { Type = "twingate:index/resource:Resource" },
