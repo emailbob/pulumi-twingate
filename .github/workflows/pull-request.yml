@@ -2,11 +2,13 @@
 name: Build
 
 on:
-  pull_request:
-    paths-ignore:
-      - docs
-      - .devcontainer
-      - examples
+on:
+  workflow_dispatch: {}
+  # pull_request:
+  #   paths-ignore:
+  #     - docs
+  #     - .devcontainer
+  #     - examples
 
 jobs:
   build_sdk:
