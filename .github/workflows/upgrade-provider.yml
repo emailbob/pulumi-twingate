@@ -20,4 +20,7 @@ jobs:
         kind: all
         email: emailbob@gmail.com
         username: emailbob
+      env:
+        #GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
