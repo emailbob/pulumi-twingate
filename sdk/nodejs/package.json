@@ -23,6 +23,7 @@
     },
     "pulumi": {
         "resource": true,
-        "name": "twingate"
+        "name": "twingate",
+        "server": "github://api.github.com/emailbob/pulumi-twingate"
     }
 }
