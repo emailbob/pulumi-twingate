@@ -64,10 +64,6 @@ type LookupTwingateUserResult struct {
 	FirstName string `pulumi:"firstName"`
 	// The ID of the User. The ID for the User can be obtained from the Admin API or the URL string in the Admin Console.
 	Id string `pulumi:"id"`
-	// Indicates whether the User is an admin
-	//
-	// Deprecated: This read-only Boolean value will be deprecated in a future release. You may use the `role` value instead.
-	IsAdmin bool `pulumi:"isAdmin"`
 	// The last name of the User
 	LastName string `pulumi:"lastName"`
 	// Indicates the User's role. Either ADMIN, DEVOPS, SUPPORT, or MEMBER
@@ -127,13 +123,6 @@ func (o LookupTwingateUserResultOutput) FirstName() pulumi.StringOutput {
 // The ID of the User. The ID for the User can be obtained from the Admin API or the URL string in the Admin Console.
 func (o LookupTwingateUserResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupTwingateUserResult) string { return v.Id }).(pulumi.StringOutput)
-}
-
-// Indicates whether the User is an admin
-//
-// Deprecated: This read-only Boolean value will be deprecated in a future release. You may use the `role` value instead.
-func (o LookupTwingateUserResultOutput) IsAdmin() pulumi.BoolOutput {
-	return o.ApplyT(func(v LookupTwingateUserResult) bool { return v.IsAdmin }).(pulumi.BoolOutput)
 }
 
 // The last name of the User

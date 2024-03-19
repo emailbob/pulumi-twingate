@@ -7,32 +7,29 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Twingate.Inputs
+namespace Pulumi.Twingate.Outputs
 {
 
-    public sealed class GetTwingateResourceProtocolUdpArgs : global::Pulumi.InvokeArgs
+    [OutputType]
+    public sealed class GetTwingateResourcesResourceProtocolsUdpResult
     {
         /// <summary>
         /// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
         /// </summary>
-        [Input("policy", required: true)]
-        public string Policy { get; set; } = null!;
-
-        [Input("ports", required: true)]
-        private List<string>? _ports;
-
+        public readonly string Policy;
         /// <summary>
         /// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
         /// </summary>
-        public List<string> Ports
-        {
-            get => _ports ?? (_ports = new List<string>());
-            set => _ports = value;
-        }
+        public readonly ImmutableArray<string> Ports;
 
-        public GetTwingateResourceProtocolUdpArgs()
+        [OutputConstructor]
+        private GetTwingateResourcesResourceProtocolsUdpResult(
+            string policy,
+
+            ImmutableArray<string> ports)
         {
+            Policy = policy;
+            Ports = ports;
         }
-        public static new GetTwingateResourceProtocolUdpArgs Empty => new GetTwingateResourceProtocolUdpArgs();
     }
 }

@@ -55,7 +55,7 @@ type LookupTwingateResourceArgs struct {
 	// The ID of the Resource. The ID for the Resource can be obtained from the Admin API or the URL string in the Admin Console.
 	Id string `pulumi:"id"`
 	// By default (when this argument is not defined) no restriction is applied, and all protocols and ports are allowed.
-	Protocols []GetTwingateResourceProtocol `pulumi:"protocols"`
+	Protocols *GetTwingateResourceProtocols `pulumi:"protocols"`
 }
 
 // A collection of values returned by getTwingateResource.
@@ -67,7 +67,7 @@ type LookupTwingateResourceResult struct {
 	// The name of the Resource
 	Name string `pulumi:"name"`
 	// By default (when this argument is not defined) no restriction is applied, and all protocols and ports are allowed.
-	Protocols []GetTwingateResourceProtocol `pulumi:"protocols"`
+	Protocols *GetTwingateResourceProtocols `pulumi:"protocols"`
 	// The Remote Network ID that the Resource is associated with. Resources may only be associated with a single Remote Network.
 	RemoteNetworkId string `pulumi:"remoteNetworkId"`
 }
@@ -90,7 +90,7 @@ type LookupTwingateResourceOutputArgs struct {
 	// The ID of the Resource. The ID for the Resource can be obtained from the Admin API or the URL string in the Admin Console.
 	Id pulumi.StringInput `pulumi:"id"`
 	// By default (when this argument is not defined) no restriction is applied, and all protocols and ports are allowed.
-	Protocols GetTwingateResourceProtocolArrayInput `pulumi:"protocols"`
+	Protocols GetTwingateResourceProtocolsPtrInput `pulumi:"protocols"`
 }
 
 func (LookupTwingateResourceOutputArgs) ElementType() reflect.Type {
@@ -128,8 +128,8 @@ func (o LookupTwingateResourceResultOutput) Name() pulumi.StringOutput {
 }
 
 // By default (when this argument is not defined) no restriction is applied, and all protocols and ports are allowed.
-func (o LookupTwingateResourceResultOutput) Protocols() GetTwingateResourceProtocolArrayOutput {
-	return o.ApplyT(func(v LookupTwingateResourceResult) []GetTwingateResourceProtocol { return v.Protocols }).(GetTwingateResourceProtocolArrayOutput)
+func (o LookupTwingateResourceResultOutput) Protocols() GetTwingateResourceProtocolsPtrOutput {
+	return o.ApplyT(func(v LookupTwingateResourceResult) *GetTwingateResourceProtocols { return v.Protocols }).(GetTwingateResourceProtocolsPtrOutput)
 }
 
 // The Remote Network ID that the Resource is associated with. Resources may only be associated with a single Remote Network.

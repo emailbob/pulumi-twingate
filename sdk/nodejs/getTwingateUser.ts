@@ -55,12 +55,6 @@ export interface GetTwingateUserResult {
      */
     readonly id: string;
     /**
-     * Indicates whether the User is an admin
-     *
-     * @deprecated This read-only Boolean value will be deprecated in a future release. You may use the `role` value instead.
-     */
-    readonly isAdmin: boolean;
-    /**
      * The last name of the User
      */
     readonly lastName: string;

@@ -11,7 +11,7 @@ namespace Pulumi.Twingate.Outputs
 {
 
     [OutputType]
-    public sealed class GetTwingateResourcesResourceProtocolUdpResult
+    public sealed class GetTwingateResourcesResourceProtocolsTcpResult
     {
         /// <summary>
         /// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
@@ -23,7 +23,7 @@ namespace Pulumi.Twingate.Outputs
         public readonly ImmutableArray<string> Ports;
 
         [OutputConstructor]
-        private GetTwingateResourcesResourceProtocolUdpResult(
+        private GetTwingateResourcesResourceProtocolsTcpResult(
             string policy,
 
             ImmutableArray<string> ports)

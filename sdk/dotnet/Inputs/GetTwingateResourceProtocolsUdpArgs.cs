@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.Twingate.Inputs
 {
 
-    public sealed class GetTwingateResourceProtocolUdpInputArgs : global::Pulumi.ResourceArgs
+    public sealed class GetTwingateResourceProtocolsUdpInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
@@ -30,9 +30,9 @@ namespace Pulumi.Twingate.Inputs
             set => _ports = value;
         }
 
-        public GetTwingateResourceProtocolUdpInputArgs()
+        public GetTwingateResourceProtocolsUdpInputArgs()
         {
         }
-        public static new GetTwingateResourceProtocolUdpInputArgs Empty => new GetTwingateResourceProtocolUdpInputArgs();
+        public static new GetTwingateResourceProtocolsUdpInputArgs Empty => new GetTwingateResourceProtocolsUdpInputArgs();
     }
 }
