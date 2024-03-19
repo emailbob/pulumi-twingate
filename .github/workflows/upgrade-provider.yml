@@ -1,10 +1,10 @@
 name: Upgrade provider
 on:
-  pull_request:
-    paths-ignore:
-      - docs
-      - .devcontainer
-      - examples
+  issues:
+    types:
+    - opened
+  schedule:
+    - cron: '*/15 * * * *'
   # workflow_dispatch: {}
 # on:
 #   issues:
