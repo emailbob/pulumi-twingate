@@ -21,7 +21,7 @@ class TwingateConnectorArgs:
         The set of arguments for constructing a TwingateConnector resource.
         :param pulumi.Input[str] remote_network_id: The ID of the Remote Network the Connector is attached to.
         :param pulumi.Input[str] name: Name of the Connector, if not provided one will be generated.
-        :param pulumi.Input[bool] status_updates_enabled: Determines whether status notifications are enabled for the Connector. Default is `true`.
+        :param pulumi.Input[bool] status_updates_enabled: Determines whether status notifications are enabled for the Connector.
         """
         pulumi.set(__self__, "remote_network_id", remote_network_id)
         if name is not None:
@@ -57,7 +57,7 @@ class TwingateConnectorArgs:
     @pulumi.getter(name="statusUpdatesEnabled")
     def status_updates_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Determines whether status notifications are enabled for the Connector. Default is `true`.
+        Determines whether status notifications are enabled for the Connector.
         """
         return pulumi.get(self, "status_updates_enabled")
 
@@ -76,7 +76,7 @@ class _TwingateConnectorState:
         Input properties used for looking up and filtering TwingateConnector resources.
         :param pulumi.Input[str] name: Name of the Connector, if not provided one will be generated.
         :param pulumi.Input[str] remote_network_id: The ID of the Remote Network the Connector is attached to.
-        :param pulumi.Input[bool] status_updates_enabled: Determines whether status notifications are enabled for the Connector. Default is `true`.
+        :param pulumi.Input[bool] status_updates_enabled: Determines whether status notifications are enabled for the Connector.
         """
         if name is not None:
             pulumi.set(__self__, "name", name)
@@ -113,7 +113,7 @@ class _TwingateConnectorState:
     @pulumi.getter(name="statusUpdatesEnabled")
     def status_updates_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Determines whether status notifications are enabled for the Connector. Default is `true`.
+        Determines whether status notifications are enabled for the Connector.
         """
         return pulumi.get(self, "status_updates_enabled")
 
@@ -142,9 +142,7 @@ class TwingateConnector(pulumi.CustomResource):
         import emailbob_twingate as twingate
 
         aws_network = twingate.TwingateRemoteNetwork("awsNetwork")
-        aws_connector = twingate.TwingateConnector("awsConnector",
-            remote_network_id=aws_network.id,
-            status_updates_enabled=True)
+        aws_connector = twingate.TwingateConnector("awsConnector", remote_network_id=aws_network.id)
         ```
         <!--End PulumiCodeChooser -->
 
@@ -158,7 +156,7 @@ class TwingateConnector(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Name of the Connector, if not provided one will be generated.
         :param pulumi.Input[str] remote_network_id: The ID of the Remote Network the Connector is attached to.
-        :param pulumi.Input[bool] status_updates_enabled: Determines whether status notifications are enabled for the Connector. Default is `true`.
+        :param pulumi.Input[bool] status_updates_enabled: Determines whether status notifications are enabled for the Connector.
         """
         ...
     @overload
@@ -177,9 +175,7 @@ class TwingateConnector(pulumi.CustomResource):
         import emailbob_twingate as twingate
 
         aws_network = twingate.TwingateRemoteNetwork("awsNetwork")
-        aws_connector = twingate.TwingateConnector("awsConnector",
-            remote_network_id=aws_network.id,
-            status_updates_enabled=True)
+        aws_connector = twingate.TwingateConnector("awsConnector", remote_network_id=aws_network.id)
         ```
         <!--End PulumiCodeChooser -->
 
@@ -243,7 +239,7 @@ class TwingateConnector(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] name: Name of the Connector, if not provided one will be generated.
         :param pulumi.Input[str] remote_network_id: The ID of the Remote Network the Connector is attached to.
-        :param pulumi.Input[bool] status_updates_enabled: Determines whether status notifications are enabled for the Connector. Default is `true`.
+        :param pulumi.Input[bool] status_updates_enabled: Determines whether status notifications are enabled for the Connector.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -274,7 +270,7 @@ class TwingateConnector(pulumi.CustomResource):
     @pulumi.getter(name="statusUpdatesEnabled")
     def status_updates_enabled(self) -> pulumi.Output[bool]:
         """
-        Determines whether status notifications are enabled for the Connector. Default is `true`.
+        Determines whether status notifications are enabled for the Connector.
         """
         return pulumi.get(self, "status_updates_enabled")
 

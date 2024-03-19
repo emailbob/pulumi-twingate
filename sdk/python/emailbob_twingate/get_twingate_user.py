@@ -21,7 +21,7 @@ class GetTwingateUserResult:
     """
     A collection of values returned by getTwingateUser.
     """
-    def __init__(__self__, email=None, first_name=None, id=None, last_name=None, role=None, type=None):
+    def __init__(__self__, email=None, first_name=None, id=None, is_admin=None, last_name=None, role=None, type=None):
         if email and not isinstance(email, str):
             raise TypeError("Expected argument 'email' to be a str")
         pulumi.set(__self__, "email", email)
@@ -31,6 +31,9 @@ class GetTwingateUserResult:
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
+        if is_admin and not isinstance(is_admin, bool):
+            raise TypeError("Expected argument 'is_admin' to be a bool")
+        pulumi.set(__self__, "is_admin", is_admin)
         if last_name and not isinstance(last_name, str):
             raise TypeError("Expected argument 'last_name' to be a str")
         pulumi.set(__self__, "last_name", last_name)
@@ -66,6 +69,17 @@ class GetTwingateUserResult:
         return pulumi.get(self, "id")
 
     @property
+    @pulumi.getter(name="isAdmin")
+    def is_admin(self) -> bool:
+        """
+        Indicates whether the User is an admin
+        """
+        warnings.warn("""This read-only Boolean value will be deprecated in a future release. You may use the `role` value instead.""", DeprecationWarning)
+        pulumi.log.warn("""is_admin is deprecated: This read-only Boolean value will be deprecated in a future release. You may use the `role` value instead.""")
+
+        return pulumi.get(self, "is_admin")
+
+    @property
     @pulumi.getter(name="lastName")
     def last_name(self) -> str:
         """
@@ -99,6 +113,7 @@ class AwaitableGetTwingateUserResult(GetTwingateUserResult):
             email=self.email,
             first_name=self.first_name,
             id=self.id,
+            is_admin=self.is_admin,
             last_name=self.last_name,
             role=self.role,
             type=self.type)
@@ -132,6 +147,7 @@ def get_twingate_user(id: Optional[str] = None,
         email=pulumi.get(__ret__, 'email'),
         first_name=pulumi.get(__ret__, 'first_name'),
         id=pulumi.get(__ret__, 'id'),
+        is_admin=pulumi.get(__ret__, 'is_admin'),
         last_name=pulumi.get(__ret__, 'last_name'),
         role=pulumi.get(__ret__, 'role'),
         type=pulumi.get(__ret__, 'type'))

@@ -42,7 +42,7 @@ export interface GetTwingateResourceArgs {
     /**
      * By default (when this argument is not defined) no restriction is applied, and all protocols and ports are allowed.
      */
-    protocols?: inputs.GetTwingateResourceProtocols;
+    protocols?: inputs.GetTwingateResourceProtocol[];
 }
 
 /**
@@ -64,7 +64,7 @@ export interface GetTwingateResourceResult {
     /**
      * By default (when this argument is not defined) no restriction is applied, and all protocols and ports are allowed.
      */
-    readonly protocols?: outputs.GetTwingateResourceProtocols;
+    readonly protocols?: outputs.GetTwingateResourceProtocol[];
     /**
      * The Remote Network ID that the Resource is associated with. Resources may only be associated with a single Remote Network.
      */
@@ -101,5 +101,5 @@ export interface GetTwingateResourceOutputArgs {
     /**
      * By default (when this argument is not defined) no restriction is applied, and all protocols and ports are allowed.
      */
-    protocols?: pulumi.Input<inputs.GetTwingateResourceProtocolsArgs>;
+    protocols?: pulumi.Input<pulumi.Input<inputs.GetTwingateResourceProtocolArgs>[]>;
 }

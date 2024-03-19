@@ -73,11 +73,17 @@ namespace Pulumi.Twingate
         [Input("id", required: true)]
         public string Id { get; set; } = null!;
 
+        [Input("protocols")]
+        private List<Inputs.GetTwingateResourceProtocolArgs>? _protocols;
+
         /// <summary>
         /// By default (when this argument is not defined) no restriction is applied, and all protocols and ports are allowed.
         /// </summary>
-        [Input("protocols")]
-        public Inputs.GetTwingateResourceProtocolsArgs? Protocols { get; set; }
+        public List<Inputs.GetTwingateResourceProtocolArgs> Protocols
+        {
+            get => _protocols ?? (_protocols = new List<Inputs.GetTwingateResourceProtocolArgs>());
+            set => _protocols = value;
+        }
 
         public GetTwingateResourceArgs()
         {
@@ -93,11 +99,17 @@ namespace Pulumi.Twingate
         [Input("id", required: true)]
         public Input<string> Id { get; set; } = null!;
 
+        [Input("protocols")]
+        private InputList<Inputs.GetTwingateResourceProtocolInputArgs>? _protocols;
+
         /// <summary>
         /// By default (when this argument is not defined) no restriction is applied, and all protocols and ports are allowed.
         /// </summary>
-        [Input("protocols")]
-        public Input<Inputs.GetTwingateResourceProtocolsInputArgs>? Protocols { get; set; }
+        public InputList<Inputs.GetTwingateResourceProtocolInputArgs> Protocols
+        {
+            get => _protocols ?? (_protocols = new InputList<Inputs.GetTwingateResourceProtocolInputArgs>());
+            set => _protocols = value;
+        }
 
         public GetTwingateResourceInvokeArgs()
         {
@@ -124,7 +136,7 @@ namespace Pulumi.Twingate
         /// <summary>
         /// By default (when this argument is not defined) no restriction is applied, and all protocols and ports are allowed.
         /// </summary>
-        public readonly Outputs.GetTwingateResourceProtocolsResult? Protocols;
+        public readonly ImmutableArray<Outputs.GetTwingateResourceProtocolResult> Protocols;
         /// <summary>
         /// The Remote Network ID that the Resource is associated with. Resources may only be associated with a single Remote Network.
         /// </summary>
@@ -138,7 +150,7 @@ namespace Pulumi.Twingate
 
             string name,
 
-            Outputs.GetTwingateResourceProtocolsResult? protocols,
+            ImmutableArray<Outputs.GetTwingateResourceProtocolResult> protocols,
 
             string remoteNetworkId)
         {

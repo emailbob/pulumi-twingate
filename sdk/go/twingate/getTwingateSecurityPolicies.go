@@ -28,9 +28,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := twingate.GetTwingateSecurityPolicies(ctx, &twingate.GetTwingateSecurityPoliciesArgs{
-//				Name: pulumi.StringRef("<your security policy's name>"),
-//			}, nil)
+//			_, err := twingate.GetTwingateSecurityPolicies(ctx, nil, nil)
 //			if err != nil {
 //				return err
 //			}
@@ -52,36 +50,13 @@ func GetTwingateSecurityPolicies(ctx *pulumi.Context, args *GetTwingateSecurityP
 
 // A collection of arguments for invoking getTwingateSecurityPolicies.
 type GetTwingateSecurityPoliciesArgs struct {
-	// Return a Security Policy that exactly matches this name.
-	Name *string `pulumi:"name"`
-	// Match when the value exist in the name of the security policy.
-	NameContains *string `pulumi:"nameContains"`
-	// Match when the exact value does not exist in the name of the security policy.
-	NameExclude *string `pulumi:"nameExclude"`
-	// The name of the security policy must start with the value.
-	NamePrefix *string `pulumi:"namePrefix"`
-	// The regular expression match of the name of the security policy.
-	NameRegexp *string `pulumi:"nameRegexp"`
-	// The name of the security policy must end with the value.
-	NameSuffix *string `pulumi:"nameSuffix"`
+	SecurityPolicies []GetTwingateSecurityPoliciesSecurityPolicy `pulumi:"securityPolicies"`
 }
 
 // A collection of values returned by getTwingateSecurityPolicies.
 type GetTwingateSecurityPoliciesResult struct {
-	// The ID of this resource.
-	Id string `pulumi:"id"`
-	// Returns only security policies that exactly match this name. If no options are passed it will return all security policies. Only one option can be used at a time.
-	Name *string `pulumi:"name"`
-	// Match when the value exist in the name of the security policy.
-	NameContains *string `pulumi:"nameContains"`
-	// Match when the exact value does not exist in the name of the security policy.
-	NameExclude *string `pulumi:"nameExclude"`
-	// The name of the security policy must start with the value.
-	NamePrefix *string `pulumi:"namePrefix"`
-	// The regular expression match of the name of the security policy.
-	NameRegexp *string `pulumi:"nameRegexp"`
-	// The name of the security policy must end with the value.
-	NameSuffix       *string                                     `pulumi:"nameSuffix"`
+	// The provider-assigned unique ID for this managed resource.
+	Id               string                                      `pulumi:"id"`
 	SecurityPolicies []GetTwingateSecurityPoliciesSecurityPolicy `pulumi:"securityPolicies"`
 }
 
@@ -100,18 +75,7 @@ func GetTwingateSecurityPoliciesOutput(ctx *pulumi.Context, args GetTwingateSecu
 
 // A collection of arguments for invoking getTwingateSecurityPolicies.
 type GetTwingateSecurityPoliciesOutputArgs struct {
-	// Return a Security Policy that exactly matches this name.
-	Name pulumi.StringPtrInput `pulumi:"name"`
-	// Match when the value exist in the name of the security policy.
-	NameContains pulumi.StringPtrInput `pulumi:"nameContains"`
-	// Match when the exact value does not exist in the name of the security policy.
-	NameExclude pulumi.StringPtrInput `pulumi:"nameExclude"`
-	// The name of the security policy must start with the value.
-	NamePrefix pulumi.StringPtrInput `pulumi:"namePrefix"`
-	// The regular expression match of the name of the security policy.
-	NameRegexp pulumi.StringPtrInput `pulumi:"nameRegexp"`
-	// The name of the security policy must end with the value.
-	NameSuffix pulumi.StringPtrInput `pulumi:"nameSuffix"`
+	SecurityPolicies GetTwingateSecurityPoliciesSecurityPolicyArrayInput `pulumi:"securityPolicies"`
 }
 
 func (GetTwingateSecurityPoliciesOutputArgs) ElementType() reflect.Type {
@@ -133,39 +97,9 @@ func (o GetTwingateSecurityPoliciesResultOutput) ToGetTwingateSecurityPoliciesRe
 	return o
 }
 
-// The ID of this resource.
+// The provider-assigned unique ID for this managed resource.
 func (o GetTwingateSecurityPoliciesResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetTwingateSecurityPoliciesResult) string { return v.Id }).(pulumi.StringOutput)
-}
-
-// Returns only security policies that exactly match this name. If no options are passed it will return all security policies. Only one option can be used at a time.
-func (o GetTwingateSecurityPoliciesResultOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetTwingateSecurityPoliciesResult) *string { return v.Name }).(pulumi.StringPtrOutput)
-}
-
-// Match when the value exist in the name of the security policy.
-func (o GetTwingateSecurityPoliciesResultOutput) NameContains() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetTwingateSecurityPoliciesResult) *string { return v.NameContains }).(pulumi.StringPtrOutput)
-}
-
-// Match when the exact value does not exist in the name of the security policy.
-func (o GetTwingateSecurityPoliciesResultOutput) NameExclude() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetTwingateSecurityPoliciesResult) *string { return v.NameExclude }).(pulumi.StringPtrOutput)
-}
-
-// The name of the security policy must start with the value.
-func (o GetTwingateSecurityPoliciesResultOutput) NamePrefix() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetTwingateSecurityPoliciesResult) *string { return v.NamePrefix }).(pulumi.StringPtrOutput)
-}
-
-// The regular expression match of the name of the security policy.
-func (o GetTwingateSecurityPoliciesResultOutput) NameRegexp() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetTwingateSecurityPoliciesResult) *string { return v.NameRegexp }).(pulumi.StringPtrOutput)
-}
-
-// The name of the security policy must end with the value.
-func (o GetTwingateSecurityPoliciesResultOutput) NameSuffix() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetTwingateSecurityPoliciesResult) *string { return v.NameSuffix }).(pulumi.StringPtrOutput)
 }
 
 func (o GetTwingateSecurityPoliciesResultOutput) SecurityPolicies() GetTwingateSecurityPoliciesSecurityPolicyArrayOutput {

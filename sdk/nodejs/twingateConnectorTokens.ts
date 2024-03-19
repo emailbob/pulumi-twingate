@@ -59,7 +59,7 @@ export class TwingateConnectorTokens extends pulumi.CustomResource {
     /**
      * Arbitrary map of values that, when changed, will trigger recreation of resource. Use this to automatically rotate Connector tokens on a schedule.
      */
-    public readonly keepers!: pulumi.Output<{[key: string]: string} | undefined>;
+    public readonly keepers!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
      * The Refresh Token of the parent Connector
      */
@@ -114,7 +114,7 @@ export interface TwingateConnectorTokensState {
     /**
      * Arbitrary map of values that, when changed, will trigger recreation of resource. Use this to automatically rotate Connector tokens on a schedule.
      */
-    keepers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    keepers?: pulumi.Input<{[key: string]: any}>;
     /**
      * The Refresh Token of the parent Connector
      */
@@ -132,5 +132,5 @@ export interface TwingateConnectorTokensArgs {
     /**
      * Arbitrary map of values that, when changed, will trigger recreation of resource. Use this to automatically rotate Connector tokens on a schedule.
      */
-    keepers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    keepers?: pulumi.Input<{[key: string]: any}>;
 }

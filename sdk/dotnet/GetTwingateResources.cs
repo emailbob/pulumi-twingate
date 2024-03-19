@@ -34,7 +34,7 @@ namespace Pulumi.Twingate
         /// ```
         /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
-        public static Task<GetTwingateResourcesResult> InvokeAsync(GetTwingateResourcesArgs? args = null, InvokeOptions? options = null)
+        public static Task<GetTwingateResourcesResult> InvokeAsync(GetTwingateResourcesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTwingateResourcesResult>("twingate:index/getTwingateResources:getTwingateResources", args ?? new GetTwingateResourcesArgs(), options.WithDefaults());
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Pulumi.Twingate
         /// ```
         /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
-        public static Output<GetTwingateResourcesResult> Invoke(GetTwingateResourcesInvokeArgs? args = null, InvokeOptions? options = null)
+        public static Output<GetTwingateResourcesResult> Invoke(GetTwingateResourcesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTwingateResourcesResult>("twingate:index/getTwingateResources:getTwingateResources", args ?? new GetTwingateResourcesInvokeArgs(), options.WithDefaults());
     }
 
@@ -70,38 +70,20 @@ namespace Pulumi.Twingate
         /// <summary>
         /// The name of the Resource
         /// </summary>
-        [Input("name")]
-        public string? Name { get; set; }
+        [Input("name", required: true)]
+        public string Name { get; set; } = null!;
+
+        [Input("resources")]
+        private List<Inputs.GetTwingateResourcesResourceArgs>? _resources;
 
         /// <summary>
-        /// Match when the value exist in the name of the resource.
+        /// List of Resources
         /// </summary>
-        [Input("nameContains")]
-        public string? NameContains { get; set; }
-
-        /// <summary>
-        /// Match when the exact value does not exist in the name of the resource.
-        /// </summary>
-        [Input("nameExclude")]
-        public string? NameExclude { get; set; }
-
-        /// <summary>
-        /// The name of the resource must start with the value.
-        /// </summary>
-        [Input("namePrefix")]
-        public string? NamePrefix { get; set; }
-
-        /// <summary>
-        /// The regular expression match of the name of the resource.
-        /// </summary>
-        [Input("nameRegexp")]
-        public string? NameRegexp { get; set; }
-
-        /// <summary>
-        /// The name of the resource must end with the value.
-        /// </summary>
-        [Input("nameSuffix")]
-        public string? NameSuffix { get; set; }
+        public List<Inputs.GetTwingateResourcesResourceArgs> Resources
+        {
+            get => _resources ?? (_resources = new List<Inputs.GetTwingateResourcesResourceArgs>());
+            set => _resources = value;
+        }
 
         public GetTwingateResourcesArgs()
         {
@@ -114,38 +96,20 @@ namespace Pulumi.Twingate
         /// <summary>
         /// The name of the Resource
         /// </summary>
-        [Input("name")]
-        public Input<string>? Name { get; set; }
+        [Input("name", required: true)]
+        public Input<string> Name { get; set; } = null!;
+
+        [Input("resources")]
+        private InputList<Inputs.GetTwingateResourcesResourceInputArgs>? _resources;
 
         /// <summary>
-        /// Match when the value exist in the name of the resource.
+        /// List of Resources
         /// </summary>
-        [Input("nameContains")]
-        public Input<string>? NameContains { get; set; }
-
-        /// <summary>
-        /// Match when the exact value does not exist in the name of the resource.
-        /// </summary>
-        [Input("nameExclude")]
-        public Input<string>? NameExclude { get; set; }
-
-        /// <summary>
-        /// The name of the resource must start with the value.
-        /// </summary>
-        [Input("namePrefix")]
-        public Input<string>? NamePrefix { get; set; }
-
-        /// <summary>
-        /// The regular expression match of the name of the resource.
-        /// </summary>
-        [Input("nameRegexp")]
-        public Input<string>? NameRegexp { get; set; }
-
-        /// <summary>
-        /// The name of the resource must end with the value.
-        /// </summary>
-        [Input("nameSuffix")]
-        public Input<string>? NameSuffix { get; set; }
+        public InputList<Inputs.GetTwingateResourcesResourceInputArgs> Resources
+        {
+            get => _resources ?? (_resources = new InputList<Inputs.GetTwingateResourcesResourceInputArgs>());
+            set => _resources = value;
+        }
 
         public GetTwingateResourcesInvokeArgs()
         {
@@ -158,33 +122,13 @@ namespace Pulumi.Twingate
     public sealed class GetTwingateResourcesResult
     {
         /// <summary>
-        /// The ID of this resource.
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
         /// <summary>
-        /// Returns only resources that exactly match this name. If no options are passed it will return all resources. Only one option can be used at a time.
+        /// The name of the Resource
         /// </summary>
-        public readonly string? Name;
-        /// <summary>
-        /// Match when the value exist in the name of the resource.
-        /// </summary>
-        public readonly string? NameContains;
-        /// <summary>
-        /// Match when the exact value does not exist in the name of the resource.
-        /// </summary>
-        public readonly string? NameExclude;
-        /// <summary>
-        /// The name of the resource must start with the value.
-        /// </summary>
-        public readonly string? NamePrefix;
-        /// <summary>
-        /// The regular expression match of the name of the resource.
-        /// </summary>
-        public readonly string? NameRegexp;
-        /// <summary>
-        /// The name of the resource must end with the value.
-        /// </summary>
-        public readonly string? NameSuffix;
+        public readonly string Name;
         /// <summary>
         /// List of Resources
         /// </summary>
@@ -194,27 +138,12 @@ namespace Pulumi.Twingate
         private GetTwingateResourcesResult(
             string id,
 
-            string? name,
-
-            string? nameContains,
-
-            string? nameExclude,
-
-            string? namePrefix,
-
-            string? nameRegexp,
-
-            string? nameSuffix,
+            string name,
 
             ImmutableArray<Outputs.GetTwingateResourcesResourceResult> resources)
         {
             Id = id;
             Name = name;
-            NameContains = nameContains;
-            NameExclude = nameExclude;
-            NamePrefix = namePrefix;
-            NameRegexp = nameRegexp;
-            NameSuffix = nameSuffix;
             Resources = resources;
         }
     }

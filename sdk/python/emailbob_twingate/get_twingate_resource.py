@@ -33,8 +33,8 @@ class GetTwingateResourceResult:
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
-        if protocols and not isinstance(protocols, dict):
-            raise TypeError("Expected argument 'protocols' to be a dict")
+        if protocols and not isinstance(protocols, list):
+            raise TypeError("Expected argument 'protocols' to be a list")
         pulumi.set(__self__, "protocols", protocols)
         if remote_network_id and not isinstance(remote_network_id, str):
             raise TypeError("Expected argument 'remote_network_id' to be a str")
@@ -66,7 +66,7 @@ class GetTwingateResourceResult:
 
     @property
     @pulumi.getter
-    def protocols(self) -> Optional['outputs.GetTwingateResourceProtocolsResult']:
+    def protocols(self) -> Optional[Sequence['outputs.GetTwingateResourceProtocolResult']]:
         """
         By default (when this argument is not defined) no restriction is applied, and all protocols and ports are allowed.
         """
@@ -95,7 +95,7 @@ class AwaitableGetTwingateResourceResult(GetTwingateResourceResult):
 
 
 def get_twingate_resource(id: Optional[str] = None,
-                          protocols: Optional[pulumi.InputType['GetTwingateResourceProtocolsArgs']] = None,
+                          protocols: Optional[Sequence[pulumi.InputType['GetTwingateResourceProtocolArgs']]] = None,
                           opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetTwingateResourceResult:
     """
     Resources in Twingate represent any network destination address that you wish to provide private access to for users authorized via the Twingate Client application. Resources can be defined by either IP or DNS address, and all private DNS addresses will be automatically resolved with no client configuration changes. For more information, see the Twingate [documentation](https://docs.twingate.com/docs/resources-and-access-nodes).
@@ -113,7 +113,7 @@ def get_twingate_resource(id: Optional[str] = None,
 
 
     :param str id: The ID of the Resource. The ID for the Resource can be obtained from the Admin API or the URL string in the Admin Console.
-    :param pulumi.InputType['GetTwingateResourceProtocolsArgs'] protocols: By default (when this argument is not defined) no restriction is applied, and all protocols and ports are allowed.
+    :param Sequence[pulumi.InputType['GetTwingateResourceProtocolArgs']] protocols: By default (when this argument is not defined) no restriction is applied, and all protocols and ports are allowed.
     """
     __args__ = dict()
     __args__['id'] = id
@@ -131,7 +131,7 @@ def get_twingate_resource(id: Optional[str] = None,
 
 @_utilities.lift_output_func(get_twingate_resource)
 def get_twingate_resource_output(id: Optional[pulumi.Input[str]] = None,
-                                 protocols: Optional[pulumi.Input[Optional[pulumi.InputType['GetTwingateResourceProtocolsArgs']]]] = None,
+                                 protocols: Optional[pulumi.Input[Optional[Sequence[pulumi.InputType['GetTwingateResourceProtocolArgs']]]]] = None,
                                  opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetTwingateResourceResult]:
     """
     Resources in Twingate represent any network destination address that you wish to provide private access to for users authorized via the Twingate Client application. Resources can be defined by either IP or DNS address, and all private DNS addresses will be automatically resolved with no client configuration changes. For more information, see the Twingate [documentation](https://docs.twingate.com/docs/resources-and-access-nodes).
@@ -149,6 +149,6 @@ def get_twingate_resource_output(id: Optional[pulumi.Input[str]] = None,
 
 
     :param str id: The ID of the Resource. The ID for the Resource can be obtained from the Admin API or the URL string in the Admin Console.
-    :param pulumi.InputType['GetTwingateResourceProtocolsArgs'] protocols: By default (when this argument is not defined) no restriction is applied, and all protocols and ports are allowed.
+    :param Sequence[pulumi.InputType['GetTwingateResourceProtocolArgs']] protocols: By default (when this argument is not defined) no restriction is applied, and all protocols and ports are allowed.
     """
     ...

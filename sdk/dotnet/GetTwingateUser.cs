@@ -110,6 +110,10 @@ namespace Pulumi.Twingate
         /// </summary>
         public readonly string Id;
         /// <summary>
+        /// Indicates whether the User is an admin
+        /// </summary>
+        public readonly bool IsAdmin;
+        /// <summary>
         /// The last name of the User
         /// </summary>
         public readonly string LastName;
@@ -130,6 +134,8 @@ namespace Pulumi.Twingate
 
             string id,
 
+            bool isAdmin,
+
             string lastName,
 
             string role,
@@ -139,6 +145,7 @@ namespace Pulumi.Twingate
             Email = email;
             FirstName = firstName;
             Id = id;
+            IsAdmin = isAdmin;
             LastName = lastName;
             Role = role;
             Type = type;

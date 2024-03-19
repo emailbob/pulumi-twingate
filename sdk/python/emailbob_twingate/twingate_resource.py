@@ -20,27 +20,23 @@ class TwingateResourceArgs:
                  remote_network_id: pulumi.Input[str],
                  access: Optional[pulumi.Input['TwingateResourceAccessArgs']] = None,
                  alias: Optional[pulumi.Input[str]] = None,
-                 is_active: Optional[pulumi.Input[bool]] = None,
                  is_authoritative: Optional[pulumi.Input[bool]] = None,
                  is_browser_shortcut_enabled: Optional[pulumi.Input[bool]] = None,
                  is_visible: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 protocols: Optional[pulumi.Input['TwingateResourceProtocolsArgs']] = None,
-                 security_policy_id: Optional[pulumi.Input[str]] = None):
+                 protocols: Optional[pulumi.Input['TwingateResourceProtocolsArgs']] = None):
         """
         The set of arguments for constructing a TwingateResource resource.
         :param pulumi.Input[str] address: The Resource's IP/CIDR or FQDN/DNS zone
         :param pulumi.Input[str] remote_network_id: Remote Network ID where the Resource lives
         :param pulumi.Input['TwingateResourceAccessArgs'] access: Restrict access to certain groups or service accounts
         :param pulumi.Input[str] alias: Set a DNS alias address for the Resource. Must be a DNS-valid name string.
-        :param pulumi.Input[bool] is_active: Set the resource as active or inactive. Default is `true`.
         :param pulumi.Input[bool] is_authoritative: Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
                `false`, assignments made outside of Terraform will be ignored.
-        :param pulumi.Input[bool] is_browser_shortcut_enabled: Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client. Default is `false`.
-        :param pulumi.Input[bool] is_visible: Controls whether this Resource will be visible in the main Resource list in the Twingate Client. Default is `true`.
+        :param pulumi.Input[bool] is_browser_shortcut_enabled: Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client.
+        :param pulumi.Input[bool] is_visible: Controls whether this Resource will be visible in the main Resource list in the Twingate Client.
         :param pulumi.Input[str] name: The name of the Resource
         :param pulumi.Input['TwingateResourceProtocolsArgs'] protocols: Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
-        :param pulumi.Input[str] security_policy_id: The ID of a `get_twingate_security_policy` to set as this Resource's Security Policy. Default is `Default Policy`.
         """
         pulumi.set(__self__, "address", address)
         pulumi.set(__self__, "remote_network_id", remote_network_id)
@@ -48,8 +44,6 @@ class TwingateResourceArgs:
             pulumi.set(__self__, "access", access)
         if alias is not None:
             pulumi.set(__self__, "alias", alias)
-        if is_active is not None:
-            pulumi.set(__self__, "is_active", is_active)
         if is_authoritative is not None:
             pulumi.set(__self__, "is_authoritative", is_authoritative)
         if is_browser_shortcut_enabled is not None:
@@ -60,8 +54,6 @@ class TwingateResourceArgs:
             pulumi.set(__self__, "name", name)
         if protocols is not None:
             pulumi.set(__self__, "protocols", protocols)
-        if security_policy_id is not None:
-            pulumi.set(__self__, "security_policy_id", security_policy_id)
 
     @property
     @pulumi.getter
@@ -112,18 +104,6 @@ class TwingateResourceArgs:
         pulumi.set(self, "alias", value)
 
     @property
-    @pulumi.getter(name="isActive")
-    def is_active(self) -> Optional[pulumi.Input[bool]]:
-        """
-        Set the resource as active or inactive. Default is `true`.
-        """
-        return pulumi.get(self, "is_active")
-
-    @is_active.setter
-    def is_active(self, value: Optional[pulumi.Input[bool]]):
-        pulumi.set(self, "is_active", value)
-
-    @property
     @pulumi.getter(name="isAuthoritative")
     def is_authoritative(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -140,7 +120,7 @@ class TwingateResourceArgs:
     @pulumi.getter(name="isBrowserShortcutEnabled")
     def is_browser_shortcut_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client. Default is `false`.
+        Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client.
         """
         return pulumi.get(self, "is_browser_shortcut_enabled")
 
@@ -152,7 +132,7 @@ class TwingateResourceArgs:
     @pulumi.getter(name="isVisible")
     def is_visible(self) -> Optional[pulumi.Input[bool]]:
         """
-        Controls whether this Resource will be visible in the main Resource list in the Twingate Client. Default is `true`.
+        Controls whether this Resource will be visible in the main Resource list in the Twingate Client.
         """
         return pulumi.get(self, "is_visible")
 
@@ -184,18 +164,6 @@ class TwingateResourceArgs:
     def protocols(self, value: Optional[pulumi.Input['TwingateResourceProtocolsArgs']]):
         pulumi.set(self, "protocols", value)
 
-    @property
-    @pulumi.getter(name="securityPolicyId")
-    def security_policy_id(self) -> Optional[pulumi.Input[str]]:
-        """
-        The ID of a `get_twingate_security_policy` to set as this Resource's Security Policy. Default is `Default Policy`.
-        """
-        return pulumi.get(self, "security_policy_id")
-
-    @security_policy_id.setter
-    def security_policy_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "security_policy_id", value)
-
 
 @pulumi.input_type
 class _TwingateResourceState:
@@ -203,28 +171,24 @@ class _TwingateResourceState:
                  access: Optional[pulumi.Input['TwingateResourceAccessArgs']] = None,
                  address: Optional[pulumi.Input[str]] = None,
                  alias: Optional[pulumi.Input[str]] = None,
-                 is_active: Optional[pulumi.Input[bool]] = None,
                  is_authoritative: Optional[pulumi.Input[bool]] = None,
                  is_browser_shortcut_enabled: Optional[pulumi.Input[bool]] = None,
                  is_visible: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  protocols: Optional[pulumi.Input['TwingateResourceProtocolsArgs']] = None,
-                 remote_network_id: Optional[pulumi.Input[str]] = None,
-                 security_policy_id: Optional[pulumi.Input[str]] = None):
+                 remote_network_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering TwingateResource resources.
         :param pulumi.Input['TwingateResourceAccessArgs'] access: Restrict access to certain groups or service accounts
         :param pulumi.Input[str] address: The Resource's IP/CIDR or FQDN/DNS zone
         :param pulumi.Input[str] alias: Set a DNS alias address for the Resource. Must be a DNS-valid name string.
-        :param pulumi.Input[bool] is_active: Set the resource as active or inactive. Default is `true`.
         :param pulumi.Input[bool] is_authoritative: Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
                `false`, assignments made outside of Terraform will be ignored.
-        :param pulumi.Input[bool] is_browser_shortcut_enabled: Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client. Default is `false`.
-        :param pulumi.Input[bool] is_visible: Controls whether this Resource will be visible in the main Resource list in the Twingate Client. Default is `true`.
+        :param pulumi.Input[bool] is_browser_shortcut_enabled: Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client.
+        :param pulumi.Input[bool] is_visible: Controls whether this Resource will be visible in the main Resource list in the Twingate Client.
         :param pulumi.Input[str] name: The name of the Resource
         :param pulumi.Input['TwingateResourceProtocolsArgs'] protocols: Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
         :param pulumi.Input[str] remote_network_id: Remote Network ID where the Resource lives
-        :param pulumi.Input[str] security_policy_id: The ID of a `get_twingate_security_policy` to set as this Resource's Security Policy. Default is `Default Policy`.
         """
         if access is not None:
             pulumi.set(__self__, "access", access)
@@ -232,8 +196,6 @@ class _TwingateResourceState:
             pulumi.set(__self__, "address", address)
         if alias is not None:
             pulumi.set(__self__, "alias", alias)
-        if is_active is not None:
-            pulumi.set(__self__, "is_active", is_active)
         if is_authoritative is not None:
             pulumi.set(__self__, "is_authoritative", is_authoritative)
         if is_browser_shortcut_enabled is not None:
@@ -246,8 +208,6 @@ class _TwingateResourceState:
             pulumi.set(__self__, "protocols", protocols)
         if remote_network_id is not None:
             pulumi.set(__self__, "remote_network_id", remote_network_id)
-        if security_policy_id is not None:
-            pulumi.set(__self__, "security_policy_id", security_policy_id)
 
     @property
     @pulumi.getter
@@ -286,18 +246,6 @@ class _TwingateResourceState:
         pulumi.set(self, "alias", value)
 
     @property
-    @pulumi.getter(name="isActive")
-    def is_active(self) -> Optional[pulumi.Input[bool]]:
-        """
-        Set the resource as active or inactive. Default is `true`.
-        """
-        return pulumi.get(self, "is_active")
-
-    @is_active.setter
-    def is_active(self, value: Optional[pulumi.Input[bool]]):
-        pulumi.set(self, "is_active", value)
-
-    @property
     @pulumi.getter(name="isAuthoritative")
     def is_authoritative(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -314,7 +262,7 @@ class _TwingateResourceState:
     @pulumi.getter(name="isBrowserShortcutEnabled")
     def is_browser_shortcut_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client. Default is `false`.
+        Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client.
         """
         return pulumi.get(self, "is_browser_shortcut_enabled")
 
@@ -326,7 +274,7 @@ class _TwingateResourceState:
     @pulumi.getter(name="isVisible")
     def is_visible(self) -> Optional[pulumi.Input[bool]]:
         """
-        Controls whether this Resource will be visible in the main Resource list in the Twingate Client. Default is `true`.
+        Controls whether this Resource will be visible in the main Resource list in the Twingate Client.
         """
         return pulumi.get(self, "is_visible")
 
@@ -370,18 +318,6 @@ class _TwingateResourceState:
     def remote_network_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "remote_network_id", value)
 
-    @property
-    @pulumi.getter(name="securityPolicyId")
-    def security_policy_id(self) -> Optional[pulumi.Input[str]]:
-        """
-        The ID of a `get_twingate_security_policy` to set as this Resource's Security Policy. Default is `Default Policy`.
-        """
-        return pulumi.get(self, "security_policy_id")
-
-    @security_policy_id.setter
-    def security_policy_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "security_policy_id", value)
-
 
 class TwingateResource(pulumi.CustomResource):
     @overload
@@ -391,17 +327,48 @@ class TwingateResource(pulumi.CustomResource):
                  access: Optional[pulumi.Input[pulumi.InputType['TwingateResourceAccessArgs']]] = None,
                  address: Optional[pulumi.Input[str]] = None,
                  alias: Optional[pulumi.Input[str]] = None,
-                 is_active: Optional[pulumi.Input[bool]] = None,
                  is_authoritative: Optional[pulumi.Input[bool]] = None,
                  is_browser_shortcut_enabled: Optional[pulumi.Input[bool]] = None,
                  is_visible: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  protocols: Optional[pulumi.Input[pulumi.InputType['TwingateResourceProtocolsArgs']]] = None,
                  remote_network_id: Optional[pulumi.Input[str]] = None,
-                 security_policy_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         Resources in Twingate represent servers on the private network that clients can connect to. Resources can be defined by IP, CIDR range, FQDN, or DNS zone. For more information, see the Twingate [documentation](https://docs.twingate.com/docs/resources-and-access-nodes).
+
+        ## Example Usage
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import emailbob_twingate as twingate
+
+        aws_network = twingate.TwingateRemoteNetwork("awsNetwork")
+        aws = twingate.TwingateGroup("aws")
+        github_actions_prod = twingate.TwingateServiceAccount("githubActionsProd")
+        resource = twingate.TwingateResource("resource",
+            address="internal.int",
+            remote_network_id=aws_network.id,
+            protocols=twingate.TwingateResourceProtocolsArgs(
+                allow_icmp=True,
+                tcp=twingate.TwingateResourceProtocolsTcpArgs(
+                    policy="RESTRICTED",
+                    ports=[
+                        "80",
+                        "82-83",
+                    ],
+                ),
+                udp=twingate.TwingateResourceProtocolsUdpArgs(
+                    policy="ALLOW_ALL",
+                ),
+            ),
+            access=twingate.TwingateResourceAccessArgs(
+                group_ids=[aws.id],
+                service_account_ids=[github_actions_prod.id],
+            ))
+        ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 
@@ -414,15 +381,13 @@ class TwingateResource(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['TwingateResourceAccessArgs']] access: Restrict access to certain groups or service accounts
         :param pulumi.Input[str] address: The Resource's IP/CIDR or FQDN/DNS zone
         :param pulumi.Input[str] alias: Set a DNS alias address for the Resource. Must be a DNS-valid name string.
-        :param pulumi.Input[bool] is_active: Set the resource as active or inactive. Default is `true`.
         :param pulumi.Input[bool] is_authoritative: Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
                `false`, assignments made outside of Terraform will be ignored.
-        :param pulumi.Input[bool] is_browser_shortcut_enabled: Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client. Default is `false`.
-        :param pulumi.Input[bool] is_visible: Controls whether this Resource will be visible in the main Resource list in the Twingate Client. Default is `true`.
+        :param pulumi.Input[bool] is_browser_shortcut_enabled: Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client.
+        :param pulumi.Input[bool] is_visible: Controls whether this Resource will be visible in the main Resource list in the Twingate Client.
         :param pulumi.Input[str] name: The name of the Resource
         :param pulumi.Input[pulumi.InputType['TwingateResourceProtocolsArgs']] protocols: Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
         :param pulumi.Input[str] remote_network_id: Remote Network ID where the Resource lives
-        :param pulumi.Input[str] security_policy_id: The ID of a `get_twingate_security_policy` to set as this Resource's Security Policy. Default is `Default Policy`.
         """
         ...
     @overload
@@ -432,6 +397,39 @@ class TwingateResource(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Resources in Twingate represent servers on the private network that clients can connect to. Resources can be defined by IP, CIDR range, FQDN, or DNS zone. For more information, see the Twingate [documentation](https://docs.twingate.com/docs/resources-and-access-nodes).
+
+        ## Example Usage
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import emailbob_twingate as twingate
+
+        aws_network = twingate.TwingateRemoteNetwork("awsNetwork")
+        aws = twingate.TwingateGroup("aws")
+        github_actions_prod = twingate.TwingateServiceAccount("githubActionsProd")
+        resource = twingate.TwingateResource("resource",
+            address="internal.int",
+            remote_network_id=aws_network.id,
+            protocols=twingate.TwingateResourceProtocolsArgs(
+                allow_icmp=True,
+                tcp=twingate.TwingateResourceProtocolsTcpArgs(
+                    policy="RESTRICTED",
+                    ports=[
+                        "80",
+                        "82-83",
+                    ],
+                ),
+                udp=twingate.TwingateResourceProtocolsUdpArgs(
+                    policy="ALLOW_ALL",
+                ),
+            ),
+            access=twingate.TwingateResourceAccessArgs(
+                group_ids=[aws.id],
+                service_account_ids=[github_actions_prod.id],
+            ))
+        ```
+        <!--End PulumiCodeChooser -->
 
         ## Import
 
@@ -457,14 +455,12 @@ class TwingateResource(pulumi.CustomResource):
                  access: Optional[pulumi.Input[pulumi.InputType['TwingateResourceAccessArgs']]] = None,
                  address: Optional[pulumi.Input[str]] = None,
                  alias: Optional[pulumi.Input[str]] = None,
-                 is_active: Optional[pulumi.Input[bool]] = None,
                  is_authoritative: Optional[pulumi.Input[bool]] = None,
                  is_browser_shortcut_enabled: Optional[pulumi.Input[bool]] = None,
                  is_visible: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  protocols: Optional[pulumi.Input[pulumi.InputType['TwingateResourceProtocolsArgs']]] = None,
                  remote_network_id: Optional[pulumi.Input[str]] = None,
-                 security_policy_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -479,7 +475,6 @@ class TwingateResource(pulumi.CustomResource):
                 raise TypeError("Missing required property 'address'")
             __props__.__dict__["address"] = address
             __props__.__dict__["alias"] = alias
-            __props__.__dict__["is_active"] = is_active
             __props__.__dict__["is_authoritative"] = is_authoritative
             __props__.__dict__["is_browser_shortcut_enabled"] = is_browser_shortcut_enabled
             __props__.__dict__["is_visible"] = is_visible
@@ -488,7 +483,6 @@ class TwingateResource(pulumi.CustomResource):
             if remote_network_id is None and not opts.urn:
                 raise TypeError("Missing required property 'remote_network_id'")
             __props__.__dict__["remote_network_id"] = remote_network_id
-            __props__.__dict__["security_policy_id"] = security_policy_id
         super(TwingateResource, __self__).__init__(
             'twingate:index/twingateResource:TwingateResource',
             resource_name,
@@ -502,14 +496,12 @@ class TwingateResource(pulumi.CustomResource):
             access: Optional[pulumi.Input[pulumi.InputType['TwingateResourceAccessArgs']]] = None,
             address: Optional[pulumi.Input[str]] = None,
             alias: Optional[pulumi.Input[str]] = None,
-            is_active: Optional[pulumi.Input[bool]] = None,
             is_authoritative: Optional[pulumi.Input[bool]] = None,
             is_browser_shortcut_enabled: Optional[pulumi.Input[bool]] = None,
             is_visible: Optional[pulumi.Input[bool]] = None,
             name: Optional[pulumi.Input[str]] = None,
             protocols: Optional[pulumi.Input[pulumi.InputType['TwingateResourceProtocolsArgs']]] = None,
-            remote_network_id: Optional[pulumi.Input[str]] = None,
-            security_policy_id: Optional[pulumi.Input[str]] = None) -> 'TwingateResource':
+            remote_network_id: Optional[pulumi.Input[str]] = None) -> 'TwingateResource':
         """
         Get an existing TwingateResource resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -520,15 +512,13 @@ class TwingateResource(pulumi.CustomResource):
         :param pulumi.Input[pulumi.InputType['TwingateResourceAccessArgs']] access: Restrict access to certain groups or service accounts
         :param pulumi.Input[str] address: The Resource's IP/CIDR or FQDN/DNS zone
         :param pulumi.Input[str] alias: Set a DNS alias address for the Resource. Must be a DNS-valid name string.
-        :param pulumi.Input[bool] is_active: Set the resource as active or inactive. Default is `true`.
         :param pulumi.Input[bool] is_authoritative: Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
                `false`, assignments made outside of Terraform will be ignored.
-        :param pulumi.Input[bool] is_browser_shortcut_enabled: Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client. Default is `false`.
-        :param pulumi.Input[bool] is_visible: Controls whether this Resource will be visible in the main Resource list in the Twingate Client. Default is `true`.
+        :param pulumi.Input[bool] is_browser_shortcut_enabled: Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client.
+        :param pulumi.Input[bool] is_visible: Controls whether this Resource will be visible in the main Resource list in the Twingate Client.
         :param pulumi.Input[str] name: The name of the Resource
         :param pulumi.Input[pulumi.InputType['TwingateResourceProtocolsArgs']] protocols: Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
         :param pulumi.Input[str] remote_network_id: Remote Network ID where the Resource lives
-        :param pulumi.Input[str] security_policy_id: The ID of a `get_twingate_security_policy` to set as this Resource's Security Policy. Default is `Default Policy`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -537,14 +527,12 @@ class TwingateResource(pulumi.CustomResource):
         __props__.__dict__["access"] = access
         __props__.__dict__["address"] = address
         __props__.__dict__["alias"] = alias
-        __props__.__dict__["is_active"] = is_active
         __props__.__dict__["is_authoritative"] = is_authoritative
         __props__.__dict__["is_browser_shortcut_enabled"] = is_browser_shortcut_enabled
         __props__.__dict__["is_visible"] = is_visible
         __props__.__dict__["name"] = name
         __props__.__dict__["protocols"] = protocols
         __props__.__dict__["remote_network_id"] = remote_network_id
-        __props__.__dict__["security_policy_id"] = security_policy_id
         return TwingateResource(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -572,14 +560,6 @@ class TwingateResource(pulumi.CustomResource):
         return pulumi.get(self, "alias")
 
     @property
-    @pulumi.getter(name="isActive")
-    def is_active(self) -> pulumi.Output[bool]:
-        """
-        Set the resource as active or inactive. Default is `true`.
-        """
-        return pulumi.get(self, "is_active")
-
-    @property
     @pulumi.getter(name="isAuthoritative")
     def is_authoritative(self) -> pulumi.Output[bool]:
         """
@@ -592,7 +572,7 @@ class TwingateResource(pulumi.CustomResource):
     @pulumi.getter(name="isBrowserShortcutEnabled")
     def is_browser_shortcut_enabled(self) -> pulumi.Output[bool]:
         """
-        Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client. Default is `false`.
+        Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client.
         """
         return pulumi.get(self, "is_browser_shortcut_enabled")
 
@@ -600,7 +580,7 @@ class TwingateResource(pulumi.CustomResource):
     @pulumi.getter(name="isVisible")
     def is_visible(self) -> pulumi.Output[bool]:
         """
-        Controls whether this Resource will be visible in the main Resource list in the Twingate Client. Default is `true`.
+        Controls whether this Resource will be visible in the main Resource list in the Twingate Client.
         """
         return pulumi.get(self, "is_visible")
 
@@ -614,7 +594,7 @@ class TwingateResource(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def protocols(self) -> pulumi.Output['outputs.TwingateResourceProtocols']:
+    def protocols(self) -> pulumi.Output[Optional['outputs.TwingateResourceProtocols']]:
         """
         Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
         """
@@ -627,12 +607,4 @@ class TwingateResource(pulumi.CustomResource):
         Remote Network ID where the Resource lives
         """
         return pulumi.get(self, "remote_network_id")
-
-    @property
-    @pulumi.getter(name="securityPolicyId")
-    def security_policy_id(self) -> pulumi.Output[str]:
-        """
-        The ID of a `get_twingate_security_policy` to set as this Resource's Security Policy. Default is `Default Policy`.
-        """
-        return pulumi.get(self, "security_policy_id")
 

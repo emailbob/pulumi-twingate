@@ -49,7 +49,7 @@ export interface GetTwingateGroupsGroup {
 
 export interface GetTwingateRemoteNetworksRemoteNetwork {
     /**
-     * The ID of the Remote Network.
+     * The ID of the Remote Network
      */
     id: string;
     /**
@@ -57,21 +57,21 @@ export interface GetTwingateRemoteNetworksRemoteNetwork {
      */
     location: string;
     /**
-     * The name of the Remote Network.
+     * The name of the Remote Network
      */
-    name?: string;
+    name: string;
 }
 
-export interface GetTwingateResourceProtocols {
+export interface GetTwingateResourceProtocol {
     /**
      * Whether to allow ICMP (ping) traffic
      */
     allowIcmp: boolean;
-    tcp?: outputs.GetTwingateResourceProtocolsTcp;
-    udp?: outputs.GetTwingateResourceProtocolsUdp;
+    tcps?: outputs.GetTwingateResourceProtocolTcp[];
+    udps?: outputs.GetTwingateResourceProtocolUdp[];
 }
 
-export interface GetTwingateResourceProtocolsTcp {
+export interface GetTwingateResourceProtocolTcp {
     /**
      * Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
      */
@@ -82,7 +82,7 @@ export interface GetTwingateResourceProtocolsTcp {
     ports: string[];
 }
 
-export interface GetTwingateResourceProtocolsUdp {
+export interface GetTwingateResourceProtocolUdp {
     /**
      * Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
      */
@@ -109,23 +109,23 @@ export interface GetTwingateResourcesResource {
     /**
      * Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
      */
-    protocols: outputs.GetTwingateResourcesResourceProtocols;
+    protocols?: outputs.GetTwingateResourcesResourceProtocol[];
     /**
      * Remote Network ID where the Resource lives
      */
     remoteNetworkId: string;
 }
 
-export interface GetTwingateResourcesResourceProtocols {
+export interface GetTwingateResourcesResourceProtocol {
     /**
      * Whether to allow ICMP (ping) traffic
      */
     allowIcmp: boolean;
-    tcp: outputs.GetTwingateResourcesResourceProtocolsTcp;
-    udp: outputs.GetTwingateResourcesResourceProtocolsUdp;
+    tcps?: outputs.GetTwingateResourcesResourceProtocolTcp[];
+    udps?: outputs.GetTwingateResourcesResourceProtocolUdp[];
 }
 
-export interface GetTwingateResourcesResourceProtocolsTcp {
+export interface GetTwingateResourcesResourceProtocolTcp {
     /**
      * Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
      */
@@ -136,7 +136,7 @@ export interface GetTwingateResourcesResourceProtocolsTcp {
     ports: string[];
 }
 
-export interface GetTwingateResourcesResourceProtocolsUdp {
+export interface GetTwingateResourcesResourceProtocolUdp {
     /**
      * Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
      */
@@ -191,6 +191,12 @@ export interface GetTwingateUsersUser {
      */
     id: string;
     /**
+     * Indicates whether the User is an admin
+     *
+     * @deprecated This read-only Boolean value will be deprecated in a future release. You may use the `role` value instead.
+     */
+    isAdmin: boolean;
+    /**
      * The last name of the User
      */
     lastName: string;
@@ -208,18 +214,18 @@ export interface TwingateResourceAccess {
     /**
      * List of Group IDs that will have permission to access the Resource.
      */
-    groupIds: string[];
+    groupIds?: string[];
     /**
      * List of Service Account IDs that will have permission to access the Resource.
      */
-    serviceAccountIds: string[];
+    serviceAccountIds?: string[];
 }
 
 export interface TwingateResourceProtocols {
     /**
      * Whether to allow ICMP (ping) traffic
      */
-    allowIcmp: boolean;
+    allowIcmp?: boolean;
     tcp: outputs.TwingateResourceProtocolsTcp;
     udp: outputs.TwingateResourceProtocolsUdp;
 }
@@ -232,7 +238,7 @@ export interface TwingateResourceProtocolsTcp {
     /**
      * List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
      */
-    ports: string[];
+    ports?: string[];
 }
 
 export interface TwingateResourceProtocolsUdp {
@@ -243,6 +249,6 @@ export interface TwingateResourceProtocolsUdp {
     /**
      * List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
      */
-    ports: string[];
+    ports?: string[];
 }
 

@@ -16,9 +16,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as twingate from "@pulumi/twingate";
  *
- * const all = twingate.getTwingateSecurityPolicies({
- *     name: "<your security policy's name>",
- * });
+ * const all = twingate.getTwingateSecurityPolicies({});
  * ```
  * <!--End PulumiCodeChooser -->
  */
@@ -27,12 +25,7 @@ export function getTwingateSecurityPolicies(args?: GetTwingateSecurityPoliciesAr
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("twingate:index/getTwingateSecurityPolicies:getTwingateSecurityPolicies", {
-        "name": args.name,
-        "nameContains": args.nameContains,
-        "nameExclude": args.nameExclude,
-        "namePrefix": args.namePrefix,
-        "nameRegexp": args.nameRegexp,
-        "nameSuffix": args.nameSuffix,
+        "securityPolicies": args.securityPolicies,
     }, opts);
 }
 
@@ -40,30 +33,7 @@ export function getTwingateSecurityPolicies(args?: GetTwingateSecurityPoliciesAr
  * A collection of arguments for invoking getTwingateSecurityPolicies.
  */
 export interface GetTwingateSecurityPoliciesArgs {
-    /**
-     * Return a Security Policy that exactly matches this name.
-     */
-    name?: string;
-    /**
-     * Match when the value exist in the name of the security policy.
-     */
-    nameContains?: string;
-    /**
-     * Match when the exact value does not exist in the name of the security policy.
-     */
-    nameExclude?: string;
-    /**
-     * The name of the security policy must start with the value.
-     */
-    namePrefix?: string;
-    /**
-     * The regular expression match of the name of the security policy.
-     */
-    nameRegexp?: string;
-    /**
-     * The name of the security policy must end with the value.
-     */
-    nameSuffix?: string;
+    securityPolicies?: inputs.GetTwingateSecurityPoliciesSecurityPolicy[];
 }
 
 /**
@@ -71,34 +41,10 @@ export interface GetTwingateSecurityPoliciesArgs {
  */
 export interface GetTwingateSecurityPoliciesResult {
     /**
-     * The ID of this resource.
+     * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
-    /**
-     * Returns only security policies that exactly match this name. If no options are passed it will return all security policies. Only one option can be used at a time.
-     */
-    readonly name?: string;
-    /**
-     * Match when the value exist in the name of the security policy.
-     */
-    readonly nameContains?: string;
-    /**
-     * Match when the exact value does not exist in the name of the security policy.
-     */
-    readonly nameExclude?: string;
-    /**
-     * The name of the security policy must start with the value.
-     */
-    readonly namePrefix?: string;
-    /**
-     * The regular expression match of the name of the security policy.
-     */
-    readonly nameRegexp?: string;
-    /**
-     * The name of the security policy must end with the value.
-     */
-    readonly nameSuffix?: string;
-    readonly securityPolicies: outputs.GetTwingateSecurityPoliciesSecurityPolicy[];
+    readonly securityPolicies?: outputs.GetTwingateSecurityPoliciesSecurityPolicy[];
 }
 /**
  * Security Policies are defined in the Twingate Admin Console and determine user and device authentication requirements for Resources.
@@ -110,9 +56,7 @@ export interface GetTwingateSecurityPoliciesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as twingate from "@pulumi/twingate";
  *
- * const all = twingate.getTwingateSecurityPolicies({
- *     name: "<your security policy's name>",
- * });
+ * const all = twingate.getTwingateSecurityPolicies({});
  * ```
  * <!--End PulumiCodeChooser -->
  */
@@ -124,28 +68,5 @@ export function getTwingateSecurityPoliciesOutput(args?: GetTwingateSecurityPoli
  * A collection of arguments for invoking getTwingateSecurityPolicies.
  */
 export interface GetTwingateSecurityPoliciesOutputArgs {
-    /**
-     * Return a Security Policy that exactly matches this name.
-     */
-    name?: pulumi.Input<string>;
-    /**
-     * Match when the value exist in the name of the security policy.
-     */
-    nameContains?: pulumi.Input<string>;
-    /**
-     * Match when the exact value does not exist in the name of the security policy.
-     */
-    nameExclude?: pulumi.Input<string>;
-    /**
-     * The name of the security policy must start with the value.
-     */
-    namePrefix?: pulumi.Input<string>;
-    /**
-     * The regular expression match of the name of the security policy.
-     */
-    nameRegexp?: pulumi.Input<string>;
-    /**
-     * The name of the security policy must end with the value.
-     */
-    nameSuffix?: pulumi.Input<string>;
+    securityPolicies?: pulumi.Input<pulumi.Input<inputs.GetTwingateSecurityPoliciesSecurityPolicyArgs>[]>;
 }

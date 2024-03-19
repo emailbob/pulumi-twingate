@@ -18,13 +18,13 @@ __all__ = [
     'GetTwingateConnectorsConnectorResult',
     'GetTwingateGroupsGroupResult',
     'GetTwingateRemoteNetworksRemoteNetworkResult',
-    'GetTwingateResourceProtocolsResult',
-    'GetTwingateResourceProtocolsTcpResult',
-    'GetTwingateResourceProtocolsUdpResult',
+    'GetTwingateResourceProtocolResult',
+    'GetTwingateResourceProtocolTcpResult',
+    'GetTwingateResourceProtocolUdpResult',
     'GetTwingateResourcesResourceResult',
-    'GetTwingateResourcesResourceProtocolsResult',
-    'GetTwingateResourcesResourceProtocolsTcpResult',
-    'GetTwingateResourcesResourceProtocolsUdpResult',
+    'GetTwingateResourcesResourceProtocolResult',
+    'GetTwingateResourcesResourceProtocolTcpResult',
+    'GetTwingateResourcesResourceProtocolUdpResult',
     'GetTwingateSecurityPoliciesSecurityPolicyResult',
     'GetTwingateServiceAccountsServiceAccountResult',
     'GetTwingateUsersUserResult',
@@ -100,18 +100,26 @@ class TwingateResourceProtocols(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 allow_icmp: Optional[bool] = None,
-                 tcp: Optional['outputs.TwingateResourceProtocolsTcp'] = None,
-                 udp: Optional['outputs.TwingateResourceProtocolsUdp'] = None):
+                 tcp: 'outputs.TwingateResourceProtocolsTcp',
+                 udp: 'outputs.TwingateResourceProtocolsUdp',
+                 allow_icmp: Optional[bool] = None):
         """
         :param bool allow_icmp: Whether to allow ICMP (ping) traffic
         """
+        pulumi.set(__self__, "tcp", tcp)
+        pulumi.set(__self__, "udp", udp)
         if allow_icmp is not None:
             pulumi.set(__self__, "allow_icmp", allow_icmp)
-        if tcp is not None:
-            pulumi.set(__self__, "tcp", tcp)
-        if udp is not None:
-            pulumi.set(__self__, "udp", udp)
+
+    @property
+    @pulumi.getter
+    def tcp(self) -> 'outputs.TwingateResourceProtocolsTcp':
+        return pulumi.get(self, "tcp")
+
+    @property
+    @pulumi.getter
+    def udp(self) -> 'outputs.TwingateResourceProtocolsUdp':
+        return pulumi.get(self, "udp")
 
     @property
     @pulumi.getter(name="allowIcmp")
@@ -121,34 +129,23 @@ class TwingateResourceProtocols(dict):
         """
         return pulumi.get(self, "allow_icmp")
 
-    @property
-    @pulumi.getter
-    def tcp(self) -> Optional['outputs.TwingateResourceProtocolsTcp']:
-        return pulumi.get(self, "tcp")
-
-    @property
-    @pulumi.getter
-    def udp(self) -> Optional['outputs.TwingateResourceProtocolsUdp']:
-        return pulumi.get(self, "udp")
-
 
 @pulumi.output_type
 class TwingateResourceProtocolsTcp(dict):
     def __init__(__self__, *,
-                 policy: Optional[str] = None,
+                 policy: str,
                  ports: Optional[Sequence[str]] = None):
         """
         :param str policy: Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
         :param Sequence[str] ports: List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
         """
-        if policy is not None:
-            pulumi.set(__self__, "policy", policy)
+        pulumi.set(__self__, "policy", policy)
         if ports is not None:
             pulumi.set(__self__, "ports", ports)
 
     @property
     @pulumi.getter
-    def policy(self) -> Optional[str]:
+    def policy(self) -> str:
         """
         Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
         """
@@ -166,20 +163,19 @@ class TwingateResourceProtocolsTcp(dict):
 @pulumi.output_type
 class TwingateResourceProtocolsUdp(dict):
     def __init__(__self__, *,
-                 policy: Optional[str] = None,
+                 policy: str,
                  ports: Optional[Sequence[str]] = None):
         """
         :param str policy: Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
         :param Sequence[str] ports: List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
         """
-        if policy is not None:
-            pulumi.set(__self__, "policy", policy)
+        pulumi.set(__self__, "policy", policy)
         if ports is not None:
             pulumi.set(__self__, "ports", ports)
 
     @property
     @pulumi.getter
-    def policy(self) -> Optional[str]:
+    def policy(self) -> str:
         """
         Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
         """
@@ -312,22 +308,21 @@ class GetTwingateRemoteNetworksRemoteNetworkResult(dict):
     def __init__(__self__, *,
                  id: str,
                  location: str,
-                 name: Optional[str] = None):
+                 name: str):
         """
-        :param str id: The ID of the Remote Network.
+        :param str id: The ID of the Remote Network
         :param str location: The location of the Remote Network. Must be one of the following: AWS, AZURE, GOOGLE*CLOUD, ON*PREMISE, OTHER.
-        :param str name: The name of the Remote Network.
+        :param str name: The name of the Remote Network
         """
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "location", location)
-        if name is not None:
-            pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "name", name)
 
     @property
     @pulumi.getter
     def id(self) -> str:
         """
-        The ID of the Remote Network.
+        The ID of the Remote Network
         """
         return pulumi.get(self, "id")
 
@@ -341,27 +336,27 @@ class GetTwingateRemoteNetworksRemoteNetworkResult(dict):
 
     @property
     @pulumi.getter
-    def name(self) -> Optional[str]:
+    def name(self) -> str:
         """
-        The name of the Remote Network.
+        The name of the Remote Network
         """
         return pulumi.get(self, "name")
 
 
 @pulumi.output_type
-class GetTwingateResourceProtocolsResult(dict):
+class GetTwingateResourceProtocolResult(dict):
     def __init__(__self__, *,
                  allow_icmp: bool,
-                 tcp: Optional['outputs.GetTwingateResourceProtocolsTcpResult'] = None,
-                 udp: Optional['outputs.GetTwingateResourceProtocolsUdpResult'] = None):
+                 tcps: Optional[Sequence['outputs.GetTwingateResourceProtocolTcpResult']] = None,
+                 udps: Optional[Sequence['outputs.GetTwingateResourceProtocolUdpResult']] = None):
         """
         :param bool allow_icmp: Whether to allow ICMP (ping) traffic
         """
         pulumi.set(__self__, "allow_icmp", allow_icmp)
-        if tcp is not None:
-            pulumi.set(__self__, "tcp", tcp)
-        if udp is not None:
-            pulumi.set(__self__, "udp", udp)
+        if tcps is not None:
+            pulumi.set(__self__, "tcps", tcps)
+        if udps is not None:
+            pulumi.set(__self__, "udps", udps)
 
     @property
     @pulumi.getter(name="allowIcmp")
@@ -373,17 +368,17 @@ class GetTwingateResourceProtocolsResult(dict):
 
     @property
     @pulumi.getter
-    def tcp(self) -> Optional['outputs.GetTwingateResourceProtocolsTcpResult']:
-        return pulumi.get(self, "tcp")
+    def tcps(self) -> Optional[Sequence['outputs.GetTwingateResourceProtocolTcpResult']]:
+        return pulumi.get(self, "tcps")
 
     @property
     @pulumi.getter
-    def udp(self) -> Optional['outputs.GetTwingateResourceProtocolsUdpResult']:
-        return pulumi.get(self, "udp")
+    def udps(self) -> Optional[Sequence['outputs.GetTwingateResourceProtocolUdpResult']]:
+        return pulumi.get(self, "udps")
 
 
 @pulumi.output_type
-class GetTwingateResourceProtocolsTcpResult(dict):
+class GetTwingateResourceProtocolTcpResult(dict):
     def __init__(__self__, *,
                  policy: str,
                  ports: Sequence[str]):
@@ -412,7 +407,7 @@ class GetTwingateResourceProtocolsTcpResult(dict):
 
 
 @pulumi.output_type
-class GetTwingateResourceProtocolsUdpResult(dict):
+class GetTwingateResourceProtocolUdpResult(dict):
     def __init__(__self__, *,
                  policy: str,
                  ports: Sequence[str]):
@@ -446,20 +441,21 @@ class GetTwingateResourcesResourceResult(dict):
                  address: str,
                  id: str,
                  name: str,
-                 protocols: 'outputs.GetTwingateResourcesResourceProtocolsResult',
-                 remote_network_id: str):
+                 remote_network_id: str,
+                 protocols: Optional[Sequence['outputs.GetTwingateResourcesResourceProtocolResult']] = None):
         """
         :param str address: The Resource's IP/CIDR or FQDN/DNS zone
         :param str id: The id of the Resource
         :param str name: The name of the Resource
-        :param 'GetTwingateResourcesResourceProtocolsArgs' protocols: Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
         :param str remote_network_id: Remote Network ID where the Resource lives
+        :param Sequence['GetTwingateResourcesResourceProtocolArgs'] protocols: Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
         """
         pulumi.set(__self__, "address", address)
         pulumi.set(__self__, "id", id)
         pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "protocols", protocols)
         pulumi.set(__self__, "remote_network_id", remote_network_id)
+        if protocols is not None:
+            pulumi.set(__self__, "protocols", protocols)
 
     @property
     @pulumi.getter
@@ -486,14 +482,6 @@ class GetTwingateResourcesResourceResult(dict):
         return pulumi.get(self, "name")
 
     @property
-    @pulumi.getter
-    def protocols(self) -> 'outputs.GetTwingateResourcesResourceProtocolsResult':
-        """
-        Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
-        """
-        return pulumi.get(self, "protocols")
-
-    @property
     @pulumi.getter(name="remoteNetworkId")
     def remote_network_id(self) -> str:
         """
@@ -501,19 +489,29 @@ class GetTwingateResourcesResourceResult(dict):
         """
         return pulumi.get(self, "remote_network_id")
 
+    @property
+    @pulumi.getter
+    def protocols(self) -> Optional[Sequence['outputs.GetTwingateResourcesResourceProtocolResult']]:
+        """
+        Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
+        """
+        return pulumi.get(self, "protocols")
+
 
 @pulumi.output_type
-class GetTwingateResourcesResourceProtocolsResult(dict):
+class GetTwingateResourcesResourceProtocolResult(dict):
     def __init__(__self__, *,
                  allow_icmp: bool,
-                 tcp: 'outputs.GetTwingateResourcesResourceProtocolsTcpResult',
-                 udp: 'outputs.GetTwingateResourcesResourceProtocolsUdpResult'):
+                 tcps: Optional[Sequence['outputs.GetTwingateResourcesResourceProtocolTcpResult']] = None,
+                 udps: Optional[Sequence['outputs.GetTwingateResourcesResourceProtocolUdpResult']] = None):
         """
         :param bool allow_icmp: Whether to allow ICMP (ping) traffic
         """
         pulumi.set(__self__, "allow_icmp", allow_icmp)
-        pulumi.set(__self__, "tcp", tcp)
-        pulumi.set(__self__, "udp", udp)
+        if tcps is not None:
+            pulumi.set(__self__, "tcps", tcps)
+        if udps is not None:
+            pulumi.set(__self__, "udps", udps)
 
     @property
     @pulumi.getter(name="allowIcmp")
@@ -525,17 +523,17 @@ class GetTwingateResourcesResourceProtocolsResult(dict):
 
     @property
     @pulumi.getter
-    def tcp(self) -> 'outputs.GetTwingateResourcesResourceProtocolsTcpResult':
-        return pulumi.get(self, "tcp")
+    def tcps(self) -> Optional[Sequence['outputs.GetTwingateResourcesResourceProtocolTcpResult']]:
+        return pulumi.get(self, "tcps")
 
     @property
     @pulumi.getter
-    def udp(self) -> 'outputs.GetTwingateResourcesResourceProtocolsUdpResult':
-        return pulumi.get(self, "udp")
+    def udps(self) -> Optional[Sequence['outputs.GetTwingateResourcesResourceProtocolUdpResult']]:
+        return pulumi.get(self, "udps")
 
 
 @pulumi.output_type
-class GetTwingateResourcesResourceProtocolsTcpResult(dict):
+class GetTwingateResourcesResourceProtocolTcpResult(dict):
     def __init__(__self__, *,
                  policy: str,
                  ports: Sequence[str]):
@@ -564,7 +562,7 @@ class GetTwingateResourcesResourceProtocolsTcpResult(dict):
 
 
 @pulumi.output_type
-class GetTwingateResourcesResourceProtocolsUdpResult(dict):
+class GetTwingateResourcesResourceProtocolUdpResult(dict):
     def __init__(__self__, *,
                  policy: str,
                  ports: Sequence[str]):
@@ -678,6 +676,7 @@ class GetTwingateUsersUserResult(dict):
                  email: str,
                  first_name: str,
                  id: str,
+                 is_admin: bool,
                  last_name: str,
                  role: str,
                  type: str):
@@ -685,6 +684,7 @@ class GetTwingateUsersUserResult(dict):
         :param str email: The email address of the User
         :param str first_name: The first name of the User
         :param str id: The ID of the User
+        :param bool is_admin: Indicates whether the User is an admin
         :param str last_name: The last name of the User
         :param str role: Indicates the User's role. Either ADMIN, DEVOPS, SUPPORT, or MEMBER.
         :param str type: Indicates the User's type. Either MANUAL or SYNCED.
@@ -692,6 +692,7 @@ class GetTwingateUsersUserResult(dict):
         pulumi.set(__self__, "email", email)
         pulumi.set(__self__, "first_name", first_name)
         pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "is_admin", is_admin)
         pulumi.set(__self__, "last_name", last_name)
         pulumi.set(__self__, "role", role)
         pulumi.set(__self__, "type", type)
@@ -719,6 +720,17 @@ class GetTwingateUsersUserResult(dict):
         The ID of the User
         """
         return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="isAdmin")
+    def is_admin(self) -> bool:
+        """
+        Indicates whether the User is an admin
+        """
+        warnings.warn("""This read-only Boolean value will be deprecated in a future release. You may use the `role` value instead.""", DeprecationWarning)
+        pulumi.log.warn("""is_admin is deprecated: This read-only Boolean value will be deprecated in a future release. You may use the `role` value instead.""")
+
+        return pulumi.get(self, "is_admin")
 
     @property
     @pulumi.getter(name="lastName")

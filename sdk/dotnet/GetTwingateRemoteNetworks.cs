@@ -25,10 +25,7 @@ namespace Pulumi.Twingate
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var all = Twingate.GetTwingateRemoteNetworks.Invoke(new()
-        ///     {
-        ///         Name = "&lt;your network's name&gt;",
-        ///     });
+        ///     var all = Twingate.GetTwingateRemoteNetworks.Invoke();
         /// 
         /// });
         /// ```
@@ -51,10 +48,7 @@ namespace Pulumi.Twingate
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var all = Twingate.GetTwingateRemoteNetworks.Invoke(new()
-        ///     {
-        ///         Name = "&lt;your network's name&gt;",
-        ///     });
+        ///     var all = Twingate.GetTwingateRemoteNetworks.Invoke();
         /// 
         /// });
         /// ```
@@ -67,41 +61,17 @@ namespace Pulumi.Twingate
 
     public sealed class GetTwingateRemoteNetworksArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// The name of the Remote Network.
-        /// </summary>
-        [Input("name")]
-        public string? Name { get; set; }
+        [Input("remoteNetworks")]
+        private List<Inputs.GetTwingateRemoteNetworksRemoteNetworkArgs>? _remoteNetworks;
 
         /// <summary>
-        /// Match when the value exist in the name of the remote network.
+        /// List of Remote Networks
         /// </summary>
-        [Input("nameContains")]
-        public string? NameContains { get; set; }
-
-        /// <summary>
-        /// Match when the exact value does not exist in the name of the remote network.
-        /// </summary>
-        [Input("nameExclude")]
-        public string? NameExclude { get; set; }
-
-        /// <summary>
-        /// The name of the remote network must start with the value.
-        /// </summary>
-        [Input("namePrefix")]
-        public string? NamePrefix { get; set; }
-
-        /// <summary>
-        /// The regular expression match of the name of the remote network.
-        /// </summary>
-        [Input("nameRegexp")]
-        public string? NameRegexp { get; set; }
-
-        /// <summary>
-        /// The name of the remote network must end with the value.
-        /// </summary>
-        [Input("nameSuffix")]
-        public string? NameSuffix { get; set; }
+        public List<Inputs.GetTwingateRemoteNetworksRemoteNetworkArgs> RemoteNetworks
+        {
+            get => _remoteNetworks ?? (_remoteNetworks = new List<Inputs.GetTwingateRemoteNetworksRemoteNetworkArgs>());
+            set => _remoteNetworks = value;
+        }
 
         public GetTwingateRemoteNetworksArgs()
         {
@@ -111,41 +81,17 @@ namespace Pulumi.Twingate
 
     public sealed class GetTwingateRemoteNetworksInvokeArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// The name of the Remote Network.
-        /// </summary>
-        [Input("name")]
-        public Input<string>? Name { get; set; }
+        [Input("remoteNetworks")]
+        private InputList<Inputs.GetTwingateRemoteNetworksRemoteNetworkInputArgs>? _remoteNetworks;
 
         /// <summary>
-        /// Match when the value exist in the name of the remote network.
+        /// List of Remote Networks
         /// </summary>
-        [Input("nameContains")]
-        public Input<string>? NameContains { get; set; }
-
-        /// <summary>
-        /// Match when the exact value does not exist in the name of the remote network.
-        /// </summary>
-        [Input("nameExclude")]
-        public Input<string>? NameExclude { get; set; }
-
-        /// <summary>
-        /// The name of the remote network must start with the value.
-        /// </summary>
-        [Input("namePrefix")]
-        public Input<string>? NamePrefix { get; set; }
-
-        /// <summary>
-        /// The regular expression match of the name of the remote network.
-        /// </summary>
-        [Input("nameRegexp")]
-        public Input<string>? NameRegexp { get; set; }
-
-        /// <summary>
-        /// The name of the remote network must end with the value.
-        /// </summary>
-        [Input("nameSuffix")]
-        public Input<string>? NameSuffix { get; set; }
+        public InputList<Inputs.GetTwingateRemoteNetworksRemoteNetworkInputArgs> RemoteNetworks
+        {
+            get => _remoteNetworks ?? (_remoteNetworks = new InputList<Inputs.GetTwingateRemoteNetworksRemoteNetworkInputArgs>());
+            set => _remoteNetworks = value;
+        }
 
         public GetTwingateRemoteNetworksInvokeArgs()
         {
@@ -158,33 +104,9 @@ namespace Pulumi.Twingate
     public sealed class GetTwingateRemoteNetworksResult
     {
         /// <summary>
-        /// The ID of this resource.
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
-        /// <summary>
-        /// Returns only remote networks that exactly match this name. If no options are passed it will return all remote networks. Only one option can be used at a time.
-        /// </summary>
-        public readonly string? Name;
-        /// <summary>
-        /// Match when the value exist in the name of the remote network.
-        /// </summary>
-        public readonly string? NameContains;
-        /// <summary>
-        /// Match when the exact value does not exist in the name of the remote network.
-        /// </summary>
-        public readonly string? NameExclude;
-        /// <summary>
-        /// The name of the remote network must start with the value.
-        /// </summary>
-        public readonly string? NamePrefix;
-        /// <summary>
-        /// The regular expression match of the name of the remote network.
-        /// </summary>
-        public readonly string? NameRegexp;
-        /// <summary>
-        /// The name of the remote network must end with the value.
-        /// </summary>
-        public readonly string? NameSuffix;
         /// <summary>
         /// List of Remote Networks
         /// </summary>
@@ -194,27 +116,9 @@ namespace Pulumi.Twingate
         private GetTwingateRemoteNetworksResult(
             string id,
 
-            string? name,
-
-            string? nameContains,
-
-            string? nameExclude,
-
-            string? namePrefix,
-
-            string? nameRegexp,
-
-            string? nameSuffix,
-
             ImmutableArray<Outputs.GetTwingateRemoteNetworksRemoteNetworkResult> remoteNetworks)
         {
             Id = id;
-            Name = name;
-            NameContains = nameContains;
-            NameExclude = nameExclude;
-            NamePrefix = namePrefix;
-            NameRegexp = nameRegexp;
-            NameSuffix = nameSuffix;
             RemoteNetworks = remoteNetworks;
         }
     }

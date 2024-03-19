@@ -16,10 +16,11 @@ package main
 
 import (
 	twingate "github.com/emailbob/pulumi-twingate/provider"
-	"github.com/pulumi/pulumi-terraform-bridge/pf/tfgen"
+	"github.com/emailbob/pulumi-twingate/provider/pkg/version"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
 )
 
 func main() {
 	// Modify the path to point to the new provider
-	tfgen.Main("twingate", twingate.Provider())
+	tfgen.Main("twingate", version.Version, twingate.Provider())
 }

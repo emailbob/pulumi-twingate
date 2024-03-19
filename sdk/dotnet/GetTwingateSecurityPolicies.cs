@@ -25,10 +25,7 @@ namespace Pulumi.Twingate
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var all = Twingate.GetTwingateSecurityPolicies.Invoke(new()
-        ///     {
-        ///         Name = "&lt;your security policy's name&gt;",
-        ///     });
+        ///     var all = Twingate.GetTwingateSecurityPolicies.Invoke();
         /// 
         /// });
         /// ```
@@ -51,10 +48,7 @@ namespace Pulumi.Twingate
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var all = Twingate.GetTwingateSecurityPolicies.Invoke(new()
-        ///     {
-        ///         Name = "&lt;your security policy's name&gt;",
-        ///     });
+        ///     var all = Twingate.GetTwingateSecurityPolicies.Invoke();
         /// 
         /// });
         /// ```
@@ -67,41 +61,13 @@ namespace Pulumi.Twingate
 
     public sealed class GetTwingateSecurityPoliciesArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Return a Security Policy that exactly matches this name.
-        /// </summary>
-        [Input("name")]
-        public string? Name { get; set; }
-
-        /// <summary>
-        /// Match when the value exist in the name of the security policy.
-        /// </summary>
-        [Input("nameContains")]
-        public string? NameContains { get; set; }
-
-        /// <summary>
-        /// Match when the exact value does not exist in the name of the security policy.
-        /// </summary>
-        [Input("nameExclude")]
-        public string? NameExclude { get; set; }
-
-        /// <summary>
-        /// The name of the security policy must start with the value.
-        /// </summary>
-        [Input("namePrefix")]
-        public string? NamePrefix { get; set; }
-
-        /// <summary>
-        /// The regular expression match of the name of the security policy.
-        /// </summary>
-        [Input("nameRegexp")]
-        public string? NameRegexp { get; set; }
-
-        /// <summary>
-        /// The name of the security policy must end with the value.
-        /// </summary>
-        [Input("nameSuffix")]
-        public string? NameSuffix { get; set; }
+        [Input("securityPolicies")]
+        private List<Inputs.GetTwingateSecurityPoliciesSecurityPolicyArgs>? _securityPolicies;
+        public List<Inputs.GetTwingateSecurityPoliciesSecurityPolicyArgs> SecurityPolicies
+        {
+            get => _securityPolicies ?? (_securityPolicies = new List<Inputs.GetTwingateSecurityPoliciesSecurityPolicyArgs>());
+            set => _securityPolicies = value;
+        }
 
         public GetTwingateSecurityPoliciesArgs()
         {
@@ -111,41 +77,13 @@ namespace Pulumi.Twingate
 
     public sealed class GetTwingateSecurityPoliciesInvokeArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// Return a Security Policy that exactly matches this name.
-        /// </summary>
-        [Input("name")]
-        public Input<string>? Name { get; set; }
-
-        /// <summary>
-        /// Match when the value exist in the name of the security policy.
-        /// </summary>
-        [Input("nameContains")]
-        public Input<string>? NameContains { get; set; }
-
-        /// <summary>
-        /// Match when the exact value does not exist in the name of the security policy.
-        /// </summary>
-        [Input("nameExclude")]
-        public Input<string>? NameExclude { get; set; }
-
-        /// <summary>
-        /// The name of the security policy must start with the value.
-        /// </summary>
-        [Input("namePrefix")]
-        public Input<string>? NamePrefix { get; set; }
-
-        /// <summary>
-        /// The regular expression match of the name of the security policy.
-        /// </summary>
-        [Input("nameRegexp")]
-        public Input<string>? NameRegexp { get; set; }
-
-        /// <summary>
-        /// The name of the security policy must end with the value.
-        /// </summary>
-        [Input("nameSuffix")]
-        public Input<string>? NameSuffix { get; set; }
+        [Input("securityPolicies")]
+        private InputList<Inputs.GetTwingateSecurityPoliciesSecurityPolicyInputArgs>? _securityPolicies;
+        public InputList<Inputs.GetTwingateSecurityPoliciesSecurityPolicyInputArgs> SecurityPolicies
+        {
+            get => _securityPolicies ?? (_securityPolicies = new InputList<Inputs.GetTwingateSecurityPoliciesSecurityPolicyInputArgs>());
+            set => _securityPolicies = value;
+        }
 
         public GetTwingateSecurityPoliciesInvokeArgs()
         {
@@ -158,60 +96,18 @@ namespace Pulumi.Twingate
     public sealed class GetTwingateSecurityPoliciesResult
     {
         /// <summary>
-        /// The ID of this resource.
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
-        /// <summary>
-        /// Returns only security policies that exactly match this name. If no options are passed it will return all security policies. Only one option can be used at a time.
-        /// </summary>
-        public readonly string? Name;
-        /// <summary>
-        /// Match when the value exist in the name of the security policy.
-        /// </summary>
-        public readonly string? NameContains;
-        /// <summary>
-        /// Match when the exact value does not exist in the name of the security policy.
-        /// </summary>
-        public readonly string? NameExclude;
-        /// <summary>
-        /// The name of the security policy must start with the value.
-        /// </summary>
-        public readonly string? NamePrefix;
-        /// <summary>
-        /// The regular expression match of the name of the security policy.
-        /// </summary>
-        public readonly string? NameRegexp;
-        /// <summary>
-        /// The name of the security policy must end with the value.
-        /// </summary>
-        public readonly string? NameSuffix;
         public readonly ImmutableArray<Outputs.GetTwingateSecurityPoliciesSecurityPolicyResult> SecurityPolicies;
 
         [OutputConstructor]
         private GetTwingateSecurityPoliciesResult(
             string id,
 
-            string? name,
-
-            string? nameContains,
-
-            string? nameExclude,
-
-            string? namePrefix,
-
-            string? nameRegexp,
-
-            string? nameSuffix,
-
             ImmutableArray<Outputs.GetTwingateSecurityPoliciesSecurityPolicyResult> securityPolicies)
         {
             Id = id;
-            Name = name;
-            NameContains = nameContains;
-            NameExclude = nameExclude;
-            NamePrefix = namePrefix;
-            NameRegexp = nameRegexp;
-            NameSuffix = nameSuffix;
             SecurityPolicies = securityPolicies;
         }
     }

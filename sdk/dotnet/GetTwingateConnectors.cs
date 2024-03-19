@@ -25,10 +25,7 @@ namespace Pulumi.Twingate
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var all = Twingate.GetTwingateConnectors.Invoke(new()
-        ///     {
-        ///         Name = "&lt;your connector's name&gt;",
-        ///     });
+        ///     var all = Twingate.GetTwingateConnectors.Invoke();
         /// 
         /// });
         /// ```
@@ -51,10 +48,7 @@ namespace Pulumi.Twingate
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var all = Twingate.GetTwingateConnectors.Invoke(new()
-        ///     {
-        ///         Name = "&lt;your connector's name&gt;",
-        ///     });
+        ///     var all = Twingate.GetTwingateConnectors.Invoke();
         /// 
         /// });
         /// ```
@@ -67,41 +61,17 @@ namespace Pulumi.Twingate
 
     public sealed class GetTwingateConnectorsArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// The Name of the Connector.
-        /// </summary>
-        [Input("name")]
-        public string? Name { get; set; }
+        [Input("connectors")]
+        private List<Inputs.GetTwingateConnectorsConnectorArgs>? _connectors;
 
         /// <summary>
-        /// Match when the value exist in the name of the connector.
+        /// List of Connectors
         /// </summary>
-        [Input("nameContains")]
-        public string? NameContains { get; set; }
-
-        /// <summary>
-        /// Match when the exact value does not exist in the name of the connector.
-        /// </summary>
-        [Input("nameExclude")]
-        public string? NameExclude { get; set; }
-
-        /// <summary>
-        /// The name of the connector must start with the value.
-        /// </summary>
-        [Input("namePrefix")]
-        public string? NamePrefix { get; set; }
-
-        /// <summary>
-        /// The regular expression match of the name of the connector.
-        /// </summary>
-        [Input("nameRegexp")]
-        public string? NameRegexp { get; set; }
-
-        /// <summary>
-        /// The name of the connector must end with the value.
-        /// </summary>
-        [Input("nameSuffix")]
-        public string? NameSuffix { get; set; }
+        public List<Inputs.GetTwingateConnectorsConnectorArgs> Connectors
+        {
+            get => _connectors ?? (_connectors = new List<Inputs.GetTwingateConnectorsConnectorArgs>());
+            set => _connectors = value;
+        }
 
         public GetTwingateConnectorsArgs()
         {
@@ -111,41 +81,17 @@ namespace Pulumi.Twingate
 
     public sealed class GetTwingateConnectorsInvokeArgs : global::Pulumi.InvokeArgs
     {
-        /// <summary>
-        /// The Name of the Connector.
-        /// </summary>
-        [Input("name")]
-        public Input<string>? Name { get; set; }
+        [Input("connectors")]
+        private InputList<Inputs.GetTwingateConnectorsConnectorInputArgs>? _connectors;
 
         /// <summary>
-        /// Match when the value exist in the name of the connector.
+        /// List of Connectors
         /// </summary>
-        [Input("nameContains")]
-        public Input<string>? NameContains { get; set; }
-
-        /// <summary>
-        /// Match when the exact value does not exist in the name of the connector.
-        /// </summary>
-        [Input("nameExclude")]
-        public Input<string>? NameExclude { get; set; }
-
-        /// <summary>
-        /// The name of the connector must start with the value.
-        /// </summary>
-        [Input("namePrefix")]
-        public Input<string>? NamePrefix { get; set; }
-
-        /// <summary>
-        /// The regular expression match of the name of the connector.
-        /// </summary>
-        [Input("nameRegexp")]
-        public Input<string>? NameRegexp { get; set; }
-
-        /// <summary>
-        /// The name of the connector must end with the value.
-        /// </summary>
-        [Input("nameSuffix")]
-        public Input<string>? NameSuffix { get; set; }
+        public InputList<Inputs.GetTwingateConnectorsConnectorInputArgs> Connectors
+        {
+            get => _connectors ?? (_connectors = new InputList<Inputs.GetTwingateConnectorsConnectorInputArgs>());
+            set => _connectors = value;
+        }
 
         public GetTwingateConnectorsInvokeArgs()
         {
@@ -162,60 +108,18 @@ namespace Pulumi.Twingate
         /// </summary>
         public readonly ImmutableArray<Outputs.GetTwingateConnectorsConnectorResult> Connectors;
         /// <summary>
-        /// The ID of this resource.
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
-        /// <summary>
-        /// Returns only connectors that exactly match this name. If no options are passed it will return all connectors. Only one option can be used at a time.
-        /// </summary>
-        public readonly string? Name;
-        /// <summary>
-        /// Match when the value exist in the name of the connector.
-        /// </summary>
-        public readonly string? NameContains;
-        /// <summary>
-        /// Match when the exact value does not exist in the name of the connector.
-        /// </summary>
-        public readonly string? NameExclude;
-        /// <summary>
-        /// The name of the connector must start with the value.
-        /// </summary>
-        public readonly string? NamePrefix;
-        /// <summary>
-        /// The regular expression match of the name of the connector.
-        /// </summary>
-        public readonly string? NameRegexp;
-        /// <summary>
-        /// The name of the connector must end with the value.
-        /// </summary>
-        public readonly string? NameSuffix;
 
         [OutputConstructor]
         private GetTwingateConnectorsResult(
             ImmutableArray<Outputs.GetTwingateConnectorsConnectorResult> connectors,
 
-            string id,
-
-            string? name,
-
-            string? nameContains,
-
-            string? nameExclude,
-
-            string? namePrefix,
-
-            string? nameRegexp,
-
-            string? nameSuffix)
+            string id)
         {
             Connectors = connectors;
             Id = id;
-            Name = name;
-            NameContains = nameContains;
-            NameExclude = nameExclude;
-            NamePrefix = namePrefix;
-            NameRegexp = nameRegexp;
-            NameSuffix = nameSuffix;
         }
     }
 }

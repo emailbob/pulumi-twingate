@@ -73,35 +73,17 @@ namespace Pulumi.Twingate
         [Input("name")]
         public string? Name { get; set; }
 
-        /// <summary>
-        /// Match when the value exist in the name of the service account.
-        /// </summary>
-        [Input("nameContains")]
-        public string? NameContains { get; set; }
+        [Input("serviceAccounts")]
+        private List<Inputs.GetTwingateServiceAccountsServiceAccountArgs>? _serviceAccounts;
 
         /// <summary>
-        /// Match when the exact value does not exist in the name of the service account.
+        /// List of Service Accounts
         /// </summary>
-        [Input("nameExclude")]
-        public string? NameExclude { get; set; }
-
-        /// <summary>
-        /// The name of the service account must start with the value.
-        /// </summary>
-        [Input("namePrefix")]
-        public string? NamePrefix { get; set; }
-
-        /// <summary>
-        /// The regular expression match of the name of the service account.
-        /// </summary>
-        [Input("nameRegexp")]
-        public string? NameRegexp { get; set; }
-
-        /// <summary>
-        /// The name of the service account must end with the value.
-        /// </summary>
-        [Input("nameSuffix")]
-        public string? NameSuffix { get; set; }
+        public List<Inputs.GetTwingateServiceAccountsServiceAccountArgs> ServiceAccounts
+        {
+            get => _serviceAccounts ?? (_serviceAccounts = new List<Inputs.GetTwingateServiceAccountsServiceAccountArgs>());
+            set => _serviceAccounts = value;
+        }
 
         public GetTwingateServiceAccountsArgs()
         {
@@ -117,35 +99,17 @@ namespace Pulumi.Twingate
         [Input("name")]
         public Input<string>? Name { get; set; }
 
-        /// <summary>
-        /// Match when the value exist in the name of the service account.
-        /// </summary>
-        [Input("nameContains")]
-        public Input<string>? NameContains { get; set; }
+        [Input("serviceAccounts")]
+        private InputList<Inputs.GetTwingateServiceAccountsServiceAccountInputArgs>? _serviceAccounts;
 
         /// <summary>
-        /// Match when the exact value does not exist in the name of the service account.
+        /// List of Service Accounts
         /// </summary>
-        [Input("nameExclude")]
-        public Input<string>? NameExclude { get; set; }
-
-        /// <summary>
-        /// The name of the service account must start with the value.
-        /// </summary>
-        [Input("namePrefix")]
-        public Input<string>? NamePrefix { get; set; }
-
-        /// <summary>
-        /// The regular expression match of the name of the service account.
-        /// </summary>
-        [Input("nameRegexp")]
-        public Input<string>? NameRegexp { get; set; }
-
-        /// <summary>
-        /// The name of the service account must end with the value.
-        /// </summary>
-        [Input("nameSuffix")]
-        public Input<string>? NameSuffix { get; set; }
+        public InputList<Inputs.GetTwingateServiceAccountsServiceAccountInputArgs> ServiceAccounts
+        {
+            get => _serviceAccounts ?? (_serviceAccounts = new InputList<Inputs.GetTwingateServiceAccountsServiceAccountInputArgs>());
+            set => _serviceAccounts = value;
+        }
 
         public GetTwingateServiceAccountsInvokeArgs()
         {
@@ -158,33 +122,13 @@ namespace Pulumi.Twingate
     public sealed class GetTwingateServiceAccountsResult
     {
         /// <summary>
-        /// The ID of this resource.
+        /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
         /// <summary>
-        /// Returns only service accounts that exactly match this name. If no options are passed it will return all service accounts. Only one option can be used at a time.
+        /// Filter results by the name of the Service Account.
         /// </summary>
         public readonly string? Name;
-        /// <summary>
-        /// Match when the value exist in the name of the service account.
-        /// </summary>
-        public readonly string? NameContains;
-        /// <summary>
-        /// Match when the exact value does not exist in the name of the service account.
-        /// </summary>
-        public readonly string? NameExclude;
-        /// <summary>
-        /// The name of the service account must start with the value.
-        /// </summary>
-        public readonly string? NamePrefix;
-        /// <summary>
-        /// The regular expression match of the name of the service account.
-        /// </summary>
-        public readonly string? NameRegexp;
-        /// <summary>
-        /// The name of the service account must end with the value.
-        /// </summary>
-        public readonly string? NameSuffix;
         /// <summary>
         /// List of Service Accounts
         /// </summary>
@@ -196,25 +140,10 @@ namespace Pulumi.Twingate
 
             string? name,
 
-            string? nameContains,
-
-            string? nameExclude,
-
-            string? namePrefix,
-
-            string? nameRegexp,
-
-            string? nameSuffix,
-
             ImmutableArray<Outputs.GetTwingateServiceAccountsServiceAccountResult> serviceAccounts)
         {
             Id = id;
             Name = name;
-            NameContains = nameContains;
-            NameExclude = nameExclude;
-            NamePrefix = namePrefix;
-            NameRegexp = nameRegexp;
-            NameSuffix = nameSuffix;
             ServiceAccounts = serviceAccounts;
         }
     }
