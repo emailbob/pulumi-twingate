@@ -10,23 +10,23 @@ using Pulumi.Serialization;
 namespace Pulumi.Twingate.Inputs
 {
 
-    public sealed class TwingateResourceProtocolsArgs : global::Pulumi.ResourceArgs
+    public sealed class GetTwingateResourceProtocolsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Whether to allow ICMP (ping) traffic
         /// </summary>
-        [Input("allowIcmp")]
-        public Input<bool>? AllowIcmp { get; set; }
+        [Input("allowIcmp", required: true)]
+        public bool AllowIcmp { get; set; }
 
         [Input("tcp")]
-        public Input<Inputs.TwingateResourceProtocolsTcpArgs>? Tcp { get; set; }
+        public Inputs.GetTwingateResourceProtocolsTcpArgs? Tcp { get; set; }
 
         [Input("udp")]
-        public Input<Inputs.TwingateResourceProtocolsUdpArgs>? Udp { get; set; }
+        public Inputs.GetTwingateResourceProtocolsUdpArgs? Udp { get; set; }
 
-        public TwingateResourceProtocolsArgs()
+        public GetTwingateResourceProtocolsArgs()
         {
         }
-        public static new TwingateResourceProtocolsArgs Empty => new TwingateResourceProtocolsArgs();
+        public static new GetTwingateResourceProtocolsArgs Empty => new GetTwingateResourceProtocolsArgs();
     }
 }

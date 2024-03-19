@@ -75,11 +75,6 @@ export type Provider = import("./provider").Provider;
 export const Provider: typeof import("./provider").Provider = null as any;
 utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
 
-export { ResourceArgs, ResourceState } from "./resource";
-export type Resource = import("./resource").Resource;
-export const Resource: typeof import("./resource").Resource = null as any;
-utilities.lazyLoad(exports, ["Resource"], () => require("./resource"));
-
 export { TwingateConnectorArgs, TwingateConnectorState } from "./twingateConnector";
 export type TwingateConnector = import("./twingateConnector").TwingateConnector;
 export const TwingateConnector: typeof import("./twingateConnector").TwingateConnector = null as any;
@@ -134,8 +129,6 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
-            case "twingate:index/resource:Resource":
-                return new Resource(name, <any>undefined, { urn })
             case "twingate:index/twingateConnector:TwingateConnector":
                 return new TwingateConnector(name, <any>undefined, { urn })
             case "twingate:index/twingateConnectorTokens:TwingateConnectorTokens":
@@ -157,7 +150,6 @@ const _module = {
         }
     },
 };
-pulumi.runtime.registerResourceModule("twingate", "index/resource", _module)
 pulumi.runtime.registerResourceModule("twingate", "index/twingateConnector", _module)
 pulumi.runtime.registerResourceModule("twingate", "index/twingateConnectorTokens", _module)
 pulumi.runtime.registerResourceModule("twingate", "index/twingateGroup", _module)

@@ -30,7 +30,6 @@
         "getTwingateUsers.ts",
         "index.ts",
         "provider.ts",
-        "resource.ts",
         "twingateConnector.ts",
         "twingateConnectorTokens.ts",
         "twingateGroup.ts",

@@ -11,26 +11,26 @@ namespace Pulumi.Twingate.Outputs
 {
 
     [OutputType]
-    public sealed class GetTwingateResourceProtocolResult
+    public sealed class GetTwingateResourceProtocolsResult
     {
         /// <summary>
         /// Whether to allow ICMP (ping) traffic
         /// </summary>
         public readonly bool AllowIcmp;
-        public readonly ImmutableArray<Outputs.GetTwingateResourceProtocolTcpResult> Tcps;
-        public readonly ImmutableArray<Outputs.GetTwingateResourceProtocolUdpResult> Udps;
+        public readonly Outputs.GetTwingateResourceProtocolsTcpResult? Tcp;
+        public readonly Outputs.GetTwingateResourceProtocolsUdpResult? Udp;
 
         [OutputConstructor]
-        private GetTwingateResourceProtocolResult(
+        private GetTwingateResourceProtocolsResult(
             bool allowIcmp,
 
-            ImmutableArray<Outputs.GetTwingateResourceProtocolTcpResult> tcps,
+            Outputs.GetTwingateResourceProtocolsTcpResult? tcp,
 
-            ImmutableArray<Outputs.GetTwingateResourceProtocolUdpResult> udps)
+            Outputs.GetTwingateResourceProtocolsUdpResult? udp)
         {
             AllowIcmp = allowIcmp;
-            Tcps = tcps;
-            Udps = udps;
+            Tcp = tcp;
+            Udp = udp;
         }
     }
 }

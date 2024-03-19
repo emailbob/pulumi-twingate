@@ -28,6 +28,7 @@ namespace Pulumi.Twingate
     ///     var awsConnector = new Twingate.TwingateConnector("awsConnector", new()
     ///     {
     ///         RemoteNetworkId = awsNetwork.Id,
+    ///         StatusUpdatesEnabled = true,
     ///     });
     /// 
     /// });
@@ -56,7 +57,7 @@ namespace Pulumi.Twingate
         public Output<string> RemoteNetworkId { get; private set; } = null!;
 
         /// <summary>
-        /// Determines whether status notifications are enabled for the Connector.
+        /// Determines whether status notifications are enabled for the Connector. Default is `true`.
         /// </summary>
         [Output("statusUpdatesEnabled")]
         public Output<bool> StatusUpdatesEnabled { get; private set; } = null!;
@@ -121,7 +122,7 @@ namespace Pulumi.Twingate
         public Input<string> RemoteNetworkId { get; set; } = null!;
 
         /// <summary>
-        /// Determines whether status notifications are enabled for the Connector.
+        /// Determines whether status notifications are enabled for the Connector. Default is `true`.
         /// </summary>
         [Input("statusUpdatesEnabled")]
         public Input<bool>? StatusUpdatesEnabled { get; set; }
@@ -147,7 +148,7 @@ namespace Pulumi.Twingate
         public Input<string>? RemoteNetworkId { get; set; }
 
         /// <summary>
-        /// Determines whether status notifications are enabled for the Connector.
+        /// Determines whether status notifications are enabled for the Connector. Default is `true`.
         /// </summary>
         [Input("statusUpdatesEnabled")]
         public Input<bool>? StatusUpdatesEnabled { get; set; }

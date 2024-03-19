@@ -1,5 +1,5 @@
 
-name: Release and Publish
+name: Release
 
 on:
   push:

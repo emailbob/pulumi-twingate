@@ -16,7 +16,9 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as twingate from "@pulumi/twingate";
  *
- * const all = twingate.getTwingateRemoteNetworks({});
+ * const all = twingate.getTwingateRemoteNetworks({
+ *     name: "<your network's name>",
+ * });
  * ```
  * <!--End PulumiCodeChooser -->
  */
@@ -25,7 +27,12 @@ export function getTwingateRemoteNetworks(args?: GetTwingateRemoteNetworksArgs, 
 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("twingate:index/getTwingateRemoteNetworks:getTwingateRemoteNetworks", {
-        "remoteNetworks": args.remoteNetworks,
+        "name": args.name,
+        "nameContains": args.nameContains,
+        "nameExclude": args.nameExclude,
+        "namePrefix": args.namePrefix,
+        "nameRegexp": args.nameRegexp,
+        "nameSuffix": args.nameSuffix,
     }, opts);
 }
 
@@ -34,9 +41,29 @@ export function getTwingateRemoteNetworks(args?: GetTwingateRemoteNetworksArgs, 
  */
 export interface GetTwingateRemoteNetworksArgs {
     /**
-     * List of Remote Networks
+     * The name of the Remote Network.
      */
-    remoteNetworks?: inputs.GetTwingateRemoteNetworksRemoteNetwork[];
+    name?: string;
+    /**
+     * Match when the value exist in the name of the remote network.
+     */
+    nameContains?: string;
+    /**
+     * Match when the exact value does not exist in the name of the remote network.
+     */
+    nameExclude?: string;
+    /**
+     * The name of the remote network must start with the value.
+     */
+    namePrefix?: string;
+    /**
+     * The regular expression match of the name of the remote network.
+     */
+    nameRegexp?: string;
+    /**
+     * The name of the remote network must end with the value.
+     */
+    nameSuffix?: string;
 }
 
 /**
@@ -44,13 +71,37 @@ export interface GetTwingateRemoteNetworksArgs {
  */
 export interface GetTwingateRemoteNetworksResult {
     /**
-     * The provider-assigned unique ID for this managed resource.
+     * The ID of this resource.
      */
     readonly id: string;
     /**
+     * Returns only remote networks that exactly match this name. If no options are passed it will return all remote networks. Only one option can be used at a time.
+     */
+    readonly name?: string;
+    /**
+     * Match when the value exist in the name of the remote network.
+     */
+    readonly nameContains?: string;
+    /**
+     * Match when the exact value does not exist in the name of the remote network.
+     */
+    readonly nameExclude?: string;
+    /**
+     * The name of the remote network must start with the value.
+     */
+    readonly namePrefix?: string;
+    /**
+     * The regular expression match of the name of the remote network.
+     */
+    readonly nameRegexp?: string;
+    /**
+     * The name of the remote network must end with the value.
+     */
+    readonly nameSuffix?: string;
+    /**
      * List of Remote Networks
      */
-    readonly remoteNetworks?: outputs.GetTwingateRemoteNetworksRemoteNetwork[];
+    readonly remoteNetworks: outputs.GetTwingateRemoteNetworksRemoteNetwork[];
 }
 /**
  * A Remote Network represents a single private network in Twingate that can have one or more Connectors and Resources assigned to it. You must create a Remote Network before creating Resources and Connectors that belong to it. For more information, see Twingate's [documentation](https://docs.twingate.com/docs/remote-networks).
@@ -62,7 +113,9 @@ export interface GetTwingateRemoteNetworksResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as twingate from "@pulumi/twingate";
  *
- * const all = twingate.getTwingateRemoteNetworks({});
+ * const all = twingate.getTwingateRemoteNetworks({
+ *     name: "<your network's name>",
+ * });
  * ```
  * <!--End PulumiCodeChooser -->
  */
@@ -75,7 +128,27 @@ export function getTwingateRemoteNetworksOutput(args?: GetTwingateRemoteNetworks
  */
 export interface GetTwingateRemoteNetworksOutputArgs {
     /**
-     * List of Remote Networks
+     * The name of the Remote Network.
      */
-    remoteNetworks?: pulumi.Input<pulumi.Input<inputs.GetTwingateRemoteNetworksRemoteNetworkArgs>[]>;
+    name?: pulumi.Input<string>;
+    /**
+     * Match when the value exist in the name of the remote network.
+     */
+    nameContains?: pulumi.Input<string>;
+    /**
+     * Match when the exact value does not exist in the name of the remote network.
+     */
+    nameExclude?: pulumi.Input<string>;
+    /**
+     * The name of the remote network must start with the value.
+     */
+    namePrefix?: pulumi.Input<string>;
+    /**
+     * The regular expression match of the name of the remote network.
+     */
+    nameRegexp?: pulumi.Input<string>;
+    /**
+     * The name of the remote network must end with the value.
+     */
+    nameSuffix?: pulumi.Input<string>;
 }

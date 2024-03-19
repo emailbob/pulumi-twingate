@@ -55,7 +55,7 @@ export class TwingateRemoteNetwork extends pulumi.CustomResource {
     /**
      * The location of the Remote Network. Must be one of the following: AWS, AZURE, GOOGLE*CLOUD, ON*PREMISE, OTHER.
      */
-    public readonly location!: pulumi.Output<string | undefined>;
+    public readonly location!: pulumi.Output<string>;
     /**
      * The name of the Remote Network
      */

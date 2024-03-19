@@ -15,7 +15,10 @@ import * as utilities from "./utilities";
  * import * as twingate from "@emailbob/twingate";
  *
  * const awsNetwork = new twingate.TwingateRemoteNetwork("awsNetwork", {});
- * const awsConnector = new twingate.TwingateConnector("awsConnector", {remoteNetworkId: awsNetwork.id});
+ * const awsConnector = new twingate.TwingateConnector("awsConnector", {
+ *     remoteNetworkId: awsNetwork.id,
+ *     statusUpdatesEnabled: true,
+ * });
  * ```
  * <!--End PulumiCodeChooser -->
  *
@@ -62,7 +65,7 @@ export class TwingateConnector extends pulumi.CustomResource {
      */
     public readonly remoteNetworkId!: pulumi.Output<string>;
     /**
-     * Determines whether status notifications are enabled for the Connector.
+     * Determines whether status notifications are enabled for the Connector. Default is `true`.
      */
     public readonly statusUpdatesEnabled!: pulumi.Output<boolean>;
 
@@ -109,7 +112,7 @@ export interface TwingateConnectorState {
      */
     remoteNetworkId?: pulumi.Input<string>;
     /**
-     * Determines whether status notifications are enabled for the Connector.
+     * Determines whether status notifications are enabled for the Connector. Default is `true`.
      */
     statusUpdatesEnabled?: pulumi.Input<boolean>;
 }
@@ -127,7 +130,7 @@ export interface TwingateConnectorArgs {
      */
     remoteNetworkId: pulumi.Input<string>;
     /**
-     * Determines whether status notifications are enabled for the Connector.
+     * Determines whether status notifications are enabled for the Connector. Default is `true`.
      */
     statusUpdatesEnabled?: pulumi.Input<boolean>;
 }
