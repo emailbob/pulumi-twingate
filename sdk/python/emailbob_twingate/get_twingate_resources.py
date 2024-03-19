@@ -9,7 +9,6 @@ import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 from . import outputs
-from ._inputs import *
 
 __all__ = [
     'GetTwingateResourcesResult',
@@ -23,13 +22,28 @@ class GetTwingateResourcesResult:
     """
     A collection of values returned by getTwingateResources.
     """
-    def __init__(__self__, id=None, name=None, resources=None):
+    def __init__(__self__, id=None, name=None, name_contains=None, name_exclude=None, name_prefix=None, name_regexp=None, name_suffix=None, resources=None):
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
+        if name_contains and not isinstance(name_contains, str):
+            raise TypeError("Expected argument 'name_contains' to be a str")
+        pulumi.set(__self__, "name_contains", name_contains)
+        if name_exclude and not isinstance(name_exclude, str):
+            raise TypeError("Expected argument 'name_exclude' to be a str")
+        pulumi.set(__self__, "name_exclude", name_exclude)
+        if name_prefix and not isinstance(name_prefix, str):
+            raise TypeError("Expected argument 'name_prefix' to be a str")
+        pulumi.set(__self__, "name_prefix", name_prefix)
+        if name_regexp and not isinstance(name_regexp, str):
+            raise TypeError("Expected argument 'name_regexp' to be a str")
+        pulumi.set(__self__, "name_regexp", name_regexp)
+        if name_suffix and not isinstance(name_suffix, str):
+            raise TypeError("Expected argument 'name_suffix' to be a str")
+        pulumi.set(__self__, "name_suffix", name_suffix)
         if resources and not isinstance(resources, list):
             raise TypeError("Expected argument 'resources' to be a list")
         pulumi.set(__self__, "resources", resources)
@@ -38,21 +52,61 @@ class GetTwingateResourcesResult:
     @pulumi.getter
     def id(self) -> str:
         """
-        The provider-assigned unique ID for this managed resource.
+        The ID of this resource.
         """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter
-    def name(self) -> str:
+    def name(self) -> Optional[str]:
         """
-        The name of the Resource
+        Returns only resources that exactly match this name. If no options are passed it will return all resources. Only one option can be used at a time.
         """
         return pulumi.get(self, "name")
 
     @property
+    @pulumi.getter(name="nameContains")
+    def name_contains(self) -> Optional[str]:
+        """
+        Match when the value exist in the name of the resource.
+        """
+        return pulumi.get(self, "name_contains")
+
+    @property
+    @pulumi.getter(name="nameExclude")
+    def name_exclude(self) -> Optional[str]:
+        """
+        Match when the exact value does not exist in the name of the resource.
+        """
+        return pulumi.get(self, "name_exclude")
+
+    @property
+    @pulumi.getter(name="namePrefix")
+    def name_prefix(self) -> Optional[str]:
+        """
+        The name of the resource must start with the value.
+        """
+        return pulumi.get(self, "name_prefix")
+
+    @property
+    @pulumi.getter(name="nameRegexp")
+    def name_regexp(self) -> Optional[str]:
+        """
+        The regular expression match of the name of the resource.
+        """
+        return pulumi.get(self, "name_regexp")
+
+    @property
+    @pulumi.getter(name="nameSuffix")
+    def name_suffix(self) -> Optional[str]:
+        """
+        The name of the resource must end with the value.
+        """
+        return pulumi.get(self, "name_suffix")
+
+    @property
     @pulumi.getter
-    def resources(self) -> Optional[Sequence['outputs.GetTwingateResourcesResourceResult']]:
+    def resources(self) -> Sequence['outputs.GetTwingateResourcesResourceResult']:
         """
         List of Resources
         """
@@ -67,11 +121,20 @@ class AwaitableGetTwingateResourcesResult(GetTwingateResourcesResult):
         return GetTwingateResourcesResult(
             id=self.id,
             name=self.name,
+            name_contains=self.name_contains,
+            name_exclude=self.name_exclude,
+            name_prefix=self.name_prefix,
+            name_regexp=self.name_regexp,
+            name_suffix=self.name_suffix,
             resources=self.resources)
 
 
 def get_twingate_resources(name: Optional[str] = None,
-                           resources: Optional[Sequence[pulumi.InputType['GetTwingateResourcesResourceArgs']]] = None,
+                           name_contains: Optional[str] = None,
+                           name_exclude: Optional[str] = None,
+                           name_prefix: Optional[str] = None,
+                           name_regexp: Optional[str] = None,
+                           name_suffix: Optional[str] = None,
                            opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetTwingateResourcesResult:
     """
     Resources in Twingate represent servers on the private network that clients can connect to. Resources can be defined by IP, CIDR range, FQDN, or DNS zone. For more information, see the Twingate [documentation](https://docs.twingate.com/docs/resources-and-access-nodes).
@@ -89,23 +152,40 @@ def get_twingate_resources(name: Optional[str] = None,
 
 
     :param str name: The name of the Resource
-    :param Sequence[pulumi.InputType['GetTwingateResourcesResourceArgs']] resources: List of Resources
+    :param str name_contains: Match when the value exist in the name of the resource.
+    :param str name_exclude: Match when the exact value does not exist in the name of the resource.
+    :param str name_prefix: The name of the resource must start with the value.
+    :param str name_regexp: The regular expression match of the name of the resource.
+    :param str name_suffix: The name of the resource must end with the value.
     """
     __args__ = dict()
     __args__['name'] = name
-    __args__['resources'] = resources
+    __args__['nameContains'] = name_contains
+    __args__['nameExclude'] = name_exclude
+    __args__['namePrefix'] = name_prefix
+    __args__['nameRegexp'] = name_regexp
+    __args__['nameSuffix'] = name_suffix
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('twingate:index/getTwingateResources:getTwingateResources', __args__, opts=opts, typ=GetTwingateResourcesResult).value
 
     return AwaitableGetTwingateResourcesResult(
         id=pulumi.get(__ret__, 'id'),
         name=pulumi.get(__ret__, 'name'),
+        name_contains=pulumi.get(__ret__, 'name_contains'),
+        name_exclude=pulumi.get(__ret__, 'name_exclude'),
+        name_prefix=pulumi.get(__ret__, 'name_prefix'),
+        name_regexp=pulumi.get(__ret__, 'name_regexp'),
+        name_suffix=pulumi.get(__ret__, 'name_suffix'),
         resources=pulumi.get(__ret__, 'resources'))
 
 
 @_utilities.lift_output_func(get_twingate_resources)
-def get_twingate_resources_output(name: Optional[pulumi.Input[str]] = None,
-                                  resources: Optional[pulumi.Input[Optional[Sequence[pulumi.InputType['GetTwingateResourcesResourceArgs']]]]] = None,
+def get_twingate_resources_output(name: Optional[pulumi.Input[Optional[str]]] = None,
+                                  name_contains: Optional[pulumi.Input[Optional[str]]] = None,
+                                  name_exclude: Optional[pulumi.Input[Optional[str]]] = None,
+                                  name_prefix: Optional[pulumi.Input[Optional[str]]] = None,
+                                  name_regexp: Optional[pulumi.Input[Optional[str]]] = None,
+                                  name_suffix: Optional[pulumi.Input[Optional[str]]] = None,
                                   opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetTwingateResourcesResult]:
     """
     Resources in Twingate represent servers on the private network that clients can connect to. Resources can be defined by IP, CIDR range, FQDN, or DNS zone. For more information, see the Twingate [documentation](https://docs.twingate.com/docs/resources-and-access-nodes).
@@ -123,6 +203,10 @@ def get_twingate_resources_output(name: Optional[pulumi.Input[str]] = None,
 
 
     :param str name: The name of the Resource
-    :param Sequence[pulumi.InputType['GetTwingateResourcesResourceArgs']] resources: List of Resources
+    :param str name_contains: Match when the value exist in the name of the resource.
+    :param str name_exclude: Match when the exact value does not exist in the name of the resource.
+    :param str name_prefix: The name of the resource must start with the value.
+    :param str name_regexp: The regular expression match of the name of the resource.
+    :param str name_suffix: The name of the resource must end with the value.
     """
     ...

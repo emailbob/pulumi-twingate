@@ -26,7 +26,7 @@ class ProviderArgs:
                TWINGATE_API_TOKEN environment variable.
         :param pulumi.Input[int] http_max_retry: Specifies a retry limit for the http requests made. The default value is 10. Alternatively, this can be specified using
                the TWINGATE_HTTP_MAX_RETRY environment variable
-        :param pulumi.Input[int] http_timeout: Specifies a time limit in seconds for the http requests made. The default value is 10 seconds. Alternatively, this can
+        :param pulumi.Input[int] http_timeout: Specifies a time limit in seconds for the http requests made. The default value is 35 seconds. Alternatively, this can
                be specified using the TWINGATE_HTTP_TIMEOUT environment variable
         :param pulumi.Input[str] network: Your Twingate network ID for API operations. You can find it in the Admin Console URL, for example:
                `autoco.twingate.com`, where `autoco` is your network ID Alternatively, this can be specified using the TWINGATE_NETWORK
@@ -75,7 +75,7 @@ class ProviderArgs:
     @pulumi.getter(name="httpTimeout")
     def http_timeout(self) -> Optional[pulumi.Input[int]]:
         """
-        Specifies a time limit in seconds for the http requests made. The default value is 10 seconds. Alternatively, this can
+        Specifies a time limit in seconds for the http requests made. The default value is 35 seconds. Alternatively, this can
         be specified using the TWINGATE_HTTP_TIMEOUT environment variable
         """
         return pulumi.get(self, "http_timeout")
@@ -135,7 +135,7 @@ class Provider(pulumi.ProviderResource):
                TWINGATE_API_TOKEN environment variable.
         :param pulumi.Input[int] http_max_retry: Specifies a retry limit for the http requests made. The default value is 10. Alternatively, this can be specified using
                the TWINGATE_HTTP_MAX_RETRY environment variable
-        :param pulumi.Input[int] http_timeout: Specifies a time limit in seconds for the http requests made. The default value is 10 seconds. Alternatively, this can
+        :param pulumi.Input[int] http_timeout: Specifies a time limit in seconds for the http requests made. The default value is 35 seconds. Alternatively, this can
                be specified using the TWINGATE_HTTP_TIMEOUT environment variable
         :param pulumi.Input[str] network: Your Twingate network ID for API operations. You can find it in the Admin Console URL, for example:
                `autoco.twingate.com`, where `autoco` is your network ID Alternatively, this can be specified using the TWINGATE_NETWORK

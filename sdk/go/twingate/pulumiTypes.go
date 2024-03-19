@@ -7,646 +7,11 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/emailbob/pulumi-twingate/sdk/go/twingate/internal"
+	"github.com/emailbob/pulumi-twingate/sdk/v2/go/twingate/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
 var _ = internal.GetEnvOrDefault
-
-type ResourceAccess struct {
-	// List of Group IDs that will have permission to access the Resource.
-	GroupIds []string `pulumi:"groupIds"`
-	// List of Service Account IDs that will have permission to access the Resource.
-	ServiceAccountIds []string `pulumi:"serviceAccountIds"`
-}
-
-// ResourceAccessInput is an input type that accepts ResourceAccessArgs and ResourceAccessOutput values.
-// You can construct a concrete instance of `ResourceAccessInput` via:
-//
-//	ResourceAccessArgs{...}
-type ResourceAccessInput interface {
-	pulumi.Input
-
-	ToResourceAccessOutput() ResourceAccessOutput
-	ToResourceAccessOutputWithContext(context.Context) ResourceAccessOutput
-}
-
-type ResourceAccessArgs struct {
-	// List of Group IDs that will have permission to access the Resource.
-	GroupIds pulumi.StringArrayInput `pulumi:"groupIds"`
-	// List of Service Account IDs that will have permission to access the Resource.
-	ServiceAccountIds pulumi.StringArrayInput `pulumi:"serviceAccountIds"`
-}
-
-func (ResourceAccessArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ResourceAccess)(nil)).Elem()
-}
-
-func (i ResourceAccessArgs) ToResourceAccessOutput() ResourceAccessOutput {
-	return i.ToResourceAccessOutputWithContext(context.Background())
-}
-
-func (i ResourceAccessArgs) ToResourceAccessOutputWithContext(ctx context.Context) ResourceAccessOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ResourceAccessOutput)
-}
-
-func (i ResourceAccessArgs) ToResourceAccessPtrOutput() ResourceAccessPtrOutput {
-	return i.ToResourceAccessPtrOutputWithContext(context.Background())
-}
-
-func (i ResourceAccessArgs) ToResourceAccessPtrOutputWithContext(ctx context.Context) ResourceAccessPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ResourceAccessOutput).ToResourceAccessPtrOutputWithContext(ctx)
-}
-
-// ResourceAccessPtrInput is an input type that accepts ResourceAccessArgs, ResourceAccessPtr and ResourceAccessPtrOutput values.
-// You can construct a concrete instance of `ResourceAccessPtrInput` via:
-//
-//	        ResourceAccessArgs{...}
-//
-//	or:
-//
-//	        nil
-type ResourceAccessPtrInput interface {
-	pulumi.Input
-
-	ToResourceAccessPtrOutput() ResourceAccessPtrOutput
-	ToResourceAccessPtrOutputWithContext(context.Context) ResourceAccessPtrOutput
-}
-
-type resourceAccessPtrType ResourceAccessArgs
-
-func ResourceAccessPtr(v *ResourceAccessArgs) ResourceAccessPtrInput {
-	return (*resourceAccessPtrType)(v)
-}
-
-func (*resourceAccessPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ResourceAccess)(nil)).Elem()
-}
-
-func (i *resourceAccessPtrType) ToResourceAccessPtrOutput() ResourceAccessPtrOutput {
-	return i.ToResourceAccessPtrOutputWithContext(context.Background())
-}
-
-func (i *resourceAccessPtrType) ToResourceAccessPtrOutputWithContext(ctx context.Context) ResourceAccessPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ResourceAccessPtrOutput)
-}
-
-type ResourceAccessOutput struct{ *pulumi.OutputState }
-
-func (ResourceAccessOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ResourceAccess)(nil)).Elem()
-}
-
-func (o ResourceAccessOutput) ToResourceAccessOutput() ResourceAccessOutput {
-	return o
-}
-
-func (o ResourceAccessOutput) ToResourceAccessOutputWithContext(ctx context.Context) ResourceAccessOutput {
-	return o
-}
-
-func (o ResourceAccessOutput) ToResourceAccessPtrOutput() ResourceAccessPtrOutput {
-	return o.ToResourceAccessPtrOutputWithContext(context.Background())
-}
-
-func (o ResourceAccessOutput) ToResourceAccessPtrOutputWithContext(ctx context.Context) ResourceAccessPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ResourceAccess) *ResourceAccess {
-		return &v
-	}).(ResourceAccessPtrOutput)
-}
-
-// List of Group IDs that will have permission to access the Resource.
-func (o ResourceAccessOutput) GroupIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ResourceAccess) []string { return v.GroupIds }).(pulumi.StringArrayOutput)
-}
-
-// List of Service Account IDs that will have permission to access the Resource.
-func (o ResourceAccessOutput) ServiceAccountIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ResourceAccess) []string { return v.ServiceAccountIds }).(pulumi.StringArrayOutput)
-}
-
-type ResourceAccessPtrOutput struct{ *pulumi.OutputState }
-
-func (ResourceAccessPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ResourceAccess)(nil)).Elem()
-}
-
-func (o ResourceAccessPtrOutput) ToResourceAccessPtrOutput() ResourceAccessPtrOutput {
-	return o
-}
-
-func (o ResourceAccessPtrOutput) ToResourceAccessPtrOutputWithContext(ctx context.Context) ResourceAccessPtrOutput {
-	return o
-}
-
-func (o ResourceAccessPtrOutput) Elem() ResourceAccessOutput {
-	return o.ApplyT(func(v *ResourceAccess) ResourceAccess {
-		if v != nil {
-			return *v
-		}
-		var ret ResourceAccess
-		return ret
-	}).(ResourceAccessOutput)
-}
-
-// List of Group IDs that will have permission to access the Resource.
-func (o ResourceAccessPtrOutput) GroupIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *ResourceAccess) []string {
-		if v == nil {
-			return nil
-		}
-		return v.GroupIds
-	}).(pulumi.StringArrayOutput)
-}
-
-// List of Service Account IDs that will have permission to access the Resource.
-func (o ResourceAccessPtrOutput) ServiceAccountIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *ResourceAccess) []string {
-		if v == nil {
-			return nil
-		}
-		return v.ServiceAccountIds
-	}).(pulumi.StringArrayOutput)
-}
-
-type ResourceProtocols struct {
-	// Whether to allow ICMP (ping) traffic
-	AllowIcmp *bool                `pulumi:"allowIcmp"`
-	Tcp       ResourceProtocolsTcp `pulumi:"tcp"`
-	Udp       ResourceProtocolsUdp `pulumi:"udp"`
-}
-
-// ResourceProtocolsInput is an input type that accepts ResourceProtocolsArgs and ResourceProtocolsOutput values.
-// You can construct a concrete instance of `ResourceProtocolsInput` via:
-//
-//	ResourceProtocolsArgs{...}
-type ResourceProtocolsInput interface {
-	pulumi.Input
-
-	ToResourceProtocolsOutput() ResourceProtocolsOutput
-	ToResourceProtocolsOutputWithContext(context.Context) ResourceProtocolsOutput
-}
-
-type ResourceProtocolsArgs struct {
-	// Whether to allow ICMP (ping) traffic
-	AllowIcmp pulumi.BoolPtrInput       `pulumi:"allowIcmp"`
-	Tcp       ResourceProtocolsTcpInput `pulumi:"tcp"`
-	Udp       ResourceProtocolsUdpInput `pulumi:"udp"`
-}
-
-func (ResourceProtocolsArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ResourceProtocols)(nil)).Elem()
-}
-
-func (i ResourceProtocolsArgs) ToResourceProtocolsOutput() ResourceProtocolsOutput {
-	return i.ToResourceProtocolsOutputWithContext(context.Background())
-}
-
-func (i ResourceProtocolsArgs) ToResourceProtocolsOutputWithContext(ctx context.Context) ResourceProtocolsOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ResourceProtocolsOutput)
-}
-
-func (i ResourceProtocolsArgs) ToResourceProtocolsPtrOutput() ResourceProtocolsPtrOutput {
-	return i.ToResourceProtocolsPtrOutputWithContext(context.Background())
-}
-
-func (i ResourceProtocolsArgs) ToResourceProtocolsPtrOutputWithContext(ctx context.Context) ResourceProtocolsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ResourceProtocolsOutput).ToResourceProtocolsPtrOutputWithContext(ctx)
-}
-
-// ResourceProtocolsPtrInput is an input type that accepts ResourceProtocolsArgs, ResourceProtocolsPtr and ResourceProtocolsPtrOutput values.
-// You can construct a concrete instance of `ResourceProtocolsPtrInput` via:
-//
-//	        ResourceProtocolsArgs{...}
-//
-//	or:
-//
-//	        nil
-type ResourceProtocolsPtrInput interface {
-	pulumi.Input
-
-	ToResourceProtocolsPtrOutput() ResourceProtocolsPtrOutput
-	ToResourceProtocolsPtrOutputWithContext(context.Context) ResourceProtocolsPtrOutput
-}
-
-type resourceProtocolsPtrType ResourceProtocolsArgs
-
-func ResourceProtocolsPtr(v *ResourceProtocolsArgs) ResourceProtocolsPtrInput {
-	return (*resourceProtocolsPtrType)(v)
-}
-
-func (*resourceProtocolsPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ResourceProtocols)(nil)).Elem()
-}
-
-func (i *resourceProtocolsPtrType) ToResourceProtocolsPtrOutput() ResourceProtocolsPtrOutput {
-	return i.ToResourceProtocolsPtrOutputWithContext(context.Background())
-}
-
-func (i *resourceProtocolsPtrType) ToResourceProtocolsPtrOutputWithContext(ctx context.Context) ResourceProtocolsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ResourceProtocolsPtrOutput)
-}
-
-type ResourceProtocolsOutput struct{ *pulumi.OutputState }
-
-func (ResourceProtocolsOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ResourceProtocols)(nil)).Elem()
-}
-
-func (o ResourceProtocolsOutput) ToResourceProtocolsOutput() ResourceProtocolsOutput {
-	return o
-}
-
-func (o ResourceProtocolsOutput) ToResourceProtocolsOutputWithContext(ctx context.Context) ResourceProtocolsOutput {
-	return o
-}
-
-func (o ResourceProtocolsOutput) ToResourceProtocolsPtrOutput() ResourceProtocolsPtrOutput {
-	return o.ToResourceProtocolsPtrOutputWithContext(context.Background())
-}
-
-func (o ResourceProtocolsOutput) ToResourceProtocolsPtrOutputWithContext(ctx context.Context) ResourceProtocolsPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ResourceProtocols) *ResourceProtocols {
-		return &v
-	}).(ResourceProtocolsPtrOutput)
-}
-
-// Whether to allow ICMP (ping) traffic
-func (o ResourceProtocolsOutput) AllowIcmp() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v ResourceProtocols) *bool { return v.AllowIcmp }).(pulumi.BoolPtrOutput)
-}
-
-func (o ResourceProtocolsOutput) Tcp() ResourceProtocolsTcpOutput {
-	return o.ApplyT(func(v ResourceProtocols) ResourceProtocolsTcp { return v.Tcp }).(ResourceProtocolsTcpOutput)
-}
-
-func (o ResourceProtocolsOutput) Udp() ResourceProtocolsUdpOutput {
-	return o.ApplyT(func(v ResourceProtocols) ResourceProtocolsUdp { return v.Udp }).(ResourceProtocolsUdpOutput)
-}
-
-type ResourceProtocolsPtrOutput struct{ *pulumi.OutputState }
-
-func (ResourceProtocolsPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ResourceProtocols)(nil)).Elem()
-}
-
-func (o ResourceProtocolsPtrOutput) ToResourceProtocolsPtrOutput() ResourceProtocolsPtrOutput {
-	return o
-}
-
-func (o ResourceProtocolsPtrOutput) ToResourceProtocolsPtrOutputWithContext(ctx context.Context) ResourceProtocolsPtrOutput {
-	return o
-}
-
-func (o ResourceProtocolsPtrOutput) Elem() ResourceProtocolsOutput {
-	return o.ApplyT(func(v *ResourceProtocols) ResourceProtocols {
-		if v != nil {
-			return *v
-		}
-		var ret ResourceProtocols
-		return ret
-	}).(ResourceProtocolsOutput)
-}
-
-// Whether to allow ICMP (ping) traffic
-func (o ResourceProtocolsPtrOutput) AllowIcmp() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *ResourceProtocols) *bool {
-		if v == nil {
-			return nil
-		}
-		return v.AllowIcmp
-	}).(pulumi.BoolPtrOutput)
-}
-
-func (o ResourceProtocolsPtrOutput) Tcp() ResourceProtocolsTcpPtrOutput {
-	return o.ApplyT(func(v *ResourceProtocols) *ResourceProtocolsTcp {
-		if v == nil {
-			return nil
-		}
-		return &v.Tcp
-	}).(ResourceProtocolsTcpPtrOutput)
-}
-
-func (o ResourceProtocolsPtrOutput) Udp() ResourceProtocolsUdpPtrOutput {
-	return o.ApplyT(func(v *ResourceProtocols) *ResourceProtocolsUdp {
-		if v == nil {
-			return nil
-		}
-		return &v.Udp
-	}).(ResourceProtocolsUdpPtrOutput)
-}
-
-type ResourceProtocolsTcp struct {
-	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-	Policy string `pulumi:"policy"`
-	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
-	Ports []string `pulumi:"ports"`
-}
-
-// ResourceProtocolsTcpInput is an input type that accepts ResourceProtocolsTcpArgs and ResourceProtocolsTcpOutput values.
-// You can construct a concrete instance of `ResourceProtocolsTcpInput` via:
-//
-//	ResourceProtocolsTcpArgs{...}
-type ResourceProtocolsTcpInput interface {
-	pulumi.Input
-
-	ToResourceProtocolsTcpOutput() ResourceProtocolsTcpOutput
-	ToResourceProtocolsTcpOutputWithContext(context.Context) ResourceProtocolsTcpOutput
-}
-
-type ResourceProtocolsTcpArgs struct {
-	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-	Policy pulumi.StringInput `pulumi:"policy"`
-	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
-	Ports pulumi.StringArrayInput `pulumi:"ports"`
-}
-
-func (ResourceProtocolsTcpArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ResourceProtocolsTcp)(nil)).Elem()
-}
-
-func (i ResourceProtocolsTcpArgs) ToResourceProtocolsTcpOutput() ResourceProtocolsTcpOutput {
-	return i.ToResourceProtocolsTcpOutputWithContext(context.Background())
-}
-
-func (i ResourceProtocolsTcpArgs) ToResourceProtocolsTcpOutputWithContext(ctx context.Context) ResourceProtocolsTcpOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ResourceProtocolsTcpOutput)
-}
-
-func (i ResourceProtocolsTcpArgs) ToResourceProtocolsTcpPtrOutput() ResourceProtocolsTcpPtrOutput {
-	return i.ToResourceProtocolsTcpPtrOutputWithContext(context.Background())
-}
-
-func (i ResourceProtocolsTcpArgs) ToResourceProtocolsTcpPtrOutputWithContext(ctx context.Context) ResourceProtocolsTcpPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ResourceProtocolsTcpOutput).ToResourceProtocolsTcpPtrOutputWithContext(ctx)
-}
-
-// ResourceProtocolsTcpPtrInput is an input type that accepts ResourceProtocolsTcpArgs, ResourceProtocolsTcpPtr and ResourceProtocolsTcpPtrOutput values.
-// You can construct a concrete instance of `ResourceProtocolsTcpPtrInput` via:
-//
-//	        ResourceProtocolsTcpArgs{...}
-//
-//	or:
-//
-//	        nil
-type ResourceProtocolsTcpPtrInput interface {
-	pulumi.Input
-
-	ToResourceProtocolsTcpPtrOutput() ResourceProtocolsTcpPtrOutput
-	ToResourceProtocolsTcpPtrOutputWithContext(context.Context) ResourceProtocolsTcpPtrOutput
-}
-
-type resourceProtocolsTcpPtrType ResourceProtocolsTcpArgs
-
-func ResourceProtocolsTcpPtr(v *ResourceProtocolsTcpArgs) ResourceProtocolsTcpPtrInput {
-	return (*resourceProtocolsTcpPtrType)(v)
-}
-
-func (*resourceProtocolsTcpPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ResourceProtocolsTcp)(nil)).Elem()
-}
-
-func (i *resourceProtocolsTcpPtrType) ToResourceProtocolsTcpPtrOutput() ResourceProtocolsTcpPtrOutput {
-	return i.ToResourceProtocolsTcpPtrOutputWithContext(context.Background())
-}
-
-func (i *resourceProtocolsTcpPtrType) ToResourceProtocolsTcpPtrOutputWithContext(ctx context.Context) ResourceProtocolsTcpPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ResourceProtocolsTcpPtrOutput)
-}
-
-type ResourceProtocolsTcpOutput struct{ *pulumi.OutputState }
-
-func (ResourceProtocolsTcpOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ResourceProtocolsTcp)(nil)).Elem()
-}
-
-func (o ResourceProtocolsTcpOutput) ToResourceProtocolsTcpOutput() ResourceProtocolsTcpOutput {
-	return o
-}
-
-func (o ResourceProtocolsTcpOutput) ToResourceProtocolsTcpOutputWithContext(ctx context.Context) ResourceProtocolsTcpOutput {
-	return o
-}
-
-func (o ResourceProtocolsTcpOutput) ToResourceProtocolsTcpPtrOutput() ResourceProtocolsTcpPtrOutput {
-	return o.ToResourceProtocolsTcpPtrOutputWithContext(context.Background())
-}
-
-func (o ResourceProtocolsTcpOutput) ToResourceProtocolsTcpPtrOutputWithContext(ctx context.Context) ResourceProtocolsTcpPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ResourceProtocolsTcp) *ResourceProtocolsTcp {
-		return &v
-	}).(ResourceProtocolsTcpPtrOutput)
-}
-
-// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-func (o ResourceProtocolsTcpOutput) Policy() pulumi.StringOutput {
-	return o.ApplyT(func(v ResourceProtocolsTcp) string { return v.Policy }).(pulumi.StringOutput)
-}
-
-// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
-func (o ResourceProtocolsTcpOutput) Ports() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ResourceProtocolsTcp) []string { return v.Ports }).(pulumi.StringArrayOutput)
-}
-
-type ResourceProtocolsTcpPtrOutput struct{ *pulumi.OutputState }
-
-func (ResourceProtocolsTcpPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ResourceProtocolsTcp)(nil)).Elem()
-}
-
-func (o ResourceProtocolsTcpPtrOutput) ToResourceProtocolsTcpPtrOutput() ResourceProtocolsTcpPtrOutput {
-	return o
-}
-
-func (o ResourceProtocolsTcpPtrOutput) ToResourceProtocolsTcpPtrOutputWithContext(ctx context.Context) ResourceProtocolsTcpPtrOutput {
-	return o
-}
-
-func (o ResourceProtocolsTcpPtrOutput) Elem() ResourceProtocolsTcpOutput {
-	return o.ApplyT(func(v *ResourceProtocolsTcp) ResourceProtocolsTcp {
-		if v != nil {
-			return *v
-		}
-		var ret ResourceProtocolsTcp
-		return ret
-	}).(ResourceProtocolsTcpOutput)
-}
-
-// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-func (o ResourceProtocolsTcpPtrOutput) Policy() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ResourceProtocolsTcp) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Policy
-	}).(pulumi.StringPtrOutput)
-}
-
-// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
-func (o ResourceProtocolsTcpPtrOutput) Ports() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *ResourceProtocolsTcp) []string {
-		if v == nil {
-			return nil
-		}
-		return v.Ports
-	}).(pulumi.StringArrayOutput)
-}
-
-type ResourceProtocolsUdp struct {
-	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-	Policy string `pulumi:"policy"`
-	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
-	Ports []string `pulumi:"ports"`
-}
-
-// ResourceProtocolsUdpInput is an input type that accepts ResourceProtocolsUdpArgs and ResourceProtocolsUdpOutput values.
-// You can construct a concrete instance of `ResourceProtocolsUdpInput` via:
-//
-//	ResourceProtocolsUdpArgs{...}
-type ResourceProtocolsUdpInput interface {
-	pulumi.Input
-
-	ToResourceProtocolsUdpOutput() ResourceProtocolsUdpOutput
-	ToResourceProtocolsUdpOutputWithContext(context.Context) ResourceProtocolsUdpOutput
-}
-
-type ResourceProtocolsUdpArgs struct {
-	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-	Policy pulumi.StringInput `pulumi:"policy"`
-	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
-	Ports pulumi.StringArrayInput `pulumi:"ports"`
-}
-
-func (ResourceProtocolsUdpArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ResourceProtocolsUdp)(nil)).Elem()
-}
-
-func (i ResourceProtocolsUdpArgs) ToResourceProtocolsUdpOutput() ResourceProtocolsUdpOutput {
-	return i.ToResourceProtocolsUdpOutputWithContext(context.Background())
-}
-
-func (i ResourceProtocolsUdpArgs) ToResourceProtocolsUdpOutputWithContext(ctx context.Context) ResourceProtocolsUdpOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ResourceProtocolsUdpOutput)
-}
-
-func (i ResourceProtocolsUdpArgs) ToResourceProtocolsUdpPtrOutput() ResourceProtocolsUdpPtrOutput {
-	return i.ToResourceProtocolsUdpPtrOutputWithContext(context.Background())
-}
-
-func (i ResourceProtocolsUdpArgs) ToResourceProtocolsUdpPtrOutputWithContext(ctx context.Context) ResourceProtocolsUdpPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ResourceProtocolsUdpOutput).ToResourceProtocolsUdpPtrOutputWithContext(ctx)
-}
-
-// ResourceProtocolsUdpPtrInput is an input type that accepts ResourceProtocolsUdpArgs, ResourceProtocolsUdpPtr and ResourceProtocolsUdpPtrOutput values.
-// You can construct a concrete instance of `ResourceProtocolsUdpPtrInput` via:
-//
-//	        ResourceProtocolsUdpArgs{...}
-//
-//	or:
-//
-//	        nil
-type ResourceProtocolsUdpPtrInput interface {
-	pulumi.Input
-
-	ToResourceProtocolsUdpPtrOutput() ResourceProtocolsUdpPtrOutput
-	ToResourceProtocolsUdpPtrOutputWithContext(context.Context) ResourceProtocolsUdpPtrOutput
-}
-
-type resourceProtocolsUdpPtrType ResourceProtocolsUdpArgs
-
-func ResourceProtocolsUdpPtr(v *ResourceProtocolsUdpArgs) ResourceProtocolsUdpPtrInput {
-	return (*resourceProtocolsUdpPtrType)(v)
-}
-
-func (*resourceProtocolsUdpPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ResourceProtocolsUdp)(nil)).Elem()
-}
-
-func (i *resourceProtocolsUdpPtrType) ToResourceProtocolsUdpPtrOutput() ResourceProtocolsUdpPtrOutput {
-	return i.ToResourceProtocolsUdpPtrOutputWithContext(context.Background())
-}
-
-func (i *resourceProtocolsUdpPtrType) ToResourceProtocolsUdpPtrOutputWithContext(ctx context.Context) ResourceProtocolsUdpPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ResourceProtocolsUdpPtrOutput)
-}
-
-type ResourceProtocolsUdpOutput struct{ *pulumi.OutputState }
-
-func (ResourceProtocolsUdpOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ResourceProtocolsUdp)(nil)).Elem()
-}
-
-func (o ResourceProtocolsUdpOutput) ToResourceProtocolsUdpOutput() ResourceProtocolsUdpOutput {
-	return o
-}
-
-func (o ResourceProtocolsUdpOutput) ToResourceProtocolsUdpOutputWithContext(ctx context.Context) ResourceProtocolsUdpOutput {
-	return o
-}
-
-func (o ResourceProtocolsUdpOutput) ToResourceProtocolsUdpPtrOutput() ResourceProtocolsUdpPtrOutput {
-	return o.ToResourceProtocolsUdpPtrOutputWithContext(context.Background())
-}
-
-func (o ResourceProtocolsUdpOutput) ToResourceProtocolsUdpPtrOutputWithContext(ctx context.Context) ResourceProtocolsUdpPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ResourceProtocolsUdp) *ResourceProtocolsUdp {
-		return &v
-	}).(ResourceProtocolsUdpPtrOutput)
-}
-
-// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-func (o ResourceProtocolsUdpOutput) Policy() pulumi.StringOutput {
-	return o.ApplyT(func(v ResourceProtocolsUdp) string { return v.Policy }).(pulumi.StringOutput)
-}
-
-// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
-func (o ResourceProtocolsUdpOutput) Ports() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v ResourceProtocolsUdp) []string { return v.Ports }).(pulumi.StringArrayOutput)
-}
-
-type ResourceProtocolsUdpPtrOutput struct{ *pulumi.OutputState }
-
-func (ResourceProtocolsUdpPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ResourceProtocolsUdp)(nil)).Elem()
-}
-
-func (o ResourceProtocolsUdpPtrOutput) ToResourceProtocolsUdpPtrOutput() ResourceProtocolsUdpPtrOutput {
-	return o
-}
-
-func (o ResourceProtocolsUdpPtrOutput) ToResourceProtocolsUdpPtrOutputWithContext(ctx context.Context) ResourceProtocolsUdpPtrOutput {
-	return o
-}
-
-func (o ResourceProtocolsUdpPtrOutput) Elem() ResourceProtocolsUdpOutput {
-	return o.ApplyT(func(v *ResourceProtocolsUdp) ResourceProtocolsUdp {
-		if v != nil {
-			return *v
-		}
-		var ret ResourceProtocolsUdp
-		return ret
-	}).(ResourceProtocolsUdpOutput)
-}
-
-// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-func (o ResourceProtocolsUdpPtrOutput) Policy() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *ResourceProtocolsUdp) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.Policy
-	}).(pulumi.StringPtrOutput)
-}
-
-// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
-func (o ResourceProtocolsUdpPtrOutput) Ports() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *ResourceProtocolsUdp) []string {
-		if v == nil {
-			return nil
-		}
-		return v.Ports
-	}).(pulumi.StringArrayOutput)
-}
 
 type TwingateResourceAccess struct {
 	// List of Group IDs that will have permission to access the Resource.
@@ -806,9 +171,9 @@ func (o TwingateResourceAccessPtrOutput) ServiceAccountIds() pulumi.StringArrayO
 
 type TwingateResourceProtocols struct {
 	// Whether to allow ICMP (ping) traffic
-	AllowIcmp *bool                        `pulumi:"allowIcmp"`
-	Tcp       TwingateResourceProtocolsTcp `pulumi:"tcp"`
-	Udp       TwingateResourceProtocolsUdp `pulumi:"udp"`
+	AllowIcmp *bool                         `pulumi:"allowIcmp"`
+	Tcp       *TwingateResourceProtocolsTcp `pulumi:"tcp"`
+	Udp       *TwingateResourceProtocolsUdp `pulumi:"udp"`
 }
 
 // TwingateResourceProtocolsInput is an input type that accepts TwingateResourceProtocolsArgs and TwingateResourceProtocolsOutput values.
@@ -824,9 +189,9 @@ type TwingateResourceProtocolsInput interface {
 
 type TwingateResourceProtocolsArgs struct {
 	// Whether to allow ICMP (ping) traffic
-	AllowIcmp pulumi.BoolPtrInput               `pulumi:"allowIcmp"`
-	Tcp       TwingateResourceProtocolsTcpInput `pulumi:"tcp"`
-	Udp       TwingateResourceProtocolsUdpInput `pulumi:"udp"`
+	AllowIcmp pulumi.BoolPtrInput                  `pulumi:"allowIcmp"`
+	Tcp       TwingateResourceProtocolsTcpPtrInput `pulumi:"tcp"`
+	Udp       TwingateResourceProtocolsUdpPtrInput `pulumi:"udp"`
 }
 
 func (TwingateResourceProtocolsArgs) ElementType() reflect.Type {
@@ -911,12 +276,12 @@ func (o TwingateResourceProtocolsOutput) AllowIcmp() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v TwingateResourceProtocols) *bool { return v.AllowIcmp }).(pulumi.BoolPtrOutput)
 }
 
-func (o TwingateResourceProtocolsOutput) Tcp() TwingateResourceProtocolsTcpOutput {
-	return o.ApplyT(func(v TwingateResourceProtocols) TwingateResourceProtocolsTcp { return v.Tcp }).(TwingateResourceProtocolsTcpOutput)
+func (o TwingateResourceProtocolsOutput) Tcp() TwingateResourceProtocolsTcpPtrOutput {
+	return o.ApplyT(func(v TwingateResourceProtocols) *TwingateResourceProtocolsTcp { return v.Tcp }).(TwingateResourceProtocolsTcpPtrOutput)
 }
 
-func (o TwingateResourceProtocolsOutput) Udp() TwingateResourceProtocolsUdpOutput {
-	return o.ApplyT(func(v TwingateResourceProtocols) TwingateResourceProtocolsUdp { return v.Udp }).(TwingateResourceProtocolsUdpOutput)
+func (o TwingateResourceProtocolsOutput) Udp() TwingateResourceProtocolsUdpPtrOutput {
+	return o.ApplyT(func(v TwingateResourceProtocols) *TwingateResourceProtocolsUdp { return v.Udp }).(TwingateResourceProtocolsUdpPtrOutput)
 }
 
 type TwingateResourceProtocolsPtrOutput struct{ *pulumi.OutputState }
@@ -958,7 +323,7 @@ func (o TwingateResourceProtocolsPtrOutput) Tcp() TwingateResourceProtocolsTcpPt
 		if v == nil {
 			return nil
 		}
-		return &v.Tcp
+		return v.Tcp
 	}).(TwingateResourceProtocolsTcpPtrOutput)
 }
 
@@ -967,13 +332,13 @@ func (o TwingateResourceProtocolsPtrOutput) Udp() TwingateResourceProtocolsUdpPt
 		if v == nil {
 			return nil
 		}
-		return &v.Udp
+		return v.Udp
 	}).(TwingateResourceProtocolsUdpPtrOutput)
 }
 
 type TwingateResourceProtocolsTcp struct {
 	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-	Policy string `pulumi:"policy"`
+	Policy *string `pulumi:"policy"`
 	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 	Ports []string `pulumi:"ports"`
 }
@@ -991,7 +356,7 @@ type TwingateResourceProtocolsTcpInput interface {
 
 type TwingateResourceProtocolsTcpArgs struct {
 	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-	Policy pulumi.StringInput `pulumi:"policy"`
+	Policy pulumi.StringPtrInput `pulumi:"policy"`
 	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 	Ports pulumi.StringArrayInput `pulumi:"ports"`
 }
@@ -1074,8 +439,8 @@ func (o TwingateResourceProtocolsTcpOutput) ToTwingateResourceProtocolsTcpPtrOut
 }
 
 // Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-func (o TwingateResourceProtocolsTcpOutput) Policy() pulumi.StringOutput {
-	return o.ApplyT(func(v TwingateResourceProtocolsTcp) string { return v.Policy }).(pulumi.StringOutput)
+func (o TwingateResourceProtocolsTcpOutput) Policy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TwingateResourceProtocolsTcp) *string { return v.Policy }).(pulumi.StringPtrOutput)
 }
 
 // List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
@@ -1113,7 +478,7 @@ func (o TwingateResourceProtocolsTcpPtrOutput) Policy() pulumi.StringPtrOutput {
 		if v == nil {
 			return nil
 		}
-		return &v.Policy
+		return v.Policy
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -1129,7 +494,7 @@ func (o TwingateResourceProtocolsTcpPtrOutput) Ports() pulumi.StringArrayOutput 
 
 type TwingateResourceProtocolsUdp struct {
 	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-	Policy string `pulumi:"policy"`
+	Policy *string `pulumi:"policy"`
 	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 	Ports []string `pulumi:"ports"`
 }
@@ -1147,7 +512,7 @@ type TwingateResourceProtocolsUdpInput interface {
 
 type TwingateResourceProtocolsUdpArgs struct {
 	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-	Policy pulumi.StringInput `pulumi:"policy"`
+	Policy pulumi.StringPtrInput `pulumi:"policy"`
 	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 	Ports pulumi.StringArrayInput `pulumi:"ports"`
 }
@@ -1230,8 +595,8 @@ func (o TwingateResourceProtocolsUdpOutput) ToTwingateResourceProtocolsUdpPtrOut
 }
 
 // Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-func (o TwingateResourceProtocolsUdpOutput) Policy() pulumi.StringOutput {
-	return o.ApplyT(func(v TwingateResourceProtocolsUdp) string { return v.Policy }).(pulumi.StringOutput)
+func (o TwingateResourceProtocolsUdpOutput) Policy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TwingateResourceProtocolsUdp) *string { return v.Policy }).(pulumi.StringPtrOutput)
 }
 
 // List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
@@ -1269,7 +634,7 @@ func (o TwingateResourceProtocolsUdpPtrOutput) Policy() pulumi.StringPtrOutput {
 		if v == nil {
 			return nil
 		}
-		return &v.Policy
+		return v.Policy
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -1541,12 +906,12 @@ func (o GetTwingateGroupsGroupArrayOutput) Index(i pulumi.IntInput) GetTwingateG
 }
 
 type GetTwingateRemoteNetworksRemoteNetwork struct {
-	// The ID of the Remote Network
+	// The ID of the Remote Network.
 	Id string `pulumi:"id"`
 	// The location of the Remote Network. Must be one of the following: AWS, AZURE, GOOGLE*CLOUD, ON*PREMISE, OTHER.
 	Location string `pulumi:"location"`
-	// The name of the Remote Network
-	Name string `pulumi:"name"`
+	// The name of the Remote Network.
+	Name *string `pulumi:"name"`
 }
 
 // GetTwingateRemoteNetworksRemoteNetworkInput is an input type that accepts GetTwingateRemoteNetworksRemoteNetworkArgs and GetTwingateRemoteNetworksRemoteNetworkOutput values.
@@ -1561,12 +926,12 @@ type GetTwingateRemoteNetworksRemoteNetworkInput interface {
 }
 
 type GetTwingateRemoteNetworksRemoteNetworkArgs struct {
-	// The ID of the Remote Network
+	// The ID of the Remote Network.
 	Id pulumi.StringInput `pulumi:"id"`
 	// The location of the Remote Network. Must be one of the following: AWS, AZURE, GOOGLE*CLOUD, ON*PREMISE, OTHER.
 	Location pulumi.StringInput `pulumi:"location"`
-	// The name of the Remote Network
-	Name pulumi.StringInput `pulumi:"name"`
+	// The name of the Remote Network.
+	Name pulumi.StringPtrInput `pulumi:"name"`
 }
 
 func (GetTwingateRemoteNetworksRemoteNetworkArgs) ElementType() reflect.Type {
@@ -1620,7 +985,7 @@ func (o GetTwingateRemoteNetworksRemoteNetworkOutput) ToGetTwingateRemoteNetwork
 	return o
 }
 
-// The ID of the Remote Network
+// The ID of the Remote Network.
 func (o GetTwingateRemoteNetworksRemoteNetworkOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetTwingateRemoteNetworksRemoteNetwork) string { return v.Id }).(pulumi.StringOutput)
 }
@@ -1630,9 +995,9 @@ func (o GetTwingateRemoteNetworksRemoteNetworkOutput) Location() pulumi.StringOu
 	return o.ApplyT(func(v GetTwingateRemoteNetworksRemoteNetwork) string { return v.Location }).(pulumi.StringOutput)
 }
 
-// The name of the Remote Network
-func (o GetTwingateRemoteNetworksRemoteNetworkOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v GetTwingateRemoteNetworksRemoteNetwork) string { return v.Name }).(pulumi.StringOutput)
+// The name of the Remote Network.
+func (o GetTwingateRemoteNetworksRemoteNetworkOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetTwingateRemoteNetworksRemoteNetwork) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
 type GetTwingateRemoteNetworksRemoteNetworkArrayOutput struct{ *pulumi.OutputState }
@@ -1655,325 +1020,483 @@ func (o GetTwingateRemoteNetworksRemoteNetworkArrayOutput) Index(i pulumi.IntInp
 	}).(GetTwingateRemoteNetworksRemoteNetworkOutput)
 }
 
-type GetTwingateResourceProtocol struct {
+type GetTwingateResourceProtocols struct {
 	// Whether to allow ICMP (ping) traffic
 	AllowIcmp bool                             `pulumi:"allowIcmp"`
-	Tcps      []GetTwingateResourceProtocolTcp `pulumi:"tcps"`
-	Udps      []GetTwingateResourceProtocolUdp `pulumi:"udps"`
+	Tcp       *GetTwingateResourceProtocolsTcp `pulumi:"tcp"`
+	Udp       *GetTwingateResourceProtocolsUdp `pulumi:"udp"`
 }
 
-// GetTwingateResourceProtocolInput is an input type that accepts GetTwingateResourceProtocolArgs and GetTwingateResourceProtocolOutput values.
-// You can construct a concrete instance of `GetTwingateResourceProtocolInput` via:
+// GetTwingateResourceProtocolsInput is an input type that accepts GetTwingateResourceProtocolsArgs and GetTwingateResourceProtocolsOutput values.
+// You can construct a concrete instance of `GetTwingateResourceProtocolsInput` via:
 //
-//	GetTwingateResourceProtocolArgs{...}
-type GetTwingateResourceProtocolInput interface {
+//	GetTwingateResourceProtocolsArgs{...}
+type GetTwingateResourceProtocolsInput interface {
 	pulumi.Input
 
-	ToGetTwingateResourceProtocolOutput() GetTwingateResourceProtocolOutput
-	ToGetTwingateResourceProtocolOutputWithContext(context.Context) GetTwingateResourceProtocolOutput
+	ToGetTwingateResourceProtocolsOutput() GetTwingateResourceProtocolsOutput
+	ToGetTwingateResourceProtocolsOutputWithContext(context.Context) GetTwingateResourceProtocolsOutput
 }
 
-type GetTwingateResourceProtocolArgs struct {
+type GetTwingateResourceProtocolsArgs struct {
 	// Whether to allow ICMP (ping) traffic
-	AllowIcmp pulumi.BoolInput                         `pulumi:"allowIcmp"`
-	Tcps      GetTwingateResourceProtocolTcpArrayInput `pulumi:"tcps"`
-	Udps      GetTwingateResourceProtocolUdpArrayInput `pulumi:"udps"`
+	AllowIcmp pulumi.BoolInput                        `pulumi:"allowIcmp"`
+	Tcp       GetTwingateResourceProtocolsTcpPtrInput `pulumi:"tcp"`
+	Udp       GetTwingateResourceProtocolsUdpPtrInput `pulumi:"udp"`
 }
 
-func (GetTwingateResourceProtocolArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetTwingateResourceProtocol)(nil)).Elem()
+func (GetTwingateResourceProtocolsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTwingateResourceProtocols)(nil)).Elem()
 }
 
-func (i GetTwingateResourceProtocolArgs) ToGetTwingateResourceProtocolOutput() GetTwingateResourceProtocolOutput {
-	return i.ToGetTwingateResourceProtocolOutputWithContext(context.Background())
+func (i GetTwingateResourceProtocolsArgs) ToGetTwingateResourceProtocolsOutput() GetTwingateResourceProtocolsOutput {
+	return i.ToGetTwingateResourceProtocolsOutputWithContext(context.Background())
 }
 
-func (i GetTwingateResourceProtocolArgs) ToGetTwingateResourceProtocolOutputWithContext(ctx context.Context) GetTwingateResourceProtocolOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourceProtocolOutput)
+func (i GetTwingateResourceProtocolsArgs) ToGetTwingateResourceProtocolsOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourceProtocolsOutput)
 }
 
-// GetTwingateResourceProtocolArrayInput is an input type that accepts GetTwingateResourceProtocolArray and GetTwingateResourceProtocolArrayOutput values.
-// You can construct a concrete instance of `GetTwingateResourceProtocolArrayInput` via:
+func (i GetTwingateResourceProtocolsArgs) ToGetTwingateResourceProtocolsPtrOutput() GetTwingateResourceProtocolsPtrOutput {
+	return i.ToGetTwingateResourceProtocolsPtrOutputWithContext(context.Background())
+}
+
+func (i GetTwingateResourceProtocolsArgs) ToGetTwingateResourceProtocolsPtrOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourceProtocolsOutput).ToGetTwingateResourceProtocolsPtrOutputWithContext(ctx)
+}
+
+// GetTwingateResourceProtocolsPtrInput is an input type that accepts GetTwingateResourceProtocolsArgs, GetTwingateResourceProtocolsPtr and GetTwingateResourceProtocolsPtrOutput values.
+// You can construct a concrete instance of `GetTwingateResourceProtocolsPtrInput` via:
 //
-//	GetTwingateResourceProtocolArray{ GetTwingateResourceProtocolArgs{...} }
-type GetTwingateResourceProtocolArrayInput interface {
+//	        GetTwingateResourceProtocolsArgs{...}
+//
+//	or:
+//
+//	        nil
+type GetTwingateResourceProtocolsPtrInput interface {
 	pulumi.Input
 
-	ToGetTwingateResourceProtocolArrayOutput() GetTwingateResourceProtocolArrayOutput
-	ToGetTwingateResourceProtocolArrayOutputWithContext(context.Context) GetTwingateResourceProtocolArrayOutput
+	ToGetTwingateResourceProtocolsPtrOutput() GetTwingateResourceProtocolsPtrOutput
+	ToGetTwingateResourceProtocolsPtrOutputWithContext(context.Context) GetTwingateResourceProtocolsPtrOutput
 }
 
-type GetTwingateResourceProtocolArray []GetTwingateResourceProtocolInput
+type getTwingateResourceProtocolsPtrType GetTwingateResourceProtocolsArgs
 
-func (GetTwingateResourceProtocolArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetTwingateResourceProtocol)(nil)).Elem()
+func GetTwingateResourceProtocolsPtr(v *GetTwingateResourceProtocolsArgs) GetTwingateResourceProtocolsPtrInput {
+	return (*getTwingateResourceProtocolsPtrType)(v)
 }
 
-func (i GetTwingateResourceProtocolArray) ToGetTwingateResourceProtocolArrayOutput() GetTwingateResourceProtocolArrayOutput {
-	return i.ToGetTwingateResourceProtocolArrayOutputWithContext(context.Background())
+func (*getTwingateResourceProtocolsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetTwingateResourceProtocols)(nil)).Elem()
 }
 
-func (i GetTwingateResourceProtocolArray) ToGetTwingateResourceProtocolArrayOutputWithContext(ctx context.Context) GetTwingateResourceProtocolArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourceProtocolArrayOutput)
+func (i *getTwingateResourceProtocolsPtrType) ToGetTwingateResourceProtocolsPtrOutput() GetTwingateResourceProtocolsPtrOutput {
+	return i.ToGetTwingateResourceProtocolsPtrOutputWithContext(context.Background())
 }
 
-type GetTwingateResourceProtocolOutput struct{ *pulumi.OutputState }
-
-func (GetTwingateResourceProtocolOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetTwingateResourceProtocol)(nil)).Elem()
+func (i *getTwingateResourceProtocolsPtrType) ToGetTwingateResourceProtocolsPtrOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourceProtocolsPtrOutput)
 }
 
-func (o GetTwingateResourceProtocolOutput) ToGetTwingateResourceProtocolOutput() GetTwingateResourceProtocolOutput {
+type GetTwingateResourceProtocolsOutput struct{ *pulumi.OutputState }
+
+func (GetTwingateResourceProtocolsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTwingateResourceProtocols)(nil)).Elem()
+}
+
+func (o GetTwingateResourceProtocolsOutput) ToGetTwingateResourceProtocolsOutput() GetTwingateResourceProtocolsOutput {
 	return o
 }
 
-func (o GetTwingateResourceProtocolOutput) ToGetTwingateResourceProtocolOutputWithContext(ctx context.Context) GetTwingateResourceProtocolOutput {
+func (o GetTwingateResourceProtocolsOutput) ToGetTwingateResourceProtocolsOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsOutput {
 	return o
+}
+
+func (o GetTwingateResourceProtocolsOutput) ToGetTwingateResourceProtocolsPtrOutput() GetTwingateResourceProtocolsPtrOutput {
+	return o.ToGetTwingateResourceProtocolsPtrOutputWithContext(context.Background())
+}
+
+func (o GetTwingateResourceProtocolsOutput) ToGetTwingateResourceProtocolsPtrOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetTwingateResourceProtocols) *GetTwingateResourceProtocols {
+		return &v
+	}).(GetTwingateResourceProtocolsPtrOutput)
 }
 
 // Whether to allow ICMP (ping) traffic
-func (o GetTwingateResourceProtocolOutput) AllowIcmp() pulumi.BoolOutput {
-	return o.ApplyT(func(v GetTwingateResourceProtocol) bool { return v.AllowIcmp }).(pulumi.BoolOutput)
+func (o GetTwingateResourceProtocolsOutput) AllowIcmp() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetTwingateResourceProtocols) bool { return v.AllowIcmp }).(pulumi.BoolOutput)
 }
 
-func (o GetTwingateResourceProtocolOutput) Tcps() GetTwingateResourceProtocolTcpArrayOutput {
-	return o.ApplyT(func(v GetTwingateResourceProtocol) []GetTwingateResourceProtocolTcp { return v.Tcps }).(GetTwingateResourceProtocolTcpArrayOutput)
+func (o GetTwingateResourceProtocolsOutput) Tcp() GetTwingateResourceProtocolsTcpPtrOutput {
+	return o.ApplyT(func(v GetTwingateResourceProtocols) *GetTwingateResourceProtocolsTcp { return v.Tcp }).(GetTwingateResourceProtocolsTcpPtrOutput)
 }
 
-func (o GetTwingateResourceProtocolOutput) Udps() GetTwingateResourceProtocolUdpArrayOutput {
-	return o.ApplyT(func(v GetTwingateResourceProtocol) []GetTwingateResourceProtocolUdp { return v.Udps }).(GetTwingateResourceProtocolUdpArrayOutput)
+func (o GetTwingateResourceProtocolsOutput) Udp() GetTwingateResourceProtocolsUdpPtrOutput {
+	return o.ApplyT(func(v GetTwingateResourceProtocols) *GetTwingateResourceProtocolsUdp { return v.Udp }).(GetTwingateResourceProtocolsUdpPtrOutput)
 }
 
-type GetTwingateResourceProtocolArrayOutput struct{ *pulumi.OutputState }
+type GetTwingateResourceProtocolsPtrOutput struct{ *pulumi.OutputState }
 
-func (GetTwingateResourceProtocolArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetTwingateResourceProtocol)(nil)).Elem()
+func (GetTwingateResourceProtocolsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetTwingateResourceProtocols)(nil)).Elem()
 }
 
-func (o GetTwingateResourceProtocolArrayOutput) ToGetTwingateResourceProtocolArrayOutput() GetTwingateResourceProtocolArrayOutput {
+func (o GetTwingateResourceProtocolsPtrOutput) ToGetTwingateResourceProtocolsPtrOutput() GetTwingateResourceProtocolsPtrOutput {
 	return o
 }
 
-func (o GetTwingateResourceProtocolArrayOutput) ToGetTwingateResourceProtocolArrayOutputWithContext(ctx context.Context) GetTwingateResourceProtocolArrayOutput {
+func (o GetTwingateResourceProtocolsPtrOutput) ToGetTwingateResourceProtocolsPtrOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsPtrOutput {
 	return o
 }
 
-func (o GetTwingateResourceProtocolArrayOutput) Index(i pulumi.IntInput) GetTwingateResourceProtocolOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTwingateResourceProtocol {
-		return vs[0].([]GetTwingateResourceProtocol)[vs[1].(int)]
-	}).(GetTwingateResourceProtocolOutput)
+func (o GetTwingateResourceProtocolsPtrOutput) Elem() GetTwingateResourceProtocolsOutput {
+	return o.ApplyT(func(v *GetTwingateResourceProtocols) GetTwingateResourceProtocols {
+		if v != nil {
+			return *v
+		}
+		var ret GetTwingateResourceProtocols
+		return ret
+	}).(GetTwingateResourceProtocolsOutput)
 }
 
-type GetTwingateResourceProtocolTcp struct {
+// Whether to allow ICMP (ping) traffic
+func (o GetTwingateResourceProtocolsPtrOutput) AllowIcmp() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *GetTwingateResourceProtocols) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.AllowIcmp
+	}).(pulumi.BoolPtrOutput)
+}
+
+func (o GetTwingateResourceProtocolsPtrOutput) Tcp() GetTwingateResourceProtocolsTcpPtrOutput {
+	return o.ApplyT(func(v *GetTwingateResourceProtocols) *GetTwingateResourceProtocolsTcp {
+		if v == nil {
+			return nil
+		}
+		return v.Tcp
+	}).(GetTwingateResourceProtocolsTcpPtrOutput)
+}
+
+func (o GetTwingateResourceProtocolsPtrOutput) Udp() GetTwingateResourceProtocolsUdpPtrOutput {
+	return o.ApplyT(func(v *GetTwingateResourceProtocols) *GetTwingateResourceProtocolsUdp {
+		if v == nil {
+			return nil
+		}
+		return v.Udp
+	}).(GetTwingateResourceProtocolsUdpPtrOutput)
+}
+
+type GetTwingateResourceProtocolsTcp struct {
 	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
 	Policy string `pulumi:"policy"`
 	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 	Ports []string `pulumi:"ports"`
 }
 
-// GetTwingateResourceProtocolTcpInput is an input type that accepts GetTwingateResourceProtocolTcpArgs and GetTwingateResourceProtocolTcpOutput values.
-// You can construct a concrete instance of `GetTwingateResourceProtocolTcpInput` via:
+// GetTwingateResourceProtocolsTcpInput is an input type that accepts GetTwingateResourceProtocolsTcpArgs and GetTwingateResourceProtocolsTcpOutput values.
+// You can construct a concrete instance of `GetTwingateResourceProtocolsTcpInput` via:
 //
-//	GetTwingateResourceProtocolTcpArgs{...}
-type GetTwingateResourceProtocolTcpInput interface {
+//	GetTwingateResourceProtocolsTcpArgs{...}
+type GetTwingateResourceProtocolsTcpInput interface {
 	pulumi.Input
 
-	ToGetTwingateResourceProtocolTcpOutput() GetTwingateResourceProtocolTcpOutput
-	ToGetTwingateResourceProtocolTcpOutputWithContext(context.Context) GetTwingateResourceProtocolTcpOutput
+	ToGetTwingateResourceProtocolsTcpOutput() GetTwingateResourceProtocolsTcpOutput
+	ToGetTwingateResourceProtocolsTcpOutputWithContext(context.Context) GetTwingateResourceProtocolsTcpOutput
 }
 
-type GetTwingateResourceProtocolTcpArgs struct {
+type GetTwingateResourceProtocolsTcpArgs struct {
 	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
 	Policy pulumi.StringInput `pulumi:"policy"`
 	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 	Ports pulumi.StringArrayInput `pulumi:"ports"`
 }
 
-func (GetTwingateResourceProtocolTcpArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetTwingateResourceProtocolTcp)(nil)).Elem()
+func (GetTwingateResourceProtocolsTcpArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTwingateResourceProtocolsTcp)(nil)).Elem()
 }
 
-func (i GetTwingateResourceProtocolTcpArgs) ToGetTwingateResourceProtocolTcpOutput() GetTwingateResourceProtocolTcpOutput {
-	return i.ToGetTwingateResourceProtocolTcpOutputWithContext(context.Background())
+func (i GetTwingateResourceProtocolsTcpArgs) ToGetTwingateResourceProtocolsTcpOutput() GetTwingateResourceProtocolsTcpOutput {
+	return i.ToGetTwingateResourceProtocolsTcpOutputWithContext(context.Background())
 }
 
-func (i GetTwingateResourceProtocolTcpArgs) ToGetTwingateResourceProtocolTcpOutputWithContext(ctx context.Context) GetTwingateResourceProtocolTcpOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourceProtocolTcpOutput)
+func (i GetTwingateResourceProtocolsTcpArgs) ToGetTwingateResourceProtocolsTcpOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsTcpOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourceProtocolsTcpOutput)
 }
 
-// GetTwingateResourceProtocolTcpArrayInput is an input type that accepts GetTwingateResourceProtocolTcpArray and GetTwingateResourceProtocolTcpArrayOutput values.
-// You can construct a concrete instance of `GetTwingateResourceProtocolTcpArrayInput` via:
+func (i GetTwingateResourceProtocolsTcpArgs) ToGetTwingateResourceProtocolsTcpPtrOutput() GetTwingateResourceProtocolsTcpPtrOutput {
+	return i.ToGetTwingateResourceProtocolsTcpPtrOutputWithContext(context.Background())
+}
+
+func (i GetTwingateResourceProtocolsTcpArgs) ToGetTwingateResourceProtocolsTcpPtrOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsTcpPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourceProtocolsTcpOutput).ToGetTwingateResourceProtocolsTcpPtrOutputWithContext(ctx)
+}
+
+// GetTwingateResourceProtocolsTcpPtrInput is an input type that accepts GetTwingateResourceProtocolsTcpArgs, GetTwingateResourceProtocolsTcpPtr and GetTwingateResourceProtocolsTcpPtrOutput values.
+// You can construct a concrete instance of `GetTwingateResourceProtocolsTcpPtrInput` via:
 //
-//	GetTwingateResourceProtocolTcpArray{ GetTwingateResourceProtocolTcpArgs{...} }
-type GetTwingateResourceProtocolTcpArrayInput interface {
+//	        GetTwingateResourceProtocolsTcpArgs{...}
+//
+//	or:
+//
+//	        nil
+type GetTwingateResourceProtocolsTcpPtrInput interface {
 	pulumi.Input
 
-	ToGetTwingateResourceProtocolTcpArrayOutput() GetTwingateResourceProtocolTcpArrayOutput
-	ToGetTwingateResourceProtocolTcpArrayOutputWithContext(context.Context) GetTwingateResourceProtocolTcpArrayOutput
+	ToGetTwingateResourceProtocolsTcpPtrOutput() GetTwingateResourceProtocolsTcpPtrOutput
+	ToGetTwingateResourceProtocolsTcpPtrOutputWithContext(context.Context) GetTwingateResourceProtocolsTcpPtrOutput
 }
 
-type GetTwingateResourceProtocolTcpArray []GetTwingateResourceProtocolTcpInput
+type getTwingateResourceProtocolsTcpPtrType GetTwingateResourceProtocolsTcpArgs
 
-func (GetTwingateResourceProtocolTcpArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetTwingateResourceProtocolTcp)(nil)).Elem()
+func GetTwingateResourceProtocolsTcpPtr(v *GetTwingateResourceProtocolsTcpArgs) GetTwingateResourceProtocolsTcpPtrInput {
+	return (*getTwingateResourceProtocolsTcpPtrType)(v)
 }
 
-func (i GetTwingateResourceProtocolTcpArray) ToGetTwingateResourceProtocolTcpArrayOutput() GetTwingateResourceProtocolTcpArrayOutput {
-	return i.ToGetTwingateResourceProtocolTcpArrayOutputWithContext(context.Background())
+func (*getTwingateResourceProtocolsTcpPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetTwingateResourceProtocolsTcp)(nil)).Elem()
 }
 
-func (i GetTwingateResourceProtocolTcpArray) ToGetTwingateResourceProtocolTcpArrayOutputWithContext(ctx context.Context) GetTwingateResourceProtocolTcpArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourceProtocolTcpArrayOutput)
+func (i *getTwingateResourceProtocolsTcpPtrType) ToGetTwingateResourceProtocolsTcpPtrOutput() GetTwingateResourceProtocolsTcpPtrOutput {
+	return i.ToGetTwingateResourceProtocolsTcpPtrOutputWithContext(context.Background())
 }
 
-type GetTwingateResourceProtocolTcpOutput struct{ *pulumi.OutputState }
-
-func (GetTwingateResourceProtocolTcpOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetTwingateResourceProtocolTcp)(nil)).Elem()
+func (i *getTwingateResourceProtocolsTcpPtrType) ToGetTwingateResourceProtocolsTcpPtrOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsTcpPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourceProtocolsTcpPtrOutput)
 }
 
-func (o GetTwingateResourceProtocolTcpOutput) ToGetTwingateResourceProtocolTcpOutput() GetTwingateResourceProtocolTcpOutput {
+type GetTwingateResourceProtocolsTcpOutput struct{ *pulumi.OutputState }
+
+func (GetTwingateResourceProtocolsTcpOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTwingateResourceProtocolsTcp)(nil)).Elem()
+}
+
+func (o GetTwingateResourceProtocolsTcpOutput) ToGetTwingateResourceProtocolsTcpOutput() GetTwingateResourceProtocolsTcpOutput {
 	return o
 }
 
-func (o GetTwingateResourceProtocolTcpOutput) ToGetTwingateResourceProtocolTcpOutputWithContext(ctx context.Context) GetTwingateResourceProtocolTcpOutput {
+func (o GetTwingateResourceProtocolsTcpOutput) ToGetTwingateResourceProtocolsTcpOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsTcpOutput {
 	return o
+}
+
+func (o GetTwingateResourceProtocolsTcpOutput) ToGetTwingateResourceProtocolsTcpPtrOutput() GetTwingateResourceProtocolsTcpPtrOutput {
+	return o.ToGetTwingateResourceProtocolsTcpPtrOutputWithContext(context.Background())
+}
+
+func (o GetTwingateResourceProtocolsTcpOutput) ToGetTwingateResourceProtocolsTcpPtrOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsTcpPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetTwingateResourceProtocolsTcp) *GetTwingateResourceProtocolsTcp {
+		return &v
+	}).(GetTwingateResourceProtocolsTcpPtrOutput)
 }
 
 // Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-func (o GetTwingateResourceProtocolTcpOutput) Policy() pulumi.StringOutput {
-	return o.ApplyT(func(v GetTwingateResourceProtocolTcp) string { return v.Policy }).(pulumi.StringOutput)
+func (o GetTwingateResourceProtocolsTcpOutput) Policy() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTwingateResourceProtocolsTcp) string { return v.Policy }).(pulumi.StringOutput)
 }
 
 // List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
-func (o GetTwingateResourceProtocolTcpOutput) Ports() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v GetTwingateResourceProtocolTcp) []string { return v.Ports }).(pulumi.StringArrayOutput)
+func (o GetTwingateResourceProtocolsTcpOutput) Ports() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetTwingateResourceProtocolsTcp) []string { return v.Ports }).(pulumi.StringArrayOutput)
 }
 
-type GetTwingateResourceProtocolTcpArrayOutput struct{ *pulumi.OutputState }
+type GetTwingateResourceProtocolsTcpPtrOutput struct{ *pulumi.OutputState }
 
-func (GetTwingateResourceProtocolTcpArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetTwingateResourceProtocolTcp)(nil)).Elem()
+func (GetTwingateResourceProtocolsTcpPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetTwingateResourceProtocolsTcp)(nil)).Elem()
 }
 
-func (o GetTwingateResourceProtocolTcpArrayOutput) ToGetTwingateResourceProtocolTcpArrayOutput() GetTwingateResourceProtocolTcpArrayOutput {
+func (o GetTwingateResourceProtocolsTcpPtrOutput) ToGetTwingateResourceProtocolsTcpPtrOutput() GetTwingateResourceProtocolsTcpPtrOutput {
 	return o
 }
 
-func (o GetTwingateResourceProtocolTcpArrayOutput) ToGetTwingateResourceProtocolTcpArrayOutputWithContext(ctx context.Context) GetTwingateResourceProtocolTcpArrayOutput {
+func (o GetTwingateResourceProtocolsTcpPtrOutput) ToGetTwingateResourceProtocolsTcpPtrOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsTcpPtrOutput {
 	return o
 }
 
-func (o GetTwingateResourceProtocolTcpArrayOutput) Index(i pulumi.IntInput) GetTwingateResourceProtocolTcpOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTwingateResourceProtocolTcp {
-		return vs[0].([]GetTwingateResourceProtocolTcp)[vs[1].(int)]
-	}).(GetTwingateResourceProtocolTcpOutput)
+func (o GetTwingateResourceProtocolsTcpPtrOutput) Elem() GetTwingateResourceProtocolsTcpOutput {
+	return o.ApplyT(func(v *GetTwingateResourceProtocolsTcp) GetTwingateResourceProtocolsTcp {
+		if v != nil {
+			return *v
+		}
+		var ret GetTwingateResourceProtocolsTcp
+		return ret
+	}).(GetTwingateResourceProtocolsTcpOutput)
 }
 
-type GetTwingateResourceProtocolUdp struct {
+// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
+func (o GetTwingateResourceProtocolsTcpPtrOutput) Policy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetTwingateResourceProtocolsTcp) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Policy
+	}).(pulumi.StringPtrOutput)
+}
+
+// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
+func (o GetTwingateResourceProtocolsTcpPtrOutput) Ports() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetTwingateResourceProtocolsTcp) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Ports
+	}).(pulumi.StringArrayOutput)
+}
+
+type GetTwingateResourceProtocolsUdp struct {
 	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
 	Policy string `pulumi:"policy"`
 	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 	Ports []string `pulumi:"ports"`
 }
 
-// GetTwingateResourceProtocolUdpInput is an input type that accepts GetTwingateResourceProtocolUdpArgs and GetTwingateResourceProtocolUdpOutput values.
-// You can construct a concrete instance of `GetTwingateResourceProtocolUdpInput` via:
+// GetTwingateResourceProtocolsUdpInput is an input type that accepts GetTwingateResourceProtocolsUdpArgs and GetTwingateResourceProtocolsUdpOutput values.
+// You can construct a concrete instance of `GetTwingateResourceProtocolsUdpInput` via:
 //
-//	GetTwingateResourceProtocolUdpArgs{...}
-type GetTwingateResourceProtocolUdpInput interface {
+//	GetTwingateResourceProtocolsUdpArgs{...}
+type GetTwingateResourceProtocolsUdpInput interface {
 	pulumi.Input
 
-	ToGetTwingateResourceProtocolUdpOutput() GetTwingateResourceProtocolUdpOutput
-	ToGetTwingateResourceProtocolUdpOutputWithContext(context.Context) GetTwingateResourceProtocolUdpOutput
+	ToGetTwingateResourceProtocolsUdpOutput() GetTwingateResourceProtocolsUdpOutput
+	ToGetTwingateResourceProtocolsUdpOutputWithContext(context.Context) GetTwingateResourceProtocolsUdpOutput
 }
 
-type GetTwingateResourceProtocolUdpArgs struct {
+type GetTwingateResourceProtocolsUdpArgs struct {
 	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
 	Policy pulumi.StringInput `pulumi:"policy"`
 	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 	Ports pulumi.StringArrayInput `pulumi:"ports"`
 }
 
-func (GetTwingateResourceProtocolUdpArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetTwingateResourceProtocolUdp)(nil)).Elem()
+func (GetTwingateResourceProtocolsUdpArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTwingateResourceProtocolsUdp)(nil)).Elem()
 }
 
-func (i GetTwingateResourceProtocolUdpArgs) ToGetTwingateResourceProtocolUdpOutput() GetTwingateResourceProtocolUdpOutput {
-	return i.ToGetTwingateResourceProtocolUdpOutputWithContext(context.Background())
+func (i GetTwingateResourceProtocolsUdpArgs) ToGetTwingateResourceProtocolsUdpOutput() GetTwingateResourceProtocolsUdpOutput {
+	return i.ToGetTwingateResourceProtocolsUdpOutputWithContext(context.Background())
 }
 
-func (i GetTwingateResourceProtocolUdpArgs) ToGetTwingateResourceProtocolUdpOutputWithContext(ctx context.Context) GetTwingateResourceProtocolUdpOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourceProtocolUdpOutput)
+func (i GetTwingateResourceProtocolsUdpArgs) ToGetTwingateResourceProtocolsUdpOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsUdpOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourceProtocolsUdpOutput)
 }
 
-// GetTwingateResourceProtocolUdpArrayInput is an input type that accepts GetTwingateResourceProtocolUdpArray and GetTwingateResourceProtocolUdpArrayOutput values.
-// You can construct a concrete instance of `GetTwingateResourceProtocolUdpArrayInput` via:
+func (i GetTwingateResourceProtocolsUdpArgs) ToGetTwingateResourceProtocolsUdpPtrOutput() GetTwingateResourceProtocolsUdpPtrOutput {
+	return i.ToGetTwingateResourceProtocolsUdpPtrOutputWithContext(context.Background())
+}
+
+func (i GetTwingateResourceProtocolsUdpArgs) ToGetTwingateResourceProtocolsUdpPtrOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsUdpPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourceProtocolsUdpOutput).ToGetTwingateResourceProtocolsUdpPtrOutputWithContext(ctx)
+}
+
+// GetTwingateResourceProtocolsUdpPtrInput is an input type that accepts GetTwingateResourceProtocolsUdpArgs, GetTwingateResourceProtocolsUdpPtr and GetTwingateResourceProtocolsUdpPtrOutput values.
+// You can construct a concrete instance of `GetTwingateResourceProtocolsUdpPtrInput` via:
 //
-//	GetTwingateResourceProtocolUdpArray{ GetTwingateResourceProtocolUdpArgs{...} }
-type GetTwingateResourceProtocolUdpArrayInput interface {
+//	        GetTwingateResourceProtocolsUdpArgs{...}
+//
+//	or:
+//
+//	        nil
+type GetTwingateResourceProtocolsUdpPtrInput interface {
 	pulumi.Input
 
-	ToGetTwingateResourceProtocolUdpArrayOutput() GetTwingateResourceProtocolUdpArrayOutput
-	ToGetTwingateResourceProtocolUdpArrayOutputWithContext(context.Context) GetTwingateResourceProtocolUdpArrayOutput
+	ToGetTwingateResourceProtocolsUdpPtrOutput() GetTwingateResourceProtocolsUdpPtrOutput
+	ToGetTwingateResourceProtocolsUdpPtrOutputWithContext(context.Context) GetTwingateResourceProtocolsUdpPtrOutput
 }
 
-type GetTwingateResourceProtocolUdpArray []GetTwingateResourceProtocolUdpInput
+type getTwingateResourceProtocolsUdpPtrType GetTwingateResourceProtocolsUdpArgs
 
-func (GetTwingateResourceProtocolUdpArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetTwingateResourceProtocolUdp)(nil)).Elem()
+func GetTwingateResourceProtocolsUdpPtr(v *GetTwingateResourceProtocolsUdpArgs) GetTwingateResourceProtocolsUdpPtrInput {
+	return (*getTwingateResourceProtocolsUdpPtrType)(v)
 }
 
-func (i GetTwingateResourceProtocolUdpArray) ToGetTwingateResourceProtocolUdpArrayOutput() GetTwingateResourceProtocolUdpArrayOutput {
-	return i.ToGetTwingateResourceProtocolUdpArrayOutputWithContext(context.Background())
+func (*getTwingateResourceProtocolsUdpPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetTwingateResourceProtocolsUdp)(nil)).Elem()
 }
 
-func (i GetTwingateResourceProtocolUdpArray) ToGetTwingateResourceProtocolUdpArrayOutputWithContext(ctx context.Context) GetTwingateResourceProtocolUdpArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourceProtocolUdpArrayOutput)
+func (i *getTwingateResourceProtocolsUdpPtrType) ToGetTwingateResourceProtocolsUdpPtrOutput() GetTwingateResourceProtocolsUdpPtrOutput {
+	return i.ToGetTwingateResourceProtocolsUdpPtrOutputWithContext(context.Background())
 }
 
-type GetTwingateResourceProtocolUdpOutput struct{ *pulumi.OutputState }
-
-func (GetTwingateResourceProtocolUdpOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetTwingateResourceProtocolUdp)(nil)).Elem()
+func (i *getTwingateResourceProtocolsUdpPtrType) ToGetTwingateResourceProtocolsUdpPtrOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsUdpPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourceProtocolsUdpPtrOutput)
 }
 
-func (o GetTwingateResourceProtocolUdpOutput) ToGetTwingateResourceProtocolUdpOutput() GetTwingateResourceProtocolUdpOutput {
+type GetTwingateResourceProtocolsUdpOutput struct{ *pulumi.OutputState }
+
+func (GetTwingateResourceProtocolsUdpOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTwingateResourceProtocolsUdp)(nil)).Elem()
+}
+
+func (o GetTwingateResourceProtocolsUdpOutput) ToGetTwingateResourceProtocolsUdpOutput() GetTwingateResourceProtocolsUdpOutput {
 	return o
 }
 
-func (o GetTwingateResourceProtocolUdpOutput) ToGetTwingateResourceProtocolUdpOutputWithContext(ctx context.Context) GetTwingateResourceProtocolUdpOutput {
+func (o GetTwingateResourceProtocolsUdpOutput) ToGetTwingateResourceProtocolsUdpOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsUdpOutput {
 	return o
+}
+
+func (o GetTwingateResourceProtocolsUdpOutput) ToGetTwingateResourceProtocolsUdpPtrOutput() GetTwingateResourceProtocolsUdpPtrOutput {
+	return o.ToGetTwingateResourceProtocolsUdpPtrOutputWithContext(context.Background())
+}
+
+func (o GetTwingateResourceProtocolsUdpOutput) ToGetTwingateResourceProtocolsUdpPtrOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsUdpPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v GetTwingateResourceProtocolsUdp) *GetTwingateResourceProtocolsUdp {
+		return &v
+	}).(GetTwingateResourceProtocolsUdpPtrOutput)
 }
 
 // Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-func (o GetTwingateResourceProtocolUdpOutput) Policy() pulumi.StringOutput {
-	return o.ApplyT(func(v GetTwingateResourceProtocolUdp) string { return v.Policy }).(pulumi.StringOutput)
+func (o GetTwingateResourceProtocolsUdpOutput) Policy() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTwingateResourceProtocolsUdp) string { return v.Policy }).(pulumi.StringOutput)
 }
 
 // List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
-func (o GetTwingateResourceProtocolUdpOutput) Ports() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v GetTwingateResourceProtocolUdp) []string { return v.Ports }).(pulumi.StringArrayOutput)
+func (o GetTwingateResourceProtocolsUdpOutput) Ports() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetTwingateResourceProtocolsUdp) []string { return v.Ports }).(pulumi.StringArrayOutput)
 }
 
-type GetTwingateResourceProtocolUdpArrayOutput struct{ *pulumi.OutputState }
+type GetTwingateResourceProtocolsUdpPtrOutput struct{ *pulumi.OutputState }
 
-func (GetTwingateResourceProtocolUdpArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetTwingateResourceProtocolUdp)(nil)).Elem()
+func (GetTwingateResourceProtocolsUdpPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**GetTwingateResourceProtocolsUdp)(nil)).Elem()
 }
 
-func (o GetTwingateResourceProtocolUdpArrayOutput) ToGetTwingateResourceProtocolUdpArrayOutput() GetTwingateResourceProtocolUdpArrayOutput {
+func (o GetTwingateResourceProtocolsUdpPtrOutput) ToGetTwingateResourceProtocolsUdpPtrOutput() GetTwingateResourceProtocolsUdpPtrOutput {
 	return o
 }
 
-func (o GetTwingateResourceProtocolUdpArrayOutput) ToGetTwingateResourceProtocolUdpArrayOutputWithContext(ctx context.Context) GetTwingateResourceProtocolUdpArrayOutput {
+func (o GetTwingateResourceProtocolsUdpPtrOutput) ToGetTwingateResourceProtocolsUdpPtrOutputWithContext(ctx context.Context) GetTwingateResourceProtocolsUdpPtrOutput {
 	return o
 }
 
-func (o GetTwingateResourceProtocolUdpArrayOutput) Index(i pulumi.IntInput) GetTwingateResourceProtocolUdpOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTwingateResourceProtocolUdp {
-		return vs[0].([]GetTwingateResourceProtocolUdp)[vs[1].(int)]
-	}).(GetTwingateResourceProtocolUdpOutput)
+func (o GetTwingateResourceProtocolsUdpPtrOutput) Elem() GetTwingateResourceProtocolsUdpOutput {
+	return o.ApplyT(func(v *GetTwingateResourceProtocolsUdp) GetTwingateResourceProtocolsUdp {
+		if v != nil {
+			return *v
+		}
+		var ret GetTwingateResourceProtocolsUdp
+		return ret
+	}).(GetTwingateResourceProtocolsUdpOutput)
+}
+
+// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
+func (o GetTwingateResourceProtocolsUdpPtrOutput) Policy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GetTwingateResourceProtocolsUdp) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Policy
+	}).(pulumi.StringPtrOutput)
+}
+
+// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
+func (o GetTwingateResourceProtocolsUdpPtrOutput) Ports() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *GetTwingateResourceProtocolsUdp) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Ports
+	}).(pulumi.StringArrayOutput)
 }
 
 type GetTwingateResourcesResource struct {
@@ -1984,7 +1507,7 @@ type GetTwingateResourcesResource struct {
 	// The name of the Resource
 	Name string `pulumi:"name"`
 	// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
-	Protocols []GetTwingateResourcesResourceProtocol `pulumi:"protocols"`
+	Protocols GetTwingateResourcesResourceProtocols `pulumi:"protocols"`
 	// Remote Network ID where the Resource lives
 	RemoteNetworkId string `pulumi:"remoteNetworkId"`
 }
@@ -2008,7 +1531,7 @@ type GetTwingateResourcesResourceArgs struct {
 	// The name of the Resource
 	Name pulumi.StringInput `pulumi:"name"`
 	// Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
-	Protocols GetTwingateResourcesResourceProtocolArrayInput `pulumi:"protocols"`
+	Protocols GetTwingateResourcesResourceProtocolsInput `pulumi:"protocols"`
 	// Remote Network ID where the Resource lives
 	RemoteNetworkId pulumi.StringInput `pulumi:"remoteNetworkId"`
 }
@@ -2080,8 +1603,8 @@ func (o GetTwingateResourcesResourceOutput) Name() pulumi.StringOutput {
 }
 
 // Restrict access to certain protocols and ports. By default or when this argument is not defined, there is no restriction, and all protocols and ports are allowed.
-func (o GetTwingateResourcesResourceOutput) Protocols() GetTwingateResourcesResourceProtocolArrayOutput {
-	return o.ApplyT(func(v GetTwingateResourcesResource) []GetTwingateResourcesResourceProtocol { return v.Protocols }).(GetTwingateResourcesResourceProtocolArrayOutput)
+func (o GetTwingateResourcesResourceOutput) Protocols() GetTwingateResourcesResourceProtocolsOutput {
+	return o.ApplyT(func(v GetTwingateResourcesResource) GetTwingateResourcesResourceProtocols { return v.Protocols }).(GetTwingateResourcesResourceProtocolsOutput)
 }
 
 // Remote Network ID where the Resource lives
@@ -2109,325 +1632,190 @@ func (o GetTwingateResourcesResourceArrayOutput) Index(i pulumi.IntInput) GetTwi
 	}).(GetTwingateResourcesResourceOutput)
 }
 
-type GetTwingateResourcesResourceProtocol struct {
+type GetTwingateResourcesResourceProtocols struct {
 	// Whether to allow ICMP (ping) traffic
-	AllowIcmp bool                                      `pulumi:"allowIcmp"`
-	Tcps      []GetTwingateResourcesResourceProtocolTcp `pulumi:"tcps"`
-	Udps      []GetTwingateResourcesResourceProtocolUdp `pulumi:"udps"`
+	AllowIcmp bool                                     `pulumi:"allowIcmp"`
+	Tcp       GetTwingateResourcesResourceProtocolsTcp `pulumi:"tcp"`
+	Udp       GetTwingateResourcesResourceProtocolsUdp `pulumi:"udp"`
 }
 
-// GetTwingateResourcesResourceProtocolInput is an input type that accepts GetTwingateResourcesResourceProtocolArgs and GetTwingateResourcesResourceProtocolOutput values.
-// You can construct a concrete instance of `GetTwingateResourcesResourceProtocolInput` via:
+// GetTwingateResourcesResourceProtocolsInput is an input type that accepts GetTwingateResourcesResourceProtocolsArgs and GetTwingateResourcesResourceProtocolsOutput values.
+// You can construct a concrete instance of `GetTwingateResourcesResourceProtocolsInput` via:
 //
-//	GetTwingateResourcesResourceProtocolArgs{...}
-type GetTwingateResourcesResourceProtocolInput interface {
+//	GetTwingateResourcesResourceProtocolsArgs{...}
+type GetTwingateResourcesResourceProtocolsInput interface {
 	pulumi.Input
 
-	ToGetTwingateResourcesResourceProtocolOutput() GetTwingateResourcesResourceProtocolOutput
-	ToGetTwingateResourcesResourceProtocolOutputWithContext(context.Context) GetTwingateResourcesResourceProtocolOutput
+	ToGetTwingateResourcesResourceProtocolsOutput() GetTwingateResourcesResourceProtocolsOutput
+	ToGetTwingateResourcesResourceProtocolsOutputWithContext(context.Context) GetTwingateResourcesResourceProtocolsOutput
 }
 
-type GetTwingateResourcesResourceProtocolArgs struct {
+type GetTwingateResourcesResourceProtocolsArgs struct {
 	// Whether to allow ICMP (ping) traffic
-	AllowIcmp pulumi.BoolInput                                  `pulumi:"allowIcmp"`
-	Tcps      GetTwingateResourcesResourceProtocolTcpArrayInput `pulumi:"tcps"`
-	Udps      GetTwingateResourcesResourceProtocolUdpArrayInput `pulumi:"udps"`
+	AllowIcmp pulumi.BoolInput                              `pulumi:"allowIcmp"`
+	Tcp       GetTwingateResourcesResourceProtocolsTcpInput `pulumi:"tcp"`
+	Udp       GetTwingateResourcesResourceProtocolsUdpInput `pulumi:"udp"`
 }
 
-func (GetTwingateResourcesResourceProtocolArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetTwingateResourcesResourceProtocol)(nil)).Elem()
+func (GetTwingateResourcesResourceProtocolsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTwingateResourcesResourceProtocols)(nil)).Elem()
 }
 
-func (i GetTwingateResourcesResourceProtocolArgs) ToGetTwingateResourcesResourceProtocolOutput() GetTwingateResourcesResourceProtocolOutput {
-	return i.ToGetTwingateResourcesResourceProtocolOutputWithContext(context.Background())
+func (i GetTwingateResourcesResourceProtocolsArgs) ToGetTwingateResourcesResourceProtocolsOutput() GetTwingateResourcesResourceProtocolsOutput {
+	return i.ToGetTwingateResourcesResourceProtocolsOutputWithContext(context.Background())
 }
 
-func (i GetTwingateResourcesResourceProtocolArgs) ToGetTwingateResourcesResourceProtocolOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourcesResourceProtocolOutput)
+func (i GetTwingateResourcesResourceProtocolsArgs) ToGetTwingateResourcesResourceProtocolsOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourcesResourceProtocolsOutput)
 }
 
-// GetTwingateResourcesResourceProtocolArrayInput is an input type that accepts GetTwingateResourcesResourceProtocolArray and GetTwingateResourcesResourceProtocolArrayOutput values.
-// You can construct a concrete instance of `GetTwingateResourcesResourceProtocolArrayInput` via:
-//
-//	GetTwingateResourcesResourceProtocolArray{ GetTwingateResourcesResourceProtocolArgs{...} }
-type GetTwingateResourcesResourceProtocolArrayInput interface {
-	pulumi.Input
+type GetTwingateResourcesResourceProtocolsOutput struct{ *pulumi.OutputState }
 
-	ToGetTwingateResourcesResourceProtocolArrayOutput() GetTwingateResourcesResourceProtocolArrayOutput
-	ToGetTwingateResourcesResourceProtocolArrayOutputWithContext(context.Context) GetTwingateResourcesResourceProtocolArrayOutput
+func (GetTwingateResourcesResourceProtocolsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTwingateResourcesResourceProtocols)(nil)).Elem()
 }
 
-type GetTwingateResourcesResourceProtocolArray []GetTwingateResourcesResourceProtocolInput
-
-func (GetTwingateResourcesResourceProtocolArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetTwingateResourcesResourceProtocol)(nil)).Elem()
-}
-
-func (i GetTwingateResourcesResourceProtocolArray) ToGetTwingateResourcesResourceProtocolArrayOutput() GetTwingateResourcesResourceProtocolArrayOutput {
-	return i.ToGetTwingateResourcesResourceProtocolArrayOutputWithContext(context.Background())
-}
-
-func (i GetTwingateResourcesResourceProtocolArray) ToGetTwingateResourcesResourceProtocolArrayOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourcesResourceProtocolArrayOutput)
-}
-
-type GetTwingateResourcesResourceProtocolOutput struct{ *pulumi.OutputState }
-
-func (GetTwingateResourcesResourceProtocolOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetTwingateResourcesResourceProtocol)(nil)).Elem()
-}
-
-func (o GetTwingateResourcesResourceProtocolOutput) ToGetTwingateResourcesResourceProtocolOutput() GetTwingateResourcesResourceProtocolOutput {
+func (o GetTwingateResourcesResourceProtocolsOutput) ToGetTwingateResourcesResourceProtocolsOutput() GetTwingateResourcesResourceProtocolsOutput {
 	return o
 }
 
-func (o GetTwingateResourcesResourceProtocolOutput) ToGetTwingateResourcesResourceProtocolOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolOutput {
+func (o GetTwingateResourcesResourceProtocolsOutput) ToGetTwingateResourcesResourceProtocolsOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolsOutput {
 	return o
 }
 
 // Whether to allow ICMP (ping) traffic
-func (o GetTwingateResourcesResourceProtocolOutput) AllowIcmp() pulumi.BoolOutput {
-	return o.ApplyT(func(v GetTwingateResourcesResourceProtocol) bool { return v.AllowIcmp }).(pulumi.BoolOutput)
+func (o GetTwingateResourcesResourceProtocolsOutput) AllowIcmp() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetTwingateResourcesResourceProtocols) bool { return v.AllowIcmp }).(pulumi.BoolOutput)
 }
 
-func (o GetTwingateResourcesResourceProtocolOutput) Tcps() GetTwingateResourcesResourceProtocolTcpArrayOutput {
-	return o.ApplyT(func(v GetTwingateResourcesResourceProtocol) []GetTwingateResourcesResourceProtocolTcp { return v.Tcps }).(GetTwingateResourcesResourceProtocolTcpArrayOutput)
+func (o GetTwingateResourcesResourceProtocolsOutput) Tcp() GetTwingateResourcesResourceProtocolsTcpOutput {
+	return o.ApplyT(func(v GetTwingateResourcesResourceProtocols) GetTwingateResourcesResourceProtocolsTcp { return v.Tcp }).(GetTwingateResourcesResourceProtocolsTcpOutput)
 }
 
-func (o GetTwingateResourcesResourceProtocolOutput) Udps() GetTwingateResourcesResourceProtocolUdpArrayOutput {
-	return o.ApplyT(func(v GetTwingateResourcesResourceProtocol) []GetTwingateResourcesResourceProtocolUdp { return v.Udps }).(GetTwingateResourcesResourceProtocolUdpArrayOutput)
+func (o GetTwingateResourcesResourceProtocolsOutput) Udp() GetTwingateResourcesResourceProtocolsUdpOutput {
+	return o.ApplyT(func(v GetTwingateResourcesResourceProtocols) GetTwingateResourcesResourceProtocolsUdp { return v.Udp }).(GetTwingateResourcesResourceProtocolsUdpOutput)
 }
 
-type GetTwingateResourcesResourceProtocolArrayOutput struct{ *pulumi.OutputState }
-
-func (GetTwingateResourcesResourceProtocolArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetTwingateResourcesResourceProtocol)(nil)).Elem()
-}
-
-func (o GetTwingateResourcesResourceProtocolArrayOutput) ToGetTwingateResourcesResourceProtocolArrayOutput() GetTwingateResourcesResourceProtocolArrayOutput {
-	return o
-}
-
-func (o GetTwingateResourcesResourceProtocolArrayOutput) ToGetTwingateResourcesResourceProtocolArrayOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolArrayOutput {
-	return o
-}
-
-func (o GetTwingateResourcesResourceProtocolArrayOutput) Index(i pulumi.IntInput) GetTwingateResourcesResourceProtocolOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTwingateResourcesResourceProtocol {
-		return vs[0].([]GetTwingateResourcesResourceProtocol)[vs[1].(int)]
-	}).(GetTwingateResourcesResourceProtocolOutput)
-}
-
-type GetTwingateResourcesResourceProtocolTcp struct {
+type GetTwingateResourcesResourceProtocolsTcp struct {
 	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
 	Policy string `pulumi:"policy"`
 	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 	Ports []string `pulumi:"ports"`
 }
 
-// GetTwingateResourcesResourceProtocolTcpInput is an input type that accepts GetTwingateResourcesResourceProtocolTcpArgs and GetTwingateResourcesResourceProtocolTcpOutput values.
-// You can construct a concrete instance of `GetTwingateResourcesResourceProtocolTcpInput` via:
+// GetTwingateResourcesResourceProtocolsTcpInput is an input type that accepts GetTwingateResourcesResourceProtocolsTcpArgs and GetTwingateResourcesResourceProtocolsTcpOutput values.
+// You can construct a concrete instance of `GetTwingateResourcesResourceProtocolsTcpInput` via:
 //
-//	GetTwingateResourcesResourceProtocolTcpArgs{...}
-type GetTwingateResourcesResourceProtocolTcpInput interface {
+//	GetTwingateResourcesResourceProtocolsTcpArgs{...}
+type GetTwingateResourcesResourceProtocolsTcpInput interface {
 	pulumi.Input
 
-	ToGetTwingateResourcesResourceProtocolTcpOutput() GetTwingateResourcesResourceProtocolTcpOutput
-	ToGetTwingateResourcesResourceProtocolTcpOutputWithContext(context.Context) GetTwingateResourcesResourceProtocolTcpOutput
+	ToGetTwingateResourcesResourceProtocolsTcpOutput() GetTwingateResourcesResourceProtocolsTcpOutput
+	ToGetTwingateResourcesResourceProtocolsTcpOutputWithContext(context.Context) GetTwingateResourcesResourceProtocolsTcpOutput
 }
 
-type GetTwingateResourcesResourceProtocolTcpArgs struct {
+type GetTwingateResourcesResourceProtocolsTcpArgs struct {
 	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
 	Policy pulumi.StringInput `pulumi:"policy"`
 	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 	Ports pulumi.StringArrayInput `pulumi:"ports"`
 }
 
-func (GetTwingateResourcesResourceProtocolTcpArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetTwingateResourcesResourceProtocolTcp)(nil)).Elem()
+func (GetTwingateResourcesResourceProtocolsTcpArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTwingateResourcesResourceProtocolsTcp)(nil)).Elem()
 }
 
-func (i GetTwingateResourcesResourceProtocolTcpArgs) ToGetTwingateResourcesResourceProtocolTcpOutput() GetTwingateResourcesResourceProtocolTcpOutput {
-	return i.ToGetTwingateResourcesResourceProtocolTcpOutputWithContext(context.Background())
+func (i GetTwingateResourcesResourceProtocolsTcpArgs) ToGetTwingateResourcesResourceProtocolsTcpOutput() GetTwingateResourcesResourceProtocolsTcpOutput {
+	return i.ToGetTwingateResourcesResourceProtocolsTcpOutputWithContext(context.Background())
 }
 
-func (i GetTwingateResourcesResourceProtocolTcpArgs) ToGetTwingateResourcesResourceProtocolTcpOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolTcpOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourcesResourceProtocolTcpOutput)
+func (i GetTwingateResourcesResourceProtocolsTcpArgs) ToGetTwingateResourcesResourceProtocolsTcpOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolsTcpOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourcesResourceProtocolsTcpOutput)
 }
 
-// GetTwingateResourcesResourceProtocolTcpArrayInput is an input type that accepts GetTwingateResourcesResourceProtocolTcpArray and GetTwingateResourcesResourceProtocolTcpArrayOutput values.
-// You can construct a concrete instance of `GetTwingateResourcesResourceProtocolTcpArrayInput` via:
-//
-//	GetTwingateResourcesResourceProtocolTcpArray{ GetTwingateResourcesResourceProtocolTcpArgs{...} }
-type GetTwingateResourcesResourceProtocolTcpArrayInput interface {
-	pulumi.Input
+type GetTwingateResourcesResourceProtocolsTcpOutput struct{ *pulumi.OutputState }
 
-	ToGetTwingateResourcesResourceProtocolTcpArrayOutput() GetTwingateResourcesResourceProtocolTcpArrayOutput
-	ToGetTwingateResourcesResourceProtocolTcpArrayOutputWithContext(context.Context) GetTwingateResourcesResourceProtocolTcpArrayOutput
+func (GetTwingateResourcesResourceProtocolsTcpOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTwingateResourcesResourceProtocolsTcp)(nil)).Elem()
 }
 
-type GetTwingateResourcesResourceProtocolTcpArray []GetTwingateResourcesResourceProtocolTcpInput
-
-func (GetTwingateResourcesResourceProtocolTcpArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetTwingateResourcesResourceProtocolTcp)(nil)).Elem()
-}
-
-func (i GetTwingateResourcesResourceProtocolTcpArray) ToGetTwingateResourcesResourceProtocolTcpArrayOutput() GetTwingateResourcesResourceProtocolTcpArrayOutput {
-	return i.ToGetTwingateResourcesResourceProtocolTcpArrayOutputWithContext(context.Background())
-}
-
-func (i GetTwingateResourcesResourceProtocolTcpArray) ToGetTwingateResourcesResourceProtocolTcpArrayOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolTcpArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourcesResourceProtocolTcpArrayOutput)
-}
-
-type GetTwingateResourcesResourceProtocolTcpOutput struct{ *pulumi.OutputState }
-
-func (GetTwingateResourcesResourceProtocolTcpOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetTwingateResourcesResourceProtocolTcp)(nil)).Elem()
-}
-
-func (o GetTwingateResourcesResourceProtocolTcpOutput) ToGetTwingateResourcesResourceProtocolTcpOutput() GetTwingateResourcesResourceProtocolTcpOutput {
+func (o GetTwingateResourcesResourceProtocolsTcpOutput) ToGetTwingateResourcesResourceProtocolsTcpOutput() GetTwingateResourcesResourceProtocolsTcpOutput {
 	return o
 }
 
-func (o GetTwingateResourcesResourceProtocolTcpOutput) ToGetTwingateResourcesResourceProtocolTcpOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolTcpOutput {
+func (o GetTwingateResourcesResourceProtocolsTcpOutput) ToGetTwingateResourcesResourceProtocolsTcpOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolsTcpOutput {
 	return o
 }
 
 // Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-func (o GetTwingateResourcesResourceProtocolTcpOutput) Policy() pulumi.StringOutput {
-	return o.ApplyT(func(v GetTwingateResourcesResourceProtocolTcp) string { return v.Policy }).(pulumi.StringOutput)
+func (o GetTwingateResourcesResourceProtocolsTcpOutput) Policy() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTwingateResourcesResourceProtocolsTcp) string { return v.Policy }).(pulumi.StringOutput)
 }
 
 // List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
-func (o GetTwingateResourcesResourceProtocolTcpOutput) Ports() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v GetTwingateResourcesResourceProtocolTcp) []string { return v.Ports }).(pulumi.StringArrayOutput)
+func (o GetTwingateResourcesResourceProtocolsTcpOutput) Ports() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetTwingateResourcesResourceProtocolsTcp) []string { return v.Ports }).(pulumi.StringArrayOutput)
 }
 
-type GetTwingateResourcesResourceProtocolTcpArrayOutput struct{ *pulumi.OutputState }
-
-func (GetTwingateResourcesResourceProtocolTcpArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetTwingateResourcesResourceProtocolTcp)(nil)).Elem()
-}
-
-func (o GetTwingateResourcesResourceProtocolTcpArrayOutput) ToGetTwingateResourcesResourceProtocolTcpArrayOutput() GetTwingateResourcesResourceProtocolTcpArrayOutput {
-	return o
-}
-
-func (o GetTwingateResourcesResourceProtocolTcpArrayOutput) ToGetTwingateResourcesResourceProtocolTcpArrayOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolTcpArrayOutput {
-	return o
-}
-
-func (o GetTwingateResourcesResourceProtocolTcpArrayOutput) Index(i pulumi.IntInput) GetTwingateResourcesResourceProtocolTcpOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTwingateResourcesResourceProtocolTcp {
-		return vs[0].([]GetTwingateResourcesResourceProtocolTcp)[vs[1].(int)]
-	}).(GetTwingateResourcesResourceProtocolTcpOutput)
-}
-
-type GetTwingateResourcesResourceProtocolUdp struct {
+type GetTwingateResourcesResourceProtocolsUdp struct {
 	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
 	Policy string `pulumi:"policy"`
 	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 	Ports []string `pulumi:"ports"`
 }
 
-// GetTwingateResourcesResourceProtocolUdpInput is an input type that accepts GetTwingateResourcesResourceProtocolUdpArgs and GetTwingateResourcesResourceProtocolUdpOutput values.
-// You can construct a concrete instance of `GetTwingateResourcesResourceProtocolUdpInput` via:
+// GetTwingateResourcesResourceProtocolsUdpInput is an input type that accepts GetTwingateResourcesResourceProtocolsUdpArgs and GetTwingateResourcesResourceProtocolsUdpOutput values.
+// You can construct a concrete instance of `GetTwingateResourcesResourceProtocolsUdpInput` via:
 //
-//	GetTwingateResourcesResourceProtocolUdpArgs{...}
-type GetTwingateResourcesResourceProtocolUdpInput interface {
+//	GetTwingateResourcesResourceProtocolsUdpArgs{...}
+type GetTwingateResourcesResourceProtocolsUdpInput interface {
 	pulumi.Input
 
-	ToGetTwingateResourcesResourceProtocolUdpOutput() GetTwingateResourcesResourceProtocolUdpOutput
-	ToGetTwingateResourcesResourceProtocolUdpOutputWithContext(context.Context) GetTwingateResourcesResourceProtocolUdpOutput
+	ToGetTwingateResourcesResourceProtocolsUdpOutput() GetTwingateResourcesResourceProtocolsUdpOutput
+	ToGetTwingateResourcesResourceProtocolsUdpOutputWithContext(context.Context) GetTwingateResourcesResourceProtocolsUdpOutput
 }
 
-type GetTwingateResourcesResourceProtocolUdpArgs struct {
+type GetTwingateResourcesResourceProtocolsUdpArgs struct {
 	// Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
 	Policy pulumi.StringInput `pulumi:"policy"`
 	// List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
 	Ports pulumi.StringArrayInput `pulumi:"ports"`
 }
 
-func (GetTwingateResourcesResourceProtocolUdpArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetTwingateResourcesResourceProtocolUdp)(nil)).Elem()
+func (GetTwingateResourcesResourceProtocolsUdpArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTwingateResourcesResourceProtocolsUdp)(nil)).Elem()
 }
 
-func (i GetTwingateResourcesResourceProtocolUdpArgs) ToGetTwingateResourcesResourceProtocolUdpOutput() GetTwingateResourcesResourceProtocolUdpOutput {
-	return i.ToGetTwingateResourcesResourceProtocolUdpOutputWithContext(context.Background())
+func (i GetTwingateResourcesResourceProtocolsUdpArgs) ToGetTwingateResourcesResourceProtocolsUdpOutput() GetTwingateResourcesResourceProtocolsUdpOutput {
+	return i.ToGetTwingateResourcesResourceProtocolsUdpOutputWithContext(context.Background())
 }
 
-func (i GetTwingateResourcesResourceProtocolUdpArgs) ToGetTwingateResourcesResourceProtocolUdpOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolUdpOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourcesResourceProtocolUdpOutput)
+func (i GetTwingateResourcesResourceProtocolsUdpArgs) ToGetTwingateResourcesResourceProtocolsUdpOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolsUdpOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourcesResourceProtocolsUdpOutput)
 }
 
-// GetTwingateResourcesResourceProtocolUdpArrayInput is an input type that accepts GetTwingateResourcesResourceProtocolUdpArray and GetTwingateResourcesResourceProtocolUdpArrayOutput values.
-// You can construct a concrete instance of `GetTwingateResourcesResourceProtocolUdpArrayInput` via:
-//
-//	GetTwingateResourcesResourceProtocolUdpArray{ GetTwingateResourcesResourceProtocolUdpArgs{...} }
-type GetTwingateResourcesResourceProtocolUdpArrayInput interface {
-	pulumi.Input
+type GetTwingateResourcesResourceProtocolsUdpOutput struct{ *pulumi.OutputState }
 
-	ToGetTwingateResourcesResourceProtocolUdpArrayOutput() GetTwingateResourcesResourceProtocolUdpArrayOutput
-	ToGetTwingateResourcesResourceProtocolUdpArrayOutputWithContext(context.Context) GetTwingateResourcesResourceProtocolUdpArrayOutput
+func (GetTwingateResourcesResourceProtocolsUdpOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTwingateResourcesResourceProtocolsUdp)(nil)).Elem()
 }
 
-type GetTwingateResourcesResourceProtocolUdpArray []GetTwingateResourcesResourceProtocolUdpInput
-
-func (GetTwingateResourcesResourceProtocolUdpArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetTwingateResourcesResourceProtocolUdp)(nil)).Elem()
-}
-
-func (i GetTwingateResourcesResourceProtocolUdpArray) ToGetTwingateResourcesResourceProtocolUdpArrayOutput() GetTwingateResourcesResourceProtocolUdpArrayOutput {
-	return i.ToGetTwingateResourcesResourceProtocolUdpArrayOutputWithContext(context.Background())
-}
-
-func (i GetTwingateResourcesResourceProtocolUdpArray) ToGetTwingateResourcesResourceProtocolUdpArrayOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolUdpArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(GetTwingateResourcesResourceProtocolUdpArrayOutput)
-}
-
-type GetTwingateResourcesResourceProtocolUdpOutput struct{ *pulumi.OutputState }
-
-func (GetTwingateResourcesResourceProtocolUdpOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*GetTwingateResourcesResourceProtocolUdp)(nil)).Elem()
-}
-
-func (o GetTwingateResourcesResourceProtocolUdpOutput) ToGetTwingateResourcesResourceProtocolUdpOutput() GetTwingateResourcesResourceProtocolUdpOutput {
+func (o GetTwingateResourcesResourceProtocolsUdpOutput) ToGetTwingateResourcesResourceProtocolsUdpOutput() GetTwingateResourcesResourceProtocolsUdpOutput {
 	return o
 }
 
-func (o GetTwingateResourcesResourceProtocolUdpOutput) ToGetTwingateResourcesResourceProtocolUdpOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolUdpOutput {
+func (o GetTwingateResourcesResourceProtocolsUdpOutput) ToGetTwingateResourcesResourceProtocolsUdpOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolsUdpOutput {
 	return o
 }
 
 // Whether to allow or deny all ports, or restrict protocol access within certain port ranges: Can be `RESTRICTED` (only listed ports are allowed), `ALLOW_ALL`, or `DENY_ALL`
-func (o GetTwingateResourcesResourceProtocolUdpOutput) Policy() pulumi.StringOutput {
-	return o.ApplyT(func(v GetTwingateResourcesResourceProtocolUdp) string { return v.Policy }).(pulumi.StringOutput)
+func (o GetTwingateResourcesResourceProtocolsUdpOutput) Policy() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTwingateResourcesResourceProtocolsUdp) string { return v.Policy }).(pulumi.StringOutput)
 }
 
 // List of port ranges between 1 and 65535 inclusive, in the format `100-200` for a range, or `8080` for a single port
-func (o GetTwingateResourcesResourceProtocolUdpOutput) Ports() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v GetTwingateResourcesResourceProtocolUdp) []string { return v.Ports }).(pulumi.StringArrayOutput)
-}
-
-type GetTwingateResourcesResourceProtocolUdpArrayOutput struct{ *pulumi.OutputState }
-
-func (GetTwingateResourcesResourceProtocolUdpArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]GetTwingateResourcesResourceProtocolUdp)(nil)).Elem()
-}
-
-func (o GetTwingateResourcesResourceProtocolUdpArrayOutput) ToGetTwingateResourcesResourceProtocolUdpArrayOutput() GetTwingateResourcesResourceProtocolUdpArrayOutput {
-	return o
-}
-
-func (o GetTwingateResourcesResourceProtocolUdpArrayOutput) ToGetTwingateResourcesResourceProtocolUdpArrayOutputWithContext(ctx context.Context) GetTwingateResourcesResourceProtocolUdpArrayOutput {
-	return o
-}
-
-func (o GetTwingateResourcesResourceProtocolUdpArrayOutput) Index(i pulumi.IntInput) GetTwingateResourcesResourceProtocolUdpOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTwingateResourcesResourceProtocolUdp {
-		return vs[0].([]GetTwingateResourcesResourceProtocolUdp)[vs[1].(int)]
-	}).(GetTwingateResourcesResourceProtocolUdpOutput)
+func (o GetTwingateResourcesResourceProtocolsUdpOutput) Ports() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetTwingateResourcesResourceProtocolsUdp) []string { return v.Ports }).(pulumi.StringArrayOutput)
 }
 
 type GetTwingateSecurityPoliciesSecurityPolicy struct {
@@ -2667,10 +2055,6 @@ type GetTwingateUsersUser struct {
 	FirstName string `pulumi:"firstName"`
 	// The ID of the User
 	Id string `pulumi:"id"`
-	// Indicates whether the User is an admin
-	//
-	// Deprecated: This read-only Boolean value will be deprecated in a future release. You may use the `role` value instead.
-	IsAdmin bool `pulumi:"isAdmin"`
 	// The last name of the User
 	LastName string `pulumi:"lastName"`
 	// Indicates the User's role. Either ADMIN, DEVOPS, SUPPORT, or MEMBER.
@@ -2697,10 +2081,6 @@ type GetTwingateUsersUserArgs struct {
 	FirstName pulumi.StringInput `pulumi:"firstName"`
 	// The ID of the User
 	Id pulumi.StringInput `pulumi:"id"`
-	// Indicates whether the User is an admin
-	//
-	// Deprecated: This read-only Boolean value will be deprecated in a future release. You may use the `role` value instead.
-	IsAdmin pulumi.BoolInput `pulumi:"isAdmin"`
 	// The last name of the User
 	LastName pulumi.StringInput `pulumi:"lastName"`
 	// Indicates the User's role. Either ADMIN, DEVOPS, SUPPORT, or MEMBER.
@@ -2775,13 +2155,6 @@ func (o GetTwingateUsersUserOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetTwingateUsersUser) string { return v.Id }).(pulumi.StringOutput)
 }
 
-// Indicates whether the User is an admin
-//
-// Deprecated: This read-only Boolean value will be deprecated in a future release. You may use the `role` value instead.
-func (o GetTwingateUsersUserOutput) IsAdmin() pulumi.BoolOutput {
-	return o.ApplyT(func(v GetTwingateUsersUser) bool { return v.IsAdmin }).(pulumi.BoolOutput)
-}
-
 // The last name of the User
 func (o GetTwingateUsersUserOutput) LastName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetTwingateUsersUser) string { return v.LastName }).(pulumi.StringOutput)
@@ -2818,14 +2191,6 @@ func (o GetTwingateUsersUserArrayOutput) Index(i pulumi.IntInput) GetTwingateUse
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*ResourceAccessInput)(nil)).Elem(), ResourceAccessArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ResourceAccessPtrInput)(nil)).Elem(), ResourceAccessArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ResourceProtocolsInput)(nil)).Elem(), ResourceProtocolsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ResourceProtocolsPtrInput)(nil)).Elem(), ResourceProtocolsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ResourceProtocolsTcpInput)(nil)).Elem(), ResourceProtocolsTcpArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ResourceProtocolsTcpPtrInput)(nil)).Elem(), ResourceProtocolsTcpArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ResourceProtocolsUdpInput)(nil)).Elem(), ResourceProtocolsUdpArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ResourceProtocolsUdpPtrInput)(nil)).Elem(), ResourceProtocolsUdpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TwingateResourceAccessInput)(nil)).Elem(), TwingateResourceAccessArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TwingateResourceAccessPtrInput)(nil)).Elem(), TwingateResourceAccessArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TwingateResourceProtocolsInput)(nil)).Elem(), TwingateResourceProtocolsArgs{})
@@ -2840,34 +2205,23 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateGroupsGroupArrayInput)(nil)).Elem(), GetTwingateGroupsGroupArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateRemoteNetworksRemoteNetworkInput)(nil)).Elem(), GetTwingateRemoteNetworksRemoteNetworkArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateRemoteNetworksRemoteNetworkArrayInput)(nil)).Elem(), GetTwingateRemoteNetworksRemoteNetworkArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourceProtocolInput)(nil)).Elem(), GetTwingateResourceProtocolArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourceProtocolArrayInput)(nil)).Elem(), GetTwingateResourceProtocolArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourceProtocolTcpInput)(nil)).Elem(), GetTwingateResourceProtocolTcpArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourceProtocolTcpArrayInput)(nil)).Elem(), GetTwingateResourceProtocolTcpArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourceProtocolUdpInput)(nil)).Elem(), GetTwingateResourceProtocolUdpArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourceProtocolUdpArrayInput)(nil)).Elem(), GetTwingateResourceProtocolUdpArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourceProtocolsInput)(nil)).Elem(), GetTwingateResourceProtocolsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourceProtocolsPtrInput)(nil)).Elem(), GetTwingateResourceProtocolsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourceProtocolsTcpInput)(nil)).Elem(), GetTwingateResourceProtocolsTcpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourceProtocolsTcpPtrInput)(nil)).Elem(), GetTwingateResourceProtocolsTcpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourceProtocolsUdpInput)(nil)).Elem(), GetTwingateResourceProtocolsUdpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourceProtocolsUdpPtrInput)(nil)).Elem(), GetTwingateResourceProtocolsUdpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourcesResourceInput)(nil)).Elem(), GetTwingateResourcesResourceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourcesResourceArrayInput)(nil)).Elem(), GetTwingateResourcesResourceArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourcesResourceProtocolInput)(nil)).Elem(), GetTwingateResourcesResourceProtocolArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourcesResourceProtocolArrayInput)(nil)).Elem(), GetTwingateResourcesResourceProtocolArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourcesResourceProtocolTcpInput)(nil)).Elem(), GetTwingateResourcesResourceProtocolTcpArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourcesResourceProtocolTcpArrayInput)(nil)).Elem(), GetTwingateResourcesResourceProtocolTcpArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourcesResourceProtocolUdpInput)(nil)).Elem(), GetTwingateResourcesResourceProtocolUdpArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourcesResourceProtocolUdpArrayInput)(nil)).Elem(), GetTwingateResourcesResourceProtocolUdpArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourcesResourceProtocolsInput)(nil)).Elem(), GetTwingateResourcesResourceProtocolsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourcesResourceProtocolsTcpInput)(nil)).Elem(), GetTwingateResourcesResourceProtocolsTcpArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateResourcesResourceProtocolsUdpInput)(nil)).Elem(), GetTwingateResourcesResourceProtocolsUdpArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateSecurityPoliciesSecurityPolicyInput)(nil)).Elem(), GetTwingateSecurityPoliciesSecurityPolicyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateSecurityPoliciesSecurityPolicyArrayInput)(nil)).Elem(), GetTwingateSecurityPoliciesSecurityPolicyArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateServiceAccountsServiceAccountInput)(nil)).Elem(), GetTwingateServiceAccountsServiceAccountArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateServiceAccountsServiceAccountArrayInput)(nil)).Elem(), GetTwingateServiceAccountsServiceAccountArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateUsersUserInput)(nil)).Elem(), GetTwingateUsersUserArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTwingateUsersUserArrayInput)(nil)).Elem(), GetTwingateUsersUserArray{})
-	pulumi.RegisterOutputType(ResourceAccessOutput{})
-	pulumi.RegisterOutputType(ResourceAccessPtrOutput{})
-	pulumi.RegisterOutputType(ResourceProtocolsOutput{})
-	pulumi.RegisterOutputType(ResourceProtocolsPtrOutput{})
-	pulumi.RegisterOutputType(ResourceProtocolsTcpOutput{})
-	pulumi.RegisterOutputType(ResourceProtocolsTcpPtrOutput{})
-	pulumi.RegisterOutputType(ResourceProtocolsUdpOutput{})
-	pulumi.RegisterOutputType(ResourceProtocolsUdpPtrOutput{})
 	pulumi.RegisterOutputType(TwingateResourceAccessOutput{})
 	pulumi.RegisterOutputType(TwingateResourceAccessPtrOutput{})
 	pulumi.RegisterOutputType(TwingateResourceProtocolsOutput{})
@@ -2882,20 +2236,17 @@ func init() {
 	pulumi.RegisterOutputType(GetTwingateGroupsGroupArrayOutput{})
 	pulumi.RegisterOutputType(GetTwingateRemoteNetworksRemoteNetworkOutput{})
 	pulumi.RegisterOutputType(GetTwingateRemoteNetworksRemoteNetworkArrayOutput{})
-	pulumi.RegisterOutputType(GetTwingateResourceProtocolOutput{})
-	pulumi.RegisterOutputType(GetTwingateResourceProtocolArrayOutput{})
-	pulumi.RegisterOutputType(GetTwingateResourceProtocolTcpOutput{})
-	pulumi.RegisterOutputType(GetTwingateResourceProtocolTcpArrayOutput{})
-	pulumi.RegisterOutputType(GetTwingateResourceProtocolUdpOutput{})
-	pulumi.RegisterOutputType(GetTwingateResourceProtocolUdpArrayOutput{})
+	pulumi.RegisterOutputType(GetTwingateResourceProtocolsOutput{})
+	pulumi.RegisterOutputType(GetTwingateResourceProtocolsPtrOutput{})
+	pulumi.RegisterOutputType(GetTwingateResourceProtocolsTcpOutput{})
+	pulumi.RegisterOutputType(GetTwingateResourceProtocolsTcpPtrOutput{})
+	pulumi.RegisterOutputType(GetTwingateResourceProtocolsUdpOutput{})
+	pulumi.RegisterOutputType(GetTwingateResourceProtocolsUdpPtrOutput{})
 	pulumi.RegisterOutputType(GetTwingateResourcesResourceOutput{})
 	pulumi.RegisterOutputType(GetTwingateResourcesResourceArrayOutput{})
-	pulumi.RegisterOutputType(GetTwingateResourcesResourceProtocolOutput{})
-	pulumi.RegisterOutputType(GetTwingateResourcesResourceProtocolArrayOutput{})
-	pulumi.RegisterOutputType(GetTwingateResourcesResourceProtocolTcpOutput{})
-	pulumi.RegisterOutputType(GetTwingateResourcesResourceProtocolTcpArrayOutput{})
-	pulumi.RegisterOutputType(GetTwingateResourcesResourceProtocolUdpOutput{})
-	pulumi.RegisterOutputType(GetTwingateResourcesResourceProtocolUdpArrayOutput{})
+	pulumi.RegisterOutputType(GetTwingateResourcesResourceProtocolsOutput{})
+	pulumi.RegisterOutputType(GetTwingateResourcesResourceProtocolsTcpOutput{})
+	pulumi.RegisterOutputType(GetTwingateResourcesResourceProtocolsUdpOutput{})
 	pulumi.RegisterOutputType(GetTwingateSecurityPoliciesSecurityPolicyOutput{})
 	pulumi.RegisterOutputType(GetTwingateSecurityPoliciesSecurityPolicyArrayOutput{})
 	pulumi.RegisterOutputType(GetTwingateServiceAccountsServiceAccountOutput{})
