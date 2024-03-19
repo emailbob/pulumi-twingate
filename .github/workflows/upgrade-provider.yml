@@ -1,6 +1,11 @@
 name: Upgrade provider
 on:
-  workflow_dispatch: {}
+  pull_request:
+    paths-ignore:
+      - docs
+      - .devcontainer
+      - examples
+  # workflow_dispatch: {}
 # on:
 #   issues:
 #     types:
