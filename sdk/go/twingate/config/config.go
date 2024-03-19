@@ -4,7 +4,7 @@
 package config
 
 import (
-	"github.com/emailbob/pulumi-twingate/sdk/go/twingate/internal"
+	"github.com/emailbob/pulumi-twingate/sdk/v2/go/twingate/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 )
@@ -24,7 +24,7 @@ func GetHttpMaxRetry(ctx *pulumi.Context) int {
 	return config.GetInt(ctx, "twingate:httpMaxRetry")
 }
 
-// Specifies a time limit in seconds for the http requests made. The default value is 10 seconds. Alternatively, this can
+// Specifies a time limit in seconds for the http requests made. The default value is 35 seconds. Alternatively, this can
 // be specified using the TWINGATE_HTTP_TIMEOUT environment variable
 func GetHttpTimeout(ctx *pulumi.Context) int {
 	return config.GetInt(ctx, "twingate:httpTimeout")

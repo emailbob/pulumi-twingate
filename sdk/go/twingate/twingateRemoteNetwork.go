@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/emailbob/pulumi-twingate/sdk/go/twingate/internal"
+	"github.com/emailbob/pulumi-twingate/sdk/v2/go/twingate/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -21,7 +21,7 @@ import (
 //
 // import (
 //
-//	"github.com/emailbob/pulumi-twingate/sdk/go/twingate"
+//	"github.com/emailbob/pulumi-twingate/sdk/v2/go/twingate"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -48,7 +48,7 @@ type TwingateRemoteNetwork struct {
 	pulumi.CustomResourceState
 
 	// The location of the Remote Network. Must be one of the following: AWS, AZURE, GOOGLE*CLOUD, ON*PREMISE, OTHER.
-	Location pulumi.StringPtrOutput `pulumi:"location"`
+	Location pulumi.StringOutput `pulumi:"location"`
 	// The name of the Remote Network
 	Name pulumi.StringOutput `pulumi:"name"`
 }
@@ -203,8 +203,8 @@ func (o TwingateRemoteNetworkOutput) ToTwingateRemoteNetworkOutputWithContext(ct
 }
 
 // The location of the Remote Network. Must be one of the following: AWS, AZURE, GOOGLE*CLOUD, ON*PREMISE, OTHER.
-func (o TwingateRemoteNetworkOutput) Location() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *TwingateRemoteNetwork) pulumi.StringPtrOutput { return v.Location }).(pulumi.StringPtrOutput)
+func (o TwingateRemoteNetworkOutput) Location() pulumi.StringOutput {
+	return o.ApplyT(func(v *TwingateRemoteNetwork) pulumi.StringOutput { return v.Location }).(pulumi.StringOutput)
 }
 
 // The name of the Remote Network

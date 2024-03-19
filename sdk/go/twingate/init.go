@@ -7,7 +7,7 @@ import (
 	"fmt"
 
 	"github.com/blang/semver"
-	"github.com/emailbob/pulumi-twingate/sdk/go/twingate/internal"
+	"github.com/emailbob/pulumi-twingate/sdk/v2/go/twingate/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -21,8 +21,6 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
-	case "twingate:index/resource:Resource":
-		r = &Resource{}
 	case "twingate:index/twingateConnector:TwingateConnector":
 		r = &TwingateConnector{}
 	case "twingate:index/twingateConnectorTokens:TwingateConnectorTokens":
@@ -70,11 +68,6 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
-	pulumi.RegisterResourceModule(
-		"twingate",
-		"index/resource",
-		&module{version},
-	)
 	pulumi.RegisterResourceModule(
 		"twingate",
 		"index/twingateConnector",

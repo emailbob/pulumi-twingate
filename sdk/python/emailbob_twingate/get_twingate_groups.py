@@ -9,7 +9,6 @@ import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 from . import outputs
-from ._inputs import *
 
 __all__ = [
     'GetTwingateGroupsResult',
@@ -23,7 +22,7 @@ class GetTwingateGroupsResult:
     """
     A collection of values returned by getTwingateGroups.
     """
-    def __init__(__self__, groups=None, id=None, is_active=None, name=None, type=None):
+    def __init__(__self__, groups=None, id=None, is_active=None, name=None, name_contains=None, name_exclude=None, name_prefix=None, name_regexp=None, name_suffix=None, types=None):
         if groups and not isinstance(groups, list):
             raise TypeError("Expected argument 'groups' to be a list")
         pulumi.set(__self__, "groups", groups)
@@ -36,13 +35,28 @@ class GetTwingateGroupsResult:
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
-        if type and not isinstance(type, str):
-            raise TypeError("Expected argument 'type' to be a str")
-        pulumi.set(__self__, "type", type)
+        if name_contains and not isinstance(name_contains, str):
+            raise TypeError("Expected argument 'name_contains' to be a str")
+        pulumi.set(__self__, "name_contains", name_contains)
+        if name_exclude and not isinstance(name_exclude, str):
+            raise TypeError("Expected argument 'name_exclude' to be a str")
+        pulumi.set(__self__, "name_exclude", name_exclude)
+        if name_prefix and not isinstance(name_prefix, str):
+            raise TypeError("Expected argument 'name_prefix' to be a str")
+        pulumi.set(__self__, "name_prefix", name_prefix)
+        if name_regexp and not isinstance(name_regexp, str):
+            raise TypeError("Expected argument 'name_regexp' to be a str")
+        pulumi.set(__self__, "name_regexp", name_regexp)
+        if name_suffix and not isinstance(name_suffix, str):
+            raise TypeError("Expected argument 'name_suffix' to be a str")
+        pulumi.set(__self__, "name_suffix", name_suffix)
+        if types and not isinstance(types, list):
+            raise TypeError("Expected argument 'types' to be a list")
+        pulumi.set(__self__, "types", types)
 
     @property
     @pulumi.getter
-    def groups(self) -> Optional[Sequence['outputs.GetTwingateGroupsGroupResult']]:
+    def groups(self) -> Sequence['outputs.GetTwingateGroupsGroupResult']:
         """
         List of Groups
         """
@@ -52,7 +66,7 @@ class GetTwingateGroupsResult:
     @pulumi.getter
     def id(self) -> str:
         """
-        The provider-assigned unique ID for this managed resource.
+        The ID of this resource.
         """
         return pulumi.get(self, "id")
 
@@ -68,17 +82,57 @@ class GetTwingateGroupsResult:
     @pulumi.getter
     def name(self) -> Optional[str]:
         """
-        Returns only Groups that exactly match this name.
+        Returns only groups that exactly match this name. If no options are passed it will return all resources. Only one option can be used at a time.
         """
         return pulumi.get(self, "name")
 
     @property
+    @pulumi.getter(name="nameContains")
+    def name_contains(self) -> Optional[str]:
+        """
+        Match when the value exist in the name of the group.
+        """
+        return pulumi.get(self, "name_contains")
+
+    @property
+    @pulumi.getter(name="nameExclude")
+    def name_exclude(self) -> Optional[str]:
+        """
+        Match when the exact value does not exist in the name of the group.
+        """
+        return pulumi.get(self, "name_exclude")
+
+    @property
+    @pulumi.getter(name="namePrefix")
+    def name_prefix(self) -> Optional[str]:
+        """
+        The name of the group must start with the value.
+        """
+        return pulumi.get(self, "name_prefix")
+
+    @property
+    @pulumi.getter(name="nameRegexp")
+    def name_regexp(self) -> Optional[str]:
+        """
+        The regular expression match of the name of the group.
+        """
+        return pulumi.get(self, "name_regexp")
+
+    @property
+    @pulumi.getter(name="nameSuffix")
+    def name_suffix(self) -> Optional[str]:
+        """
+        The name of the group must end with the value.
+        """
+        return pulumi.get(self, "name_suffix")
+
+    @property
     @pulumi.getter
-    def type(self) -> Optional[str]:
+    def types(self) -> Optional[Sequence[str]]:
         """
-        Returns only Groups of the specified type (valid: `MANUAL`, `SYNCED`, `SYSTEM`).
+        Returns groups that match a list of types. valid types: `MANUAL`, `SYNCED`, `SYSTEM`.
         """
-        return pulumi.get(self, "type")
+        return pulumi.get(self, "types")
 
 
 class AwaitableGetTwingateGroupsResult(GetTwingateGroupsResult):
@@ -91,13 +145,22 @@ class AwaitableGetTwingateGroupsResult(GetTwingateGroupsResult):
             id=self.id,
             is_active=self.is_active,
             name=self.name,
-            type=self.type)
+            name_contains=self.name_contains,
+            name_exclude=self.name_exclude,
+            name_prefix=self.name_prefix,
+            name_regexp=self.name_regexp,
+            name_suffix=self.name_suffix,
+            types=self.types)
 
 
-def get_twingate_groups(groups: Optional[Sequence[pulumi.InputType['GetTwingateGroupsGroupArgs']]] = None,
-                        is_active: Optional[bool] = None,
+def get_twingate_groups(is_active: Optional[bool] = None,
                         name: Optional[str] = None,
-                        type: Optional[str] = None,
+                        name_contains: Optional[str] = None,
+                        name_exclude: Optional[str] = None,
+                        name_prefix: Optional[str] = None,
+                        name_regexp: Optional[str] = None,
+                        name_suffix: Optional[str] = None,
+                        types: Optional[Sequence[str]] = None,
                         opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetTwingateGroupsResult:
     """
     Groups are how users are authorized to access Resources. For more information, see Twingate's [documentation](https://docs.twingate.com/docs/groups).
@@ -114,16 +177,24 @@ def get_twingate_groups(groups: Optional[Sequence[pulumi.InputType['GetTwingateG
     <!--End PulumiCodeChooser -->
 
 
-    :param Sequence[pulumi.InputType['GetTwingateGroupsGroupArgs']] groups: List of Groups
     :param bool is_active: Indicates if the Group is active
     :param str name: The name of the Group
-    :param str type: The type of the Group
+    :param str name_contains: Match when the value exist in the name of the group.
+    :param str name_exclude: Match when the exact value does not exist in the name of the group.
+    :param str name_prefix: The name of the group must start with the value.
+    :param str name_regexp: The regular expression match of the name of the group.
+    :param str name_suffix: The name of the group must end with the value.
+    :param Sequence[str] types: Returns groups that match a list of types. valid types: `MANUAL`, `SYNCED`, `SYSTEM`.
     """
     __args__ = dict()
-    __args__['groups'] = groups
     __args__['isActive'] = is_active
     __args__['name'] = name
-    __args__['type'] = type
+    __args__['nameContains'] = name_contains
+    __args__['nameExclude'] = name_exclude
+    __args__['namePrefix'] = name_prefix
+    __args__['nameRegexp'] = name_regexp
+    __args__['nameSuffix'] = name_suffix
+    __args__['types'] = types
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('twingate:index/getTwingateGroups:getTwingateGroups', __args__, opts=opts, typ=GetTwingateGroupsResult).value
 
@@ -132,14 +203,23 @@ def get_twingate_groups(groups: Optional[Sequence[pulumi.InputType['GetTwingateG
         id=pulumi.get(__ret__, 'id'),
         is_active=pulumi.get(__ret__, 'is_active'),
         name=pulumi.get(__ret__, 'name'),
-        type=pulumi.get(__ret__, 'type'))
+        name_contains=pulumi.get(__ret__, 'name_contains'),
+        name_exclude=pulumi.get(__ret__, 'name_exclude'),
+        name_prefix=pulumi.get(__ret__, 'name_prefix'),
+        name_regexp=pulumi.get(__ret__, 'name_regexp'),
+        name_suffix=pulumi.get(__ret__, 'name_suffix'),
+        types=pulumi.get(__ret__, 'types'))
 
 
 @_utilities.lift_output_func(get_twingate_groups)
-def get_twingate_groups_output(groups: Optional[pulumi.Input[Optional[Sequence[pulumi.InputType['GetTwingateGroupsGroupArgs']]]]] = None,
-                               is_active: Optional[pulumi.Input[Optional[bool]]] = None,
+def get_twingate_groups_output(is_active: Optional[pulumi.Input[Optional[bool]]] = None,
                                name: Optional[pulumi.Input[Optional[str]]] = None,
-                               type: Optional[pulumi.Input[Optional[str]]] = None,
+                               name_contains: Optional[pulumi.Input[Optional[str]]] = None,
+                               name_exclude: Optional[pulumi.Input[Optional[str]]] = None,
+                               name_prefix: Optional[pulumi.Input[Optional[str]]] = None,
+                               name_regexp: Optional[pulumi.Input[Optional[str]]] = None,
+                               name_suffix: Optional[pulumi.Input[Optional[str]]] = None,
+                               types: Optional[pulumi.Input[Optional[Sequence[str]]]] = None,
                                opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetTwingateGroupsResult]:
     """
     Groups are how users are authorized to access Resources. For more information, see Twingate's [documentation](https://docs.twingate.com/docs/groups).
@@ -156,9 +236,13 @@ def get_twingate_groups_output(groups: Optional[pulumi.Input[Optional[Sequence[p
     <!--End PulumiCodeChooser -->
 
 
-    :param Sequence[pulumi.InputType['GetTwingateGroupsGroupArgs']] groups: List of Groups
     :param bool is_active: Indicates if the Group is active
     :param str name: The name of the Group
-    :param str type: The type of the Group
+    :param str name_contains: Match when the value exist in the name of the group.
+    :param str name_exclude: Match when the exact value does not exist in the name of the group.
+    :param str name_prefix: The name of the group must start with the value.
+    :param str name_regexp: The regular expression match of the name of the group.
+    :param str name_suffix: The name of the group must end with the value.
+    :param Sequence[str] types: Returns groups that match a list of types. valid types: `MANUAL`, `SYNCED`, `SYSTEM`.
     """
     ...

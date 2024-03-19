@@ -19,7 +19,6 @@ from .get_twingate_service_accounts import *
 from .get_twingate_user import *
 from .get_twingate_users import *
 from .provider import *
-from .resource import *
 from .twingate_connector import *
 from .twingate_connector_tokens import *
 from .twingate_group import *
@@ -41,14 +40,6 @@ else:
 _utilities.register(
     resource_modules="""
 [
- {
-  "pkg": "twingate",
-  "mod": "index/resource",
-  "fqn": "emailbob_twingate",
-  "classes": {
-   "twingate:index/resource:Resource": "Resource"
-  }
- },
  {
   "pkg": "twingate",
   "mod": "index/twingateConnector",
