@@ -29,7 +29,6 @@ changelog:
   disable: true
 release:
   disable: false
-  prerelease: auto
 snapshot:
   name_template: '{{ .Tag }}-SNAPSHOT'
 project_name: "emailbob-pulumi-twingate"
