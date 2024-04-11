@@ -9,7 +9,7 @@ The Twingate provider must be configured with credentials to deploy and update r
 
 ## Example
 
-{{< chooser language "typescript,python,go" >}}
+{{< chooser language "typescript,python" >}}
 {{% choosable language typescript %}}
 
 ```typescript
