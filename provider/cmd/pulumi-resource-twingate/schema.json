@@ -78,29 +78,39 @@
         }
     },
     "types": {
-        "twingate:index/TwingateResourceAccess:TwingateResourceAccess": {
+        "twingate:index/TwingateResourceAccessGroup:TwingateResourceAccessGroup": {
             "properties": {
-                "groupIds": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "List of Group IDs that will have permission to access the Resource.\n"
+                "groupId": {
+                    "type": "string",
+                    "description": "Group ID that will have permission to access the Resource.\n"
                 },
-                "serviceAccountIds": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "List of Service Account IDs that will have permission to access the Resource.\n"
+                "securityPolicyId": {
+                    "type": "string",
+                    "description": "The ID of a `twingate.getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.\n"
                 }
             },
             "type": "object",
             "language": {
                 "nodejs": {
                     "requiredOutputs": [
-                        "groupIds",
-                        "serviceAccountIds"
+                        "groupId",
+                        "securityPolicyId"
+                    ]
+                }
+            }
+        },
+        "twingate:index/TwingateResourceAccessService:TwingateResourceAccessService": {
+            "properties": {
+                "serviceAccountId": {
+                    "type": "string",
+                    "description": "The ID of the service account that should have access to this Resource.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "serviceAccountId"
                     ]
                 }
             }
@@ -858,11 +868,21 @@
             }
         },
         "twingate:index/twingateResource:TwingateResource": {
-            "description": "Resources in Twingate represent servers on the private network that clients can connect to. Resources can be defined by IP, CIDR range, FQDN, or DNS zone. For more information, see the Twingate [documentation](https://docs.twingate.com/docs/resources-and-access-nodes).\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.twingate.TwingateRemoteNetwork;\nimport com.pulumi.twingate.TwingateGroup;\nimport com.pulumi.twingate.TwingateServiceAccount;\nimport com.pulumi.twingate.TwingateFunctions;\nimport com.pulumi.twingate.inputs.GetTwingateSecurityPolicyArgs;\nimport com.pulumi.twingate.TwingateResource;\nimport com.pulumi.twingate.TwingateResourceArgs;\nimport com.pulumi.twingate.inputs.TwingateResourceProtocolsArgs;\nimport com.pulumi.twingate.inputs.TwingateResourceProtocolsTcpArgs;\nimport com.pulumi.twingate.inputs.TwingateResourceProtocolsUdpArgs;\nimport com.pulumi.twingate.inputs.TwingateResourceAccessArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var awsNetwork = new TwingateRemoteNetwork(\"awsNetwork\");\n\n        var aws = new TwingateGroup(\"aws\");\n\n        var githubActionsProd = new TwingateServiceAccount(\"githubActionsProd\");\n\n        final var testPolicy = TwingateFunctions.getTwingateSecurityPolicy(GetTwingateSecurityPolicyArgs.builder()\n            .name(\"Test Policy\")\n            .build());\n\n        var resource = new TwingateResource(\"resource\", TwingateResourceArgs.builder()        \n            .address(\"internal.int\")\n            .remoteNetworkId(awsNetwork.id())\n            .securityPolicyId(testPolicy.applyValue(getTwingateSecurityPolicyResult -\u003e getTwingateSecurityPolicyResult.id()))\n            .protocols(TwingateResourceProtocolsArgs.builder()\n                .allow_icmp(true)\n                .tcp(TwingateResourceProtocolsTcpArgs.builder()\n                    .policy(\"RESTRICTED\")\n                    .ports(                    \n                        \"80\",\n                        \"82-83\")\n                    .build())\n                .udp(TwingateResourceProtocolsUdpArgs.builder()\n                    .policy(\"ALLOW_ALL\")\n                    .build())\n                .build())\n            .access(TwingateResourceAccessArgs.builder()\n                .groupIds(aws.id())\n                .serviceAccountIds(githubActionsProd.id())\n                .build())\n            .isActive(true)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  awsNetwork:\n    type: twingate:TwingateRemoteNetwork\n  aws:\n    type: twingate:TwingateGroup\n  githubActionsProd:\n    type: twingate:TwingateServiceAccount\n  resource:\n    type: twingate:TwingateResource\n    properties:\n      address: internal.int\n      remoteNetworkId: ${awsNetwork.id}\n      securityPolicyId: ${testPolicy.id}\n      protocols:\n        allow_icmp: true\n        tcp:\n          policy: RESTRICTED\n          ports:\n            - '80'\n            - 82-83\n        udp:\n          policy: ALLOW_ALL\n      access:\n        groupIds:\n          - ${aws.id}\n        serviceAccountIds:\n          - ${githubActionsProd.id}\n      isActive: true\nvariables:\n  testPolicy:\n    fn::invoke:\n      Function: twingate:getTwingateSecurityPolicy\n      Arguments:\n        name: Test Policy\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Import\n\n```sh\n$ pulumi import twingate:index/twingateResource:TwingateResource resource UmVzb3VyY2U6MzQwNDQ3\n```\n\n",
+            "description": "Resources in Twingate represent servers on the private network that clients can connect to. Resources can be defined by IP, CIDR range, FQDN, or DNS zone. For more information, see the Twingate [documentation](https://docs.twingate.com/docs/resources-and-access-nodes).\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.twingate.TwingateRemoteNetwork;\nimport com.pulumi.twingate.TwingateGroup;\nimport com.pulumi.twingate.TwingateServiceAccount;\nimport com.pulumi.twingate.TwingateFunctions;\nimport com.pulumi.twingate.inputs.GetTwingateSecurityPolicyArgs;\nimport com.pulumi.twingate.TwingateResource;\nimport com.pulumi.twingate.TwingateResourceArgs;\nimport com.pulumi.twingate.inputs.TwingateResourceProtocolsArgs;\nimport com.pulumi.twingate.inputs.TwingateResourceProtocolsTcpArgs;\nimport com.pulumi.twingate.inputs.TwingateResourceProtocolsUdpArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var awsNetwork = new TwingateRemoteNetwork(\"awsNetwork\");\n\n        var aws = new TwingateGroup(\"aws\");\n\n        var githubActionsProd = new TwingateServiceAccount(\"githubActionsProd\");\n\n        final var testPolicy = TwingateFunctions.getTwingateSecurityPolicy(GetTwingateSecurityPolicyArgs.builder()\n            .name(\"Test Policy\")\n            .build());\n\n        var resource = new TwingateResource(\"resource\", TwingateResourceArgs.builder()        \n            .address(\"internal.int\")\n            .remoteNetworkId(awsNetwork.id())\n            .securityPolicyId(testPolicy.applyValue(getTwingateSecurityPolicyResult -\u003e getTwingateSecurityPolicyResult.id()))\n            .protocols(TwingateResourceProtocolsArgs.builder()\n                .allow_icmp(true)\n                .tcp(TwingateResourceProtocolsTcpArgs.builder()\n                    .policy(\"RESTRICTED\")\n                    .ports(                    \n                        \"80\",\n                        \"82-83\")\n                    .build())\n                .udp(TwingateResourceProtocolsUdpArgs.builder()\n                    .policy(\"ALLOW_ALL\")\n                    .build())\n                .build())\n            .dynamic(            \n                %!v(PANIC=Format method: runtime error: invalid memory address or nil pointer dereference),\n                %!v(PANIC=Format method: runtime error: invalid memory address or nil pointer dereference))\n            .isActive(true)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  awsNetwork:\n    type: twingate:TwingateRemoteNetwork\n  aws:\n    type: twingate:TwingateGroup\n  githubActionsProd:\n    type: twingate:TwingateServiceAccount\n  resource:\n    type: twingate:TwingateResource\n    properties:\n      address: internal.int\n      remoteNetworkId: ${awsNetwork.id}\n      securityPolicyId: ${testPolicy.id}\n      protocols:\n        allow_icmp: true\n        tcp:\n          policy: RESTRICTED\n          ports:\n            - '80'\n            - 82-83\n        udp:\n          policy: ALLOW_ALL\n      dynamic:\n        - forEach:\n            - ${aws.id}\n          content:\n            - groupId: ${access_group.value}\n              securityPolicyId: ${testPolicy.id}\n        - forEach:\n            - ${githubActionsProd.id}\n          content:\n            - serviceAccountId: ${access_service.value}\n      isActive: true\nvariables:\n  testPolicy:\n    fn::invoke:\n      Function: twingate:getTwingateSecurityPolicy\n      Arguments:\n        name: Test Policy\n```\n\u003c!--End PulumiCodeChooser --\u003e\n\n## Import\n\n```sh\n$ pulumi import twingate:index/twingateResource:TwingateResource resource UmVzb3VyY2U6MzQwNDQ3\n```\n\n",
             "properties": {
-                "access": {
-                    "$ref": "#/types/twingate:index/TwingateResourceAccess:TwingateResourceAccess",
-                    "description": "Restrict access to certain groups or service accounts\n"
+                "accessGroups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/twingate:index/TwingateResourceAccessGroup:TwingateResourceAccessGroup"
+                    },
+                    "description": "Restrict access to certain group\n"
+                },
+                "accessServices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/twingate:index/TwingateResourceAccessService:TwingateResourceAccessService"
+                    },
+                    "description": "Restrict access to certain service account\n"
                 },
                 "address": {
                     "type": "string",
@@ -902,7 +922,7 @@
                 },
                 "securityPolicyId": {
                     "type": "string",
-                    "description": "The ID of a `twingate.getTwingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`.\n"
+                    "description": "The ID of a `twingate.getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.\n"
                 }
             },
             "required": [
@@ -917,9 +937,19 @@
                 "securityPolicyId"
             ],
             "inputProperties": {
-                "access": {
-                    "$ref": "#/types/twingate:index/TwingateResourceAccess:TwingateResourceAccess",
-                    "description": "Restrict access to certain groups or service accounts\n"
+                "accessGroups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/twingate:index/TwingateResourceAccessGroup:TwingateResourceAccessGroup"
+                    },
+                    "description": "Restrict access to certain group\n"
+                },
+                "accessServices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/twingate:index/TwingateResourceAccessService:TwingateResourceAccessService"
+                    },
+                    "description": "Restrict access to certain service account\n"
                 },
                 "address": {
                     "type": "string",
@@ -959,7 +989,7 @@
                 },
                 "securityPolicyId": {
                     "type": "string",
-                    "description": "The ID of a `twingate.getTwingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`.\n"
+                    "description": "The ID of a `twingate.getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.\n"
                 }
             },
             "requiredInputs": [
@@ -969,9 +999,19 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering TwingateResource resources.\n",
                 "properties": {
-                    "access": {
-                        "$ref": "#/types/twingate:index/TwingateResourceAccess:TwingateResourceAccess",
-                        "description": "Restrict access to certain groups or service accounts\n"
+                    "accessGroups": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/twingate:index/TwingateResourceAccessGroup:TwingateResourceAccessGroup"
+                        },
+                        "description": "Restrict access to certain group\n"
+                    },
+                    "accessServices": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/twingate:index/TwingateResourceAccessService:TwingateResourceAccessService"
+                        },
+                        "description": "Restrict access to certain service account\n"
                     },
                     "address": {
                         "type": "string",
@@ -1011,7 +1051,7 @@
                     },
                     "securityPolicyId": {
                         "type": "string",
-                        "description": "The ID of a `twingate.getTwingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`.\n"
+                        "description": "The ID of a `twingate.getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.\n"
                     }
                 },
                 "type": "object"
