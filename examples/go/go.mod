@@ -1,11 +1,13 @@
-module github.com/Twingate/pulumi-twingate/sdk/v3
+module twingate_go_example
 
 go 1.22.0
 
 require (
-	github.com/blang/semver v3.5.1+incompatible
+	github.com/Twingate/pulumi-twingate/sdk/v3 v3.0.0
 	github.com/pulumi/pulumi/sdk/v3 v3.113.0
 )
+
+replace github.com/Twingate/pulumi-twingate/sdk/v3 v3.0.0 => ../../sdk
 
 require (
 	dario.cat/mergo v1.0.0 // indirect
@@ -16,6 +18,7 @@ require (
 	github.com/apparentlymart/go-textseg/v13 v13.0.0 // indirect
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
+	github.com/blang/semver v3.5.1+incompatible // indirect
 	github.com/charmbracelet/bubbles v0.16.1 // indirect
 	github.com/charmbracelet/bubbletea v0.24.2 // indirect
 	github.com/charmbracelet/lipgloss v0.7.1 // indirect
@@ -64,7 +67,6 @@ require (
 	github.com/santhosh-tekuri/jsonschema/v5 v5.0.0 // indirect
 	github.com/sergi/go-diff v1.3.1 // indirect
 	github.com/skeema/knownhosts v1.2.1 // indirect
-	github.com/spf13/cast v1.4.1 // indirect
 	github.com/spf13/cobra v1.7.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/texttheater/golang-levenshtein v1.0.1 // indirect
