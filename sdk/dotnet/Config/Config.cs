@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Pulumi.Twingate
+namespace Emailbob.Twingate
 {
     public static class Config
     {
