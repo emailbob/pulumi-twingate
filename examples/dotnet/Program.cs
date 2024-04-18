@@ -1,8 +1,8 @@
 ﻿using System;
 using Pulumi;
-using Pulumi.Twingate;
-using Pulumi.Twingate.Inputs;
-using Pulumi.Twingate.Outputs;
+using Emailbob.Twingate;
+using Emailbob.Twingate.Inputs;
+using Emailbob.Twingate.Outputs;
 
 await Deployment.RunAsync(() =>
 {
