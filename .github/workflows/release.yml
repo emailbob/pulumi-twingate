@@ -1,4 +1,3 @@
-
 name: Release
 
 on:
@@ -160,6 +159,5 @@ jobs:
         language:
           - nodejs
           - python
-          #- dotnet
+          - dotnet
           - go
-
