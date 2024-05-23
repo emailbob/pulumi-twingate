@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Emailbob.Twingate" Version="0.0.35" />
     <PackageReference Include="Pulumi" Version="3.*" />
+    <PackageReference Include="Emailbob.Twingate" Version="0.0.35" />
   </ItemGroup>
 
   <!-- Comment this out if you are not using a Mac -->
