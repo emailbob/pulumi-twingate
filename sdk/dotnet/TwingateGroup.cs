@@ -15,7 +15,6 @@ namespace Emailbob.Twingate
     /// 
     /// ## Example Usage
     /// 
-    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
@@ -28,7 +27,6 @@ namespace Emailbob.Twingate
     /// 
     /// });
     /// ```
-    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
@@ -39,10 +37,6 @@ namespace Emailbob.Twingate
     [TwingateResourceType("twingate:index/twingateGroup:TwingateGroup")]
     public partial class TwingateGroup : global::Pulumi.CustomResource
     {
-        /// <summary>
-        /// Determines whether User assignments to this Group will override any existing assignments. Default is `true`. If set to
-        /// `false`, assignments made outside of Terraform will be ignored.
-        /// </summary>
         [Output("isAuthoritative")]
         public Output<bool> IsAuthoritative { get; private set; } = null!;
 
@@ -111,10 +105,6 @@ namespace Emailbob.Twingate
 
     public sealed class TwingateGroupArgs : global::Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Determines whether User assignments to this Group will override any existing assignments. Default is `true`. If set to
-        /// `false`, assignments made outside of Terraform will be ignored.
-        /// </summary>
         [Input("isAuthoritative")]
         public Input<bool>? IsAuthoritative { get; set; }
 
@@ -150,10 +140,6 @@ namespace Emailbob.Twingate
 
     public sealed class TwingateGroupState : global::Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Determines whether User assignments to this Group will override any existing assignments. Default is `true`. If set to
-        /// `false`, assignments made outside of Terraform will be ignored.
-        /// </summary>
         [Input("isAuthoritative")]
         public Input<bool>? IsAuthoritative { get; set; }
 

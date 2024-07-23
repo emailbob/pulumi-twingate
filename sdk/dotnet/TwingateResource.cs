@@ -52,10 +52,6 @@ namespace Emailbob.Twingate
         [Output("isActive")]
         public Output<bool> IsActive { get; private set; } = null!;
 
-        /// <summary>
-        /// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
-        /// `false`, assignments made outside of Terraform will be ignored.
-        /// </summary>
         [Output("isAuthoritative")]
         public Output<bool> IsAuthoritative { get; private set; } = null!;
 
@@ -90,7 +86,7 @@ namespace Emailbob.Twingate
         public Output<string> RemoteNetworkId { get; private set; } = null!;
 
         /// <summary>
-        /// The ID of a `twingate.getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.
+        /// The ID of a `twingate.getTwingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`.
         /// </summary>
         [Output("securityPolicyId")]
         public Output<string> SecurityPolicyId { get; private set; } = null!;
@@ -184,10 +180,6 @@ namespace Emailbob.Twingate
         [Input("isActive")]
         public Input<bool>? IsActive { get; set; }
 
-        /// <summary>
-        /// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
-        /// `false`, assignments made outside of Terraform will be ignored.
-        /// </summary>
         [Input("isAuthoritative")]
         public Input<bool>? IsAuthoritative { get; set; }
 
@@ -222,7 +214,7 @@ namespace Emailbob.Twingate
         public Input<string> RemoteNetworkId { get; set; } = null!;
 
         /// <summary>
-        /// The ID of a `twingate.getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.
+        /// The ID of a `twingate.getTwingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`.
         /// </summary>
         [Input("securityPolicyId")]
         public Input<string>? SecurityPolicyId { get; set; }
@@ -277,10 +269,6 @@ namespace Emailbob.Twingate
         [Input("isActive")]
         public Input<bool>? IsActive { get; set; }
 
-        /// <summary>
-        /// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
-        /// `false`, assignments made outside of Terraform will be ignored.
-        /// </summary>
         [Input("isAuthoritative")]
         public Input<bool>? IsAuthoritative { get; set; }
 
@@ -315,7 +303,7 @@ namespace Emailbob.Twingate
         public Input<string>? RemoteNetworkId { get; set; }
 
         /// <summary>
-        /// The ID of a `twingate.getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.
+        /// The ID of a `twingate.getTwingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`.
         /// </summary>
         [Input("securityPolicyId")]
         public Input<string>? SecurityPolicyId { get; set; }

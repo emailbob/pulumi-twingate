@@ -63,10 +63,6 @@ export class TwingateResource extends pulumi.CustomResource {
      * Set the resource as active or inactive. Default is `true`.
      */
     public readonly isActive!: pulumi.Output<boolean>;
-    /**
-     * Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
-     * `false`, assignments made outside of Terraform will be ignored.
-     */
     public readonly isAuthoritative!: pulumi.Output<boolean>;
     /**
      * Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client. Default is `false`.
@@ -89,7 +85,7 @@ export class TwingateResource extends pulumi.CustomResource {
      */
     public readonly remoteNetworkId!: pulumi.Output<string>;
     /**
-     * The ID of a `twingate.getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.
+     * The ID of a `twingate.getTwingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`.
      */
     public readonly securityPolicyId!: pulumi.Output<string>;
 
@@ -168,10 +164,6 @@ export interface TwingateResourceState {
      * Set the resource as active or inactive. Default is `true`.
      */
     isActive?: pulumi.Input<boolean>;
-    /**
-     * Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
-     * `false`, assignments made outside of Terraform will be ignored.
-     */
     isAuthoritative?: pulumi.Input<boolean>;
     /**
      * Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client. Default is `false`.
@@ -194,7 +186,7 @@ export interface TwingateResourceState {
      */
     remoteNetworkId?: pulumi.Input<string>;
     /**
-     * The ID of a `twingate.getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.
+     * The ID of a `twingate.getTwingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`.
      */
     securityPolicyId?: pulumi.Input<string>;
 }
@@ -223,10 +215,6 @@ export interface TwingateResourceArgs {
      * Set the resource as active or inactive. Default is `true`.
      */
     isActive?: pulumi.Input<boolean>;
-    /**
-     * Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
-     * `false`, assignments made outside of Terraform will be ignored.
-     */
     isAuthoritative?: pulumi.Input<boolean>;
     /**
      * Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client. Default is `false`.
@@ -249,7 +237,7 @@ export interface TwingateResourceArgs {
      */
     remoteNetworkId: pulumi.Input<string>;
     /**
-     * The ID of a `twingate.getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.
+     * The ID of a `twingate.getTwingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`.
      */
     securityPolicyId?: pulumi.Input<string>;
 }

@@ -15,7 +15,6 @@ namespace Emailbob.Twingate
     /// 
     /// ## Example Usage
     /// 
-    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
@@ -50,7 +49,6 @@ namespace Emailbob.Twingate
     /// 
     /// });
     /// ```
-    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TwingateResourceType("twingate:index/twingateServiceAccountKey:TwingateServiceAccountKey")]
     public partial class TwingateServiceAccountKey : global::Pulumi.CustomResource
@@ -61,9 +59,6 @@ namespace Emailbob.Twingate
         [Output("expirationTime")]
         public Output<int> ExpirationTime { get; private set; } = null!;
 
-        /// <summary>
-        /// If the value of this attribute changes to false, Terraform will destroy and recreate the resource.
-        /// </summary>
         [Output("isActive")]
         public Output<bool> IsActive { get; private set; } = null!;
 
@@ -168,9 +163,6 @@ namespace Emailbob.Twingate
         [Input("expirationTime")]
         public Input<int>? ExpirationTime { get; set; }
 
-        /// <summary>
-        /// If the value of this attribute changes to false, Terraform will destroy and recreate the resource.
-        /// </summary>
         [Input("isActive")]
         public Input<bool>? IsActive { get; set; }
 

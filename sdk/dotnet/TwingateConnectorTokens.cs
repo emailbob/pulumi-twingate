@@ -15,7 +15,6 @@ namespace Emailbob.Twingate
     /// 
     /// ## Example Usage
     /// 
-    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
     /// using System.Linq;
@@ -38,7 +37,6 @@ namespace Emailbob.Twingate
     /// 
     /// });
     /// ```
-    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TwingateResourceType("twingate:index/twingateConnectorTokens:TwingateConnectorTokens")]
     public partial class TwingateConnectorTokens : global::Pulumi.CustomResource

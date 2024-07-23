@@ -25,6 +25,12 @@ namespace Emailbob.Twingate.Inputs
         [Input("securityPolicyId")]
         public Input<string>? SecurityPolicyId { get; set; }
 
+        /// <summary>
+        /// The usage-based auto-lock duration configured on the edge (in days).
+        /// </summary>
+        [Input("usageBasedAutolockDurationDays")]
+        public Input<int>? UsageBasedAutolockDurationDays { get; set; }
+
         public TwingateResourceAccessGroupGetArgs()
         {
         }

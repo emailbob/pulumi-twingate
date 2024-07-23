@@ -9,14 +9,12 @@ import * as utilities from "./utilities";
  *
  * ## Example Usage
  *
- * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as twingate from "@emailbob/twingate";
  *
  * const aws = new twingate.TwingateGroup("aws", {});
  * ```
- * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
@@ -52,10 +50,6 @@ export class TwingateGroup extends pulumi.CustomResource {
         return obj['__pulumiType'] === TwingateGroup.__pulumiType;
     }
 
-    /**
-     * Determines whether User assignments to this Group will override any existing assignments. Default is `true`. If set to
-     * `false`, assignments made outside of Terraform will be ignored.
-     */
     public readonly isAuthoritative!: pulumi.Output<boolean>;
     /**
      * The name of the group
@@ -103,10 +97,6 @@ export class TwingateGroup extends pulumi.CustomResource {
  * Input properties used for looking up and filtering TwingateGroup resources.
  */
 export interface TwingateGroupState {
-    /**
-     * Determines whether User assignments to this Group will override any existing assignments. Default is `true`. If set to
-     * `false`, assignments made outside of Terraform will be ignored.
-     */
     isAuthoritative?: pulumi.Input<boolean>;
     /**
      * The name of the group
@@ -126,10 +116,6 @@ export interface TwingateGroupState {
  * The set of arguments for constructing a TwingateGroup resource.
  */
 export interface TwingateGroupArgs {
-    /**
-     * Determines whether User assignments to this Group will override any existing assignments. Default is `true`. If set to
-     * `false`, assignments made outside of Terraform will be ignored.
-     */
     isAuthoritative?: pulumi.Input<boolean>;
     /**
      * The name of the group

@@ -31,9 +31,7 @@ type TwingateResource struct {
 	// Set a DNS alias address for the Resource. Must be a DNS-valid name string.
 	Alias pulumi.StringPtrOutput `pulumi:"alias"`
 	// Set the resource as active or inactive. Default is `true`.
-	IsActive pulumi.BoolOutput `pulumi:"isActive"`
-	// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
-	// `false`, assignments made outside of Terraform will be ignored.
+	IsActive        pulumi.BoolOutput `pulumi:"isActive"`
 	IsAuthoritative pulumi.BoolOutput `pulumi:"isAuthoritative"`
 	// Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client. Default is `false`.
 	IsBrowserShortcutEnabled pulumi.BoolOutput `pulumi:"isBrowserShortcutEnabled"`
@@ -45,7 +43,7 @@ type TwingateResource struct {
 	Protocols TwingateResourceProtocolsOutput `pulumi:"protocols"`
 	// Remote Network ID where the Resource lives
 	RemoteNetworkId pulumi.StringOutput `pulumi:"remoteNetworkId"`
-	// The ID of a `getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.
+	// The ID of a `getTwingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`.
 	SecurityPolicyId pulumi.StringOutput `pulumi:"securityPolicyId"`
 }
 
@@ -94,9 +92,7 @@ type twingateResourceState struct {
 	// Set a DNS alias address for the Resource. Must be a DNS-valid name string.
 	Alias *string `pulumi:"alias"`
 	// Set the resource as active or inactive. Default is `true`.
-	IsActive *bool `pulumi:"isActive"`
-	// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
-	// `false`, assignments made outside of Terraform will be ignored.
+	IsActive        *bool `pulumi:"isActive"`
 	IsAuthoritative *bool `pulumi:"isAuthoritative"`
 	// Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client. Default is `false`.
 	IsBrowserShortcutEnabled *bool `pulumi:"isBrowserShortcutEnabled"`
@@ -108,7 +104,7 @@ type twingateResourceState struct {
 	Protocols *TwingateResourceProtocols `pulumi:"protocols"`
 	// Remote Network ID where the Resource lives
 	RemoteNetworkId *string `pulumi:"remoteNetworkId"`
-	// The ID of a `getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.
+	// The ID of a `getTwingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`.
 	SecurityPolicyId *string `pulumi:"securityPolicyId"`
 }
 
@@ -122,9 +118,7 @@ type TwingateResourceState struct {
 	// Set a DNS alias address for the Resource. Must be a DNS-valid name string.
 	Alias pulumi.StringPtrInput
 	// Set the resource as active or inactive. Default is `true`.
-	IsActive pulumi.BoolPtrInput
-	// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
-	// `false`, assignments made outside of Terraform will be ignored.
+	IsActive        pulumi.BoolPtrInput
 	IsAuthoritative pulumi.BoolPtrInput
 	// Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client. Default is `false`.
 	IsBrowserShortcutEnabled pulumi.BoolPtrInput
@@ -136,7 +130,7 @@ type TwingateResourceState struct {
 	Protocols TwingateResourceProtocolsPtrInput
 	// Remote Network ID where the Resource lives
 	RemoteNetworkId pulumi.StringPtrInput
-	// The ID of a `getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.
+	// The ID of a `getTwingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`.
 	SecurityPolicyId pulumi.StringPtrInput
 }
 
@@ -154,9 +148,7 @@ type twingateResourceArgs struct {
 	// Set a DNS alias address for the Resource. Must be a DNS-valid name string.
 	Alias *string `pulumi:"alias"`
 	// Set the resource as active or inactive. Default is `true`.
-	IsActive *bool `pulumi:"isActive"`
-	// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
-	// `false`, assignments made outside of Terraform will be ignored.
+	IsActive        *bool `pulumi:"isActive"`
 	IsAuthoritative *bool `pulumi:"isAuthoritative"`
 	// Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client. Default is `false`.
 	IsBrowserShortcutEnabled *bool `pulumi:"isBrowserShortcutEnabled"`
@@ -168,7 +160,7 @@ type twingateResourceArgs struct {
 	Protocols *TwingateResourceProtocols `pulumi:"protocols"`
 	// Remote Network ID where the Resource lives
 	RemoteNetworkId string `pulumi:"remoteNetworkId"`
-	// The ID of a `getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.
+	// The ID of a `getTwingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`.
 	SecurityPolicyId *string `pulumi:"securityPolicyId"`
 }
 
@@ -183,9 +175,7 @@ type TwingateResourceArgs struct {
 	// Set a DNS alias address for the Resource. Must be a DNS-valid name string.
 	Alias pulumi.StringPtrInput
 	// Set the resource as active or inactive. Default is `true`.
-	IsActive pulumi.BoolPtrInput
-	// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
-	// `false`, assignments made outside of Terraform will be ignored.
+	IsActive        pulumi.BoolPtrInput
 	IsAuthoritative pulumi.BoolPtrInput
 	// Controls whether an "Open in Browser" shortcut will be shown for this Resource in the Twingate Client. Default is `false`.
 	IsBrowserShortcutEnabled pulumi.BoolPtrInput
@@ -197,7 +187,7 @@ type TwingateResourceArgs struct {
 	Protocols TwingateResourceProtocolsPtrInput
 	// Remote Network ID where the Resource lives
 	RemoteNetworkId pulumi.StringInput
-	// The ID of a `getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.
+	// The ID of a `getTwingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`.
 	SecurityPolicyId pulumi.StringPtrInput
 }
 
@@ -313,8 +303,6 @@ func (o TwingateResourceOutput) IsActive() pulumi.BoolOutput {
 	return o.ApplyT(func(v *TwingateResource) pulumi.BoolOutput { return v.IsActive }).(pulumi.BoolOutput)
 }
 
-// Determines whether assignments in the access block will override any existing assignments. Default is `true`. If set to
-// `false`, assignments made outside of Terraform will be ignored.
 func (o TwingateResourceOutput) IsAuthoritative() pulumi.BoolOutput {
 	return o.ApplyT(func(v *TwingateResource) pulumi.BoolOutput { return v.IsAuthoritative }).(pulumi.BoolOutput)
 }
@@ -344,7 +332,7 @@ func (o TwingateResourceOutput) RemoteNetworkId() pulumi.StringOutput {
 	return o.ApplyT(func(v *TwingateResource) pulumi.StringOutput { return v.RemoteNetworkId }).(pulumi.StringOutput)
 }
 
-// The ID of a `getTwingateSecurityPolicy` to use as the access policy for the group IDs in the access block.
+// The ID of a `getTwingateSecurityPolicy` to set as this Resource's Security Policy. Default is `Default Policy`.
 func (o TwingateResourceOutput) SecurityPolicyId() pulumi.StringOutput {
 	return o.ApplyT(func(v *TwingateResource) pulumi.StringOutput { return v.SecurityPolicyId }).(pulumi.StringOutput)
 }
